@@ -51,7 +51,8 @@ end
 else
 begin
  if ((READ===1'b1)&&(WRITE===1'b0)) // read operation
-	data_ret = sram_32x64m[ADDR];
+	begin data_ret = sram_32x64m[ADDR];
+	$write("%8h\n", data_ret); end
  else if ((READ===1'b0)&&(WRITE===1'b1)) // write operation
 	sram_32x64m[ADDR] = DATA;
 end

@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/Modeltech_pe_edu_10.4a/examples
 vALU
-Z0 !s110 1490671566
+Z0 !s110 1490679002
 !i10b 1
 !s100 a7e`BCBUK6ncIcRIlGgiA3
 IknIFPW[CGEnReff^8:PVV2
@@ -23,7 +23,7 @@ Z3 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z4 !s108 1490671566.000000
+Z4 !s108 1490679002.000000
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v|
 !s101 -O0
@@ -31,7 +31,7 @@ Z4 !s108 1490671566.000000
 Z5 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 n@a@l@u
 valu_tb
-Z6 !s110 1490671567
+Z6 !s110 1490679003
 !i10b 1
 !s100 UJ]nFVGBfWIzZn`]bF8nX1
 I7Lc@mP0P`A<zGP<mPJkHV2
@@ -45,7 +45,7 @@ R3
 r1
 !s85 0
 31
-Z10 !s108 1490671567.000000
+Z10 !s108 1490679003.000000
 Z11 !s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
 Z12 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
 !s101 -O0
@@ -76,11 +76,11 @@ n@c@l@k_@g@e@n@e@r@a@t@o@r
 vCONTROL_UNIT
 R0
 !i10b 1
-!s100 ?kUQEB`k]JJD]C@e_74[V3
-I][RXFJgiMcO2`PXPHWicE2
+!s100 j]GV[0L=NdEYVY<a;T<oZ2
+IAkM@AmJ;zcG170hL6@HPn0
 R1
 R2
-Z14 w1490671111
+Z14 w1490678990
 Z15 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v
 Z16 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v
 L0 3
@@ -102,7 +102,7 @@ R0
 IlHEk9i0ULfgOXf4e01F_81
 R1
 R2
-R13
+w1490675580
 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v
 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v
 Z19 L0 24
@@ -124,7 +124,7 @@ R0
 Ilmc42OYV`DE:FJX9Db?a02
 R1
 R2
-w1490666911
+w1490675258
 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v
 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v
 R19
@@ -168,7 +168,7 @@ R0
 IG6Y4DSXI:R5>FfPWDzCmD2
 R1
 R2
-w1422864527
+w1490675450
 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v
 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v
 L0 26
@@ -205,7 +205,7 @@ R12
 !i113 1
 R5
 vPROC_CS147_SEC05
-R6
+R0
 !i10b 1
 !s100 hoddXg151;J@]_cW[Il_Y0
 IaIi5ZXcOmn>LJ4Fm?ZEz@3
@@ -229,14 +229,14 @@ n@p@r@o@c_@c@s147_@s@e@c05
 vPROC_SM
 R0
 !i10b 1
-!s100 VAXAGE2X=dm7aG9@l2YT]1
-I9nYL5;`:NPbI164M_YORz3
+!s100 ^afUA3Kc[h49JZ=13<gnU3
+ICRjMl]U_751B>aY342[Ig2
 R1
 R2
 R14
 R15
 R16
-L0 360
+L0 389
 R3
 r1
 !s85 0

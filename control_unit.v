@@ -70,7 +70,7 @@ reg [31:0] stored_jump_addr;
 reg [5:0] stored_opcode;
 reg [5:0] stored_funct;
 reg [4:0] stored_rd;
-
+reg [4:0] stored_shamt;
 
 // Registers for output ports
 reg [`ADDRESS_INDEX_LIMIT:0]  mem_addr;
@@ -88,6 +88,7 @@ reg [`DATA_INDEX_LIMIT:0] rf_data_r1, rf_data_r2;
 
 assign MEM_ADDR = mem_addr;
 assign MEM_READ = mem_read; 
+
 assign MEM_WRITE = mem_write;
 assign RF_READ = rf_read;
 assign RF_WRITE = rf_write;
@@ -101,7 +102,7 @@ assign MEM_DATA = mem_data;
 assign RF_DATA_W = rf_data_w;
 assign ZERO = zero;
 
-//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 task print_instruction;
 input [`DATA_INDEX_LIMIT:0] inst;
 reg [5:0]   opcode;
@@ -158,16 +159,21 @@ case(opcode)
 6'h1b : $write("push;");
 6'h1c : $write("pop;");
 default: begin $write("");
+
+// Prepare to get R[rs]
 rf_read=1'b1; rf_write=1'b0; rf_addr_r1 = rs; 
 
 // Set r2 (rt|shamt)
-if (funct === 6'h00 || funct === 6'h02) begin
-  rf_addr_r2 = shamt;
-end
-else begin
+
+// If sll or srl, use shamt instead of rt
+if (funct !== 6'h00 && funct === 6'h02) begin
   rf_addr_r2 = rt;
 end
+else begin
+  stored_shamt = shamt;
+end
 
+// Store values
 stored_imm = immediate;
 stored_signextimm = $signed(immediate);
 stored_zeroextimm = {16'b0, immediate};
@@ -179,7 +185,7 @@ endcase
 $write("\n");
 end
 endtask
-////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 // State nets
 wire [2:0] proc_state;
@@ -203,18 +209,24 @@ begin
   end
   if (proc_state === `PROC_EXE) begin
      // Set ALU operand and operation code (except lui, jmp, jal; no operand/operation)
+	
 	// R-Type (except jr)
-	if (stored_opcode === 6'h00 && stored_opcode !== 6'h08) begin
-           //rf_read=1'b0; rf_write=1'b1;
-           alu_op1 = rf_data_r1;
-	   alu_op2 = rf_data_r2;
+	if (stored_opcode === 6'h00 && stored_funct !== 6'h08) begin
 	   alu_oprn = stored_funct;
+	   alu_op1 = rf_data_r1; // R[rs]
+	   // If sll or srl instruction, use shamt
+           if (stored_funct === 6'h00 || stored_funct === 6'h02) begin
+  		alu_op2 = stored_shamt;
+	   end
+	   // Else, use rt
+	   else
+	   	alu_op2 = rf_data_r2; // R[rt]
 	end
+
 	// I-Type (not including lui = 6'h0f and branch I-type (6'h04, 6'h05))
 	if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b && stored_opcode !== 6'h1c 
 		&& stored_opcode !== 6'h0f && stored_opcode !== 6'h04 && stored_opcode !== 6'h05 && stored_opcode !== 0) begin
-	   //rf_read=1'b0; rf_write=1'b1;
-           alu_op1 = rf_data_r1;
+           alu_op1 = rf_data_r1; // R[rs]
 	   alu_oprn = stored_opcode; 
 	   // For andi and ori, use ZeroExtImm
 	   if (stored_opcode === 6'h0c || stored_opcode === 6'h0d) begin        
@@ -224,24 +236,28 @@ begin
 		alu_op2 = stored_signextimm;
 	   end
         end
-	// Beq, Bne
+
+	// Beq, Bne instruction
 	if (stored_opcode === 6'h04 || stored_opcode === 6'h05) begin
-           alu_op1 = rf_data_r1;
-	   alu_op2 = rf_data_r2;
-	   alu_oprn = 6'h22; //sub
-	   // Check flag to determine between PC+1 OR PC+1+SIGNEXTIMM - In write back?
-	end
+           alu_op1 = rf_data_r1; // R[rs]
+	   alu_op2 = rf_data_r2; // R[rt]
+	   alu_oprn = 6'h22; //sub op
+	end
+
 	// Lui, jmp, jal
 	if (stored_opcode === 6'h0f || stored_opcode === 6'h02 || stored_opcode === 6'h03) begin
+	   // Do nothing
 	end 
+
 	// Push instruction
 	if (stored_opcode === 6'h1b) begin
            alu_op1 = SP_REG;
 	   alu_op2 = 1;
-	   alu_oprn = 6'h22; //sub
+	   alu_oprn = 6'h22; //sub op
 	   // set RF ADDR_R1 to be 0
 	   rf_addr_r1 = 0;
 	end
+
 	// Pop instruction
 	if (stored_opcode === 6'h1c) begin
            alu_op1 = SP_REG;
@@ -252,30 +268,31 @@ begin
   if (proc_state === `PROC_MEM) begin
      // Only lw, sw, push, pop
      // Default make memory operation 00 or 11
-     	if (stored_opcode === 6'h23) begin 
+	mem_read=1'b0; mem_write=1'b0; 
+
 	// Lw instruction
+     	if (stored_opcode === 6'h23) begin 
 	  mem_read=1'b1; mem_write=1'b0; mem_addr = ALU_RESULT;
-	  //rf_addr_r2 = mem_data;
 	end
-	if (stored_opcode === 6'h2b) begin
+	
 	// Sw instruction
+	if (stored_opcode === 6'h2b) begin
 	  mem_read=1'b0; mem_write=1'b1; mem_addr = ALU_RESULT; 
-	  //mem_data = rf_addr_r2;
+	  mem_data = rf_data_r2;
 	end 
+
+	// Push instruction
 	if (stored_opcode === 6'h1b) begin
-	// push
-	  mem_read=1'b0; mem_write=1'b1; mem_addr = rf_data_r1;
+	  mem_read=1'b0; mem_write=1'b1; mem_addr = SP_REG;
+	  mem_data = rf_data_r1; // M[SP_REG] = R[0]
 	end 
+
+	// Pop instruction
 	if (stored_opcode === 6'h1c) begin
-	// pop
 	  mem_read=1'b1; mem_write=1'b0; mem_addr = SP_REG; 
 	  // Set reg file afterwards
 	end 
-	else begin
-	  mem_read=1'b0; mem_write=1'b0; 
-	end
 
-     // Set to read/write accordingly. for read: MEM_READ = 1'B1, MEM_WRITE = 1'B0
   end
   if (proc_state === `PROC_WB) begin
      // Write back to RF or PC_REG(beq, bne, jmp, jal)
@@ -284,28 +301,35 @@ begin
      // Reset memory write signal to no-op (00 or 11)
 	mem_read=1'b0; mem_write=1'b0; 
      // Set RF writing address and data/control to write back into RF
+
 	// R-Type
-	if (stored_opcode === 6'h00) begin
+	if (stored_opcode === 6'h00 && stored_funct !== 6'h08) begin
 	  rf_read=1'b0; rf_write=1'b1; rf_addr_w = stored_rd; rf_data_w = ALU_RESULT; 
 	end
+
 	// Jump register
-	if (stored_opcode === 6'h08) begin
+	if (stored_opcode === 6'h00 && stored_funct === 6'h08) begin
           rf_read=1'b1; rf_write=1'b0; // rf_addr_r1 already is rs, turn on to get data from rf
 	  PC_REG = rf_data_r1; // PC = R[rs]
 	end
+
 	// I-Type except beq, bne, sw, lui
 	if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b && stored_opcode !== 6'h1c 
-		&& stored_opcode !== 6'h0f && stored_opcode !== 6'h04 && stored_opcode !== 6'h05 && stored_opcode !== 0) begin
+		&& stored_opcode !== 0) begin
+	   
 	   // Write to R[rt]
 	   rf_read=1'b0; rf_write=1'b1; rf_addr_w = rf_addr_r2;
+
 	   // If load word instruction, get memory data
 	   if (stored_opcode === 6'h23) begin
 		rf_data_w = mem_data; // R[rt] = memory data
 	   end
+
 	   // If lui instruction, extend imm
 	   if (stored_opcode === 6'h0f) begin
-	        rf_data_w = {stored_imm, 16'b0}; // Maybe supposed to do this before
+	        rf_data_w = {stored_imm, 16'b0}; // Maybe supposed to do this before?
 	   end
+
 	   // If beq instruction
 	   if (stored_opcode === 6'h04) begin
 		// If zero flag is on, R[rs] == R[rt]
@@ -313,6 +337,7 @@ begin
 		  PC_REG = PC_REG + stored_signextimm;
 		end
 	   end
+
 	   // If bne instruction (opp of beq)
 	   if (stored_opcode === 6'h05) begin
 		// If zero flag is on, R[rs] == R[rt]
@@ -320,14 +345,18 @@ begin
 		  PC_REG = PC_REG + stored_signextimm;
 		end
 	   end
+
 	   else begin
 	        rf_data_w = ALU_RESULT; // R[rt] = result from ALU
 	   end
+
 	end
+
 	// Jump instruction
 	if (stored_opcode === 6'h02) begin
 	   PC_REG = stored_jump_addr;
 	end
+
 	// Jal instruction
 	if (stored_opcode === 6'h03) begin
 	// Write to R[31]

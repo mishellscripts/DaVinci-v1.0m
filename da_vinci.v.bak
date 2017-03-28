@@ -12,7 +12,7 @@
 //          CLK  : Clock signal
 //          RST  : Reset signal
 //
-// Notes: - 32 bit bareminimum computer system DA_VINCI_v1.0 implementing cs147dvsec05 instruction set
+// Notes: - 32 bit bareminimum computer system DA_VINCI_v1.0 implementing cs147sec05 instruction set
 //
 // Revision History:
 //
