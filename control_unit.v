@@ -62,7 +62,7 @@ inout [`DATA_INDEX_LIMIT:0] MEM_DATA;
 // Internal registers
 reg [`DATA_INDEX_LIMIT:0] PC_REG = 'h1000;
 reg [`DATA_INDEX_LIMIT:0] INST_REG;
-reg [`DATA_INDEX_LIMIT:0] SP_REG = 'h03fffff0;
+reg [`DATA_INDEX_LIMIT:0] SP_REG = 'h03ffffff;
 reg [15:0] stored_imm;
 reg [15:0] stored_signextimm;
 reg [15:0] stored_zeroextimm;
@@ -86,7 +86,7 @@ reg [`DATA_INDEX_LIMIT:0] mem_datax;
 reg [`DATA_INDEX_LIMIT:0] rf_data_w;
 reg zero; // zero flag
 
-//reg reset;
+//reg reset;sim:/DA_VINCI_TB/#INITIAL#43
 
 // Registers for input ports
 reg [`DATA_INDEX_LIMIT:0] rf_datar1, rf_datar2;
@@ -175,7 +175,7 @@ default: $write("");
 endcase
 
 
-// Store values
+// Store valuessim:/DA_VINCI_TB/#INITIAL#43
 stored_imm = immediate;
 stored_signextimm = $signed(immediate);
 stored_zeroextimm = {16'b0, immediate};
@@ -338,9 +338,7 @@ $write("Current state: %3h\n", proc_state);
 
 	// Push instruction
 	else if (stored_opcode === 6'h1b) begin
-           alu_op1 = SP_REG;
-	   alu_op2 = 1;
-	   alu_oprn = `ALU_OPRN_WIDTH'h02; //sub op
+	   
 	   // set RF ADDR_R1 to be 0
 	   rf_addr_r1 = 0;
 	end
@@ -376,9 +374,14 @@ $write("Current state: %3h\n", proc_state);
 
 	// Push instruction
 	else if (stored_opcode === 6'h1b) begin
-	 $write("Store %5h in Memory address = %8h\n", RF_DATA_R1, ALU_RESULT);
-	  mem_read=1'b0; mem_write=1'b1; mem_addr = ALU_RESULT;
+	 $write("Store %5h in Memory address = %8h\n", RF_DATA_R1, SP_REG);
+
+	  mem_read=1'b0; mem_write=1'b1; mem_addr = SP_REG;
 	  mem_datax = RF_DATA_R1; // M[SP_REG] = R[0]
+
+	   alu_op1 = SP_REG;
+	   alu_op2 = 1;
+	   alu_oprn = `ALU_OPRN_WIDTH'h02; //sub op
 	end 
 
 	// Pop instruction
@@ -392,6 +395,10 @@ $write("Current state: %3h\n", proc_state);
 	$write("------------------\n");
   end
   else if (proc_state === `PROC_WB) begin
+	if (ALU_RESULT !== 'h03ffffff && stored_opcode === 6'h1b) begin
+		SP_REG = ALU_RESULT;
+	end
+
 	$write("WRITEBACK:\n");
      // Write back to RF or PC_REG(beq, bne, jmp, jal)
      // Increase PC_REG BY 1 
