@@ -27,7 +27,7 @@ end
 // For ever perform the following task.
 always
 begin
-//#`SYS_CLK_HALF_PERIOD $write(".\n");
+#`SYS_CLK_HALF_PERIOD $write(".\n");
 #`SYS_CLK_HALF_PERIOD CLK <= ~CLK;
 end
 endmodule;

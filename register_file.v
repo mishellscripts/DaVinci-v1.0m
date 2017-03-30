@@ -57,23 +57,25 @@ begin
 end
 
 // register block is reset on neg edge of RST signal
-//always @ (negedge RST or posedge CLK)
-always @ (negedge RST or posedge CLK)
+always @ (negedge RST or posedge CLK) begin
+if (RST === 1'b0)
 begin
-  if (RST === 1'b0) begin
 for(i=0;i<=`REG_INDEX_LIMIT; i = i +1)
     sram_32x32[i] = { `DATA_WIDTH{1'b0} };
-//$readmemh(mem_init_file, sram_32x32);
 end
 else begin
  if ((READ===1'b1)&&(WRITE===1'b0)) begin // read operation
+	//$write("reading\n");
 	data1_ret = sram_32x32[ADDR_R1];
 	data2_ret = sram_32x32[ADDR_R2];
  end
- else if ((READ===1'b0)&&(WRITE===1'b1)) // write operation
+ else if ((READ===1'b0)&&(WRITE===1'b1)) begin // write operation
+	//$write("writing\n");
 	sram_32x32[ADDR_W] = DATA_W;
+ end
+ else begin 
+	$write("hiZ, read %d, write %d\n", READ, WRITE);
+ end
 end
-
 end
-
 endmodule
