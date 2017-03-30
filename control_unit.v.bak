@@ -62,7 +62,7 @@ inout [`DATA_INDEX_LIMIT:0] MEM_DATA;
 // Internal registers
 reg [`DATA_INDEX_LIMIT:0] PC_REG = 'h1000;
 reg [`DATA_INDEX_LIMIT:0] INST_REG;
-reg [`DATA_INDEX_LIMIT:0] SP_REG;
+reg [`DATA_INDEX_LIMIT:0] SP_REG = 'h03fffff0;
 reg [15:0] stored_imm;
 reg [15:0] stored_signextimm;
 reg [15:0] stored_zeroextimm;
@@ -227,28 +227,71 @@ $write("Current state: %3h\n", proc_state);
   end
   else if (proc_state === `PROC_EXE) begin
      // Set ALU operand and operation code (except lui, jmp, jal; no operand/operation)
-	// Prepare to get R[rs]
+	
 	// R-Type (except jr)
 	if (stored_opcode === 6'h00 && stored_funct !== 6'h08) begin
 	   $write("EXE: R type except jr\n");
-	   alu_oprn = stored_funct;
-	   alu_op1 = RF_DATA_R1; // R[rs]
-	   // If sll or srl instruction, use shamt
+	   
+	// Select operation
+	   // Add
+	   if (stored_funct === 6'h20) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h01;
+	   end
+	   // Sub
+	   else if (stored_funct === 6'h22) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h02;	   	
+	   end
+	   // Mul
+	   else if (stored_funct === 6'h2c) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h03;
+	   end
+	   // And
+	   else if (stored_funct === 6'h24) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h06;
+	   end
+	   // Or
+	   else if (stored_funct === 6'h25) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h07;
+	   end
+	   // Nor
+	   else if (stored_funct === 6'h27) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h08;
+	   end
+	   // Slt
+	   else if (stored_funct === 6'h2a) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h09;
+	   end
+	   // Sll
+	   else if (stored_funct === 6'h00) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h05;
+	   end
+	   // Srl
+	   else if (stored_funct === 6'h02) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h04;
+	   end
+
+	   alu_op1 = RF_DATA_R1; // R[rs] - always for R-type
+
+	 // If sll or srl instruction, use shamt for op2
            if (stored_funct === 6'h00 || stored_funct === 6'h02) begin
   		alu_op2 = stored_shamt;
 	   end
-	   // Else, use rt
-	   else
+	   // Else, use rt for op2
+	   else begin
 	   	alu_op2 = RF_DATA_R2; // R[rt]
+	   end
+
 	$write("R[rs] = %5h, R[rt] = %5h, Opcode = %5h\n", alu_op1, alu_op2, alu_oprn);
 	end
 
 	// I-Type (not including lui = 6'h0f and branch I-type (6'h04, 6'h05))
-	if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b && stored_opcode !== 6'h1c 
-		&& stored_opcode !== 6'h0f && stored_opcode !== 0) begin
+	else if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b && stored_opcode !== 6'h1c 
+		&& stored_opcode !== 6'h0f) begin
            $write("EXE: I type\n");
-	   alu_op1 = RF_DATA_R1; // R[rs] 
+	   alu_op1 = RF_DATA_R1; // R[rs] for all but lui
+	   $write("R[%3h] = %5h\n", rf_addr_r1, alu_op1);
 
+	 // Set op2 to zero ext or sign ext immediate
 	   // For andi and ori, use ZeroExtImm
 	   if (stored_opcode === 6'h0c || stored_opcode === 6'h0d) begin        
 		alu_op2 = stored_zeroextimm;
@@ -257,41 +300,59 @@ $write("Current state: %3h\n", proc_state);
 		alu_op2 = stored_signextimm;
 	   end
 
-	   // Add memory address for SW
-	   if (stored_opcode === 6'h2b) begin
-		alu_oprn = 6'h08;
+	   // Addi, SW
+	   if (stored_opcode === 6'h08) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h01;
+	   end
+	   else if (stored_opcode === 6'h2b) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h01;	   	
+	   end
+	   // Muli
+	   else if (stored_opcode === 6'h1d) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h03;
+	   end
+	   // Andi
+	   else if (stored_opcode === 6'h0c) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h06;
+	   end
+	   // Ori
+	   else if (stored_opcode === 6'h0d) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h07;
+	   end
+	   // Slti
+	   else if (stored_opcode === 6'h0a) begin
+		alu_oprn = `ALU_OPRN_WIDTH'h09;
 	   end
 	   // Beq, Bne instruction
 	   else if (stored_opcode === 6'h04 || stored_opcode === 6'h05) begin
              alu_op1 = RF_DATA_R1; // R[rs]
 	     alu_op2 = RF_DATA_R2; // R[rt]
-	     alu_oprn = 6'h22; //sub op
+	     alu_oprn = 6'h02; //sub op
 	   end
-	  else begin
-	     alu_oprn = stored_opcode;
-	  end
         end
 
-	// Lui, jmp, jal
+	/*/ Lui, jmp, jal
 	if (stored_opcode === 6'h0f || stored_opcode === 6'h02 || stored_opcode === 6'h03) begin
 	   // Do nothing
-	end 
+	end */
 
 	// Push instruction
-	if (stored_opcode === 6'h1b) begin
+	else if (stored_opcode === 6'h1b) begin
            alu_op1 = SP_REG;
 	   alu_op2 = 1;
-	   alu_oprn = 6'h22; //sub op
+	   alu_oprn = `ALU_OPRN_WIDTH'h02; //sub op
 	   // set RF ADDR_R1 to be 0
 	   rf_addr_r1 = 0;
 	end
 
 	// Pop instruction
-	if (stored_opcode === 6'h1c) begin
+	else if (stored_opcode === 6'h1c) begin
            alu_op1 = SP_REG;
 	   alu_op2 = 1;
-	   alu_oprn = 6'h20; //add
+	   alu_oprn = `ALU_OPRN_WIDTH'h01; //add
 	end
+
+	$write("op1: %3h, op2: %3h, oprn: %3h\n", alu_op1, alu_op2, alu_oprn);
 	$write("------------------\n");
   end
   else if (proc_state === `PROC_MEM) begin
@@ -302,18 +363,20 @@ $write("Current state: %3h\n", proc_state);
 
 	// Lw instruction
      	if (stored_opcode === 6'h23) begin 
+          $write("Load from Memory address = %5h + %5h, Opcode = %2h\n", alu_op1, alu_op2, alu_oprn);
 	  mem_read=1'b1; mem_write=1'b0; mem_addr = ALU_RESULT;
 	end
 	
 	// Sw instruction
 	else if (stored_opcode === 6'h2b) begin
-	 $write("Store %5h in Memory address = %5h + %5h, Opcode = %5h\n", ALU_RESULT, alu_op1, alu_op2, alu_oprn);
+	 $write("Store %5h in Memory address = %5h + %5h, Opcode = %2h\n", ALU_RESULT, alu_op1, alu_op2, alu_oprn);
 	  mem_read=1'b0; mem_write=1'b1; mem_addr = ALU_RESULT; 
 	  mem_datax = RF_DATA_R2;
 	end 
 
 	// Push instruction
 	else if (stored_opcode === 6'h1b) begin
+	 $write("Store %5h in Memory address = %8h\n", RF_DATA_R1, SP_REG);
 	  mem_read=1'b0; mem_write=1'b1; mem_addr = SP_REG;
 	  mem_datax = RF_DATA_R1; // M[SP_REG] = R[0]
 	end 
@@ -352,15 +415,17 @@ $write("Current state: %3h\n", proc_state);
 	if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b && stored_opcode !== 6'h1c 
 		&& stored_opcode !== 0 && stored_opcode !== 6'h2b) begin
 	   // Write to R[rt]
-	   rf_read=1'b0; rf_write=1'b1; rf_addr_w = rf_addr_r2;
+	   rf_read=1'b0; rf_write=1'b1; 
 
 	   // If load word instruction, get memory data
 	   if (stored_opcode === 6'h23) begin
-		rf_data_w = mem_datax; // R[rt] = memory data
+		rf_addr_w = stored_rt;
+		rf_data_w = MEM_DATA; // R[rt] = memory data
+	        $write("R[%3h] set to %5h\n", rf_addr_w, MEM_DATA);
 	   end
-
 	   // If lui instruction, extend imm
 	   else if (stored_opcode === 6'h0f) begin
+	        rf_addr_w = rf_addr_r2;
 	        rf_data_w = {stored_imm, 16'b0}; // Maybe supposed to do this before?
 	   end
 
@@ -381,6 +446,7 @@ $write("Current state: %3h\n", proc_state);
 
 	   end
 	   else begin
+		rf_addr_w = rf_addr_r2;
 	        rf_data_w = ALU_RESULT; // R[rt] = result from ALU
 		$write("R[%3h] set to %5h\n", rf_addr_w, ALU_RESULT);
 	   end
@@ -398,6 +464,11 @@ $write("Current state: %3h\n", proc_state);
 	   rf_read=1'b0; rf_write=1'b1; rf_addr_w = 31;
 	   rf_data_w = PC_REG;
 	   PC_REG = stored_jump_addr;
+	end 
+	// Pop instructon
+	if (stored_opcode === 6'h1c) begin
+	  rf_read=1'b0; rf_write=1'b1; rf_addr_w = 0;
+	   rf_data_w = MEM_DATA;
 	end 
 	 $write("------------------\n");
   end
@@ -441,14 +512,14 @@ begin
   next_state = `PROC_FETCH;
 end
 
-// reset neg edge of RST
+// reset neg edge osim:/DA_VINCI_TB/#INITIAL#43f RST
 always @ (negedge RST)
 begin
   state = 2'bxx;
   next_state = `PROC_FETCH;
 end
 
-// pos edge of clock, change state
+// pos edge ofsim:/DA_VINCI_TB/#INITIAL#43 clock, change state
 always @ (posedge CLK)
 begin
   state = next_state;

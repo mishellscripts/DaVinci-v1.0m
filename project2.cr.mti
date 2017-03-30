@@ -58,15 +58,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MEM_64MB_TB
 
-} {} {}} {C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v} {2 {vlog -work work -stats=none {C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v}
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module DA_VINCI_TB
-** Warning: C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v(58): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	DA_VINCI_TB
-
 } {} {}} {C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v} {1 {vlog -work work -stats=none {C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v}
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module ALU
