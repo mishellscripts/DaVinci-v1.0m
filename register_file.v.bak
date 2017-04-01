@@ -65,12 +65,12 @@ for(i=0;i<=`REG_INDEX_LIMIT; i = i +1)
 end
 else begin
  if ((READ===1'b1)&&(WRITE===1'b0)) begin // read operation
-	$write("reading\n");
+	//$write("reading\n");
 	data1_ret = sram_32x32[ADDR_R1];
 	data2_ret = sram_32x32[ADDR_R2];
  end
  else if ((READ===1'b0)&&(WRITE===1'b1)) begin // write operation
-	$write("writing\n");
+	//$write("writing\n");
 	sram_32x32[ADDR_W] = DATA_W;
  end
  else begin 

@@ -73,9 +73,6 @@ else begin
 	//$write("writing\n");
 	sram_32x32[ADDR_W] = DATA_W;
  end
- else begin 
-	$write("hiZ, read %d, write %d\n", READ, WRITE);
- end
 end
 end
 endmodule
