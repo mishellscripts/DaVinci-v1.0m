@@ -59,9 +59,9 @@ input ZERO, CLK, RST;
 inout [`DATA_INDEX_LIMIT:0] MEM_DATA;
 
 // Internal registers
-reg [`DATA_INDEX_LIMIT:0] PC_REG = 'h1000;
+reg [`DATA_INDEX_LIMIT:0] PC_REG = INST_START_ADDR;
 reg [`DATA_INDEX_LIMIT:0] INST_REG;
-reg [`DATA_INDEX_LIMIT:0] SP_REG = 'h03ffffff;
+reg [`DATA_INDEX_LIMIT:0] SP_REG = INIT_STACK_POINTER;
 reg [15:0] stored_imm;
 reg [15:0] stored_signextimm;
 reg [15:0] stored_zeroextimm;
@@ -453,40 +453,40 @@ assign STATE = state;
 
 initial
 begin
-  state = 2'bxx;
-  next_state = `PROC_FETCH;
+    state = 2'bxx;
+    next_state = `PROC_FETCH;
 end
 
-// reset neg edge osim:/DA_VINCI_TB/#INITIAL#43f RST
+// reset neg edge of RST
 always @ (negedge RST)
 begin
-  state = 2'bxx;
-  next_state = `PROC_FETCH;
+    state = 2'bxx;
+    next_state = `PROC_FETCH;
 end
 
-// pos edge ofsim:/DA_VINCI_TB/#INITIAL#43 clock, change state
+// pos edge of clock, change state
 always @ (posedge CLK)
 begin
-  state = next_state;
+    state = next_state;
 end
 
 // state switching depending on current state
 always @ (state)
 begin
-  if (state === `PROC_FETCH) begin
-     next_state = `PROC_DECODE;
-  end
-  if (state === `PROC_DECODE) begin
-     next_state = `PROC_EXE;
-  end
-  if (state === `PROC_EXE) begin
-     next_state = `PROC_MEM;
-  end
-  if (state === `PROC_MEM) begin
-     next_state = `PROC_WB;
-  end
-  if (state === `PROC_WB) begin
-     next_state = `PROC_FETCH;
-  end
+    if (state === `PROC_FETCH) begin
+        next_state = `PROC_DECODE;
+    end
+    if (state === `PROC_DECODE) begin
+        next_state = `PROC_EXE;
+    end
+    if (state === `PROC_EXE) begin
+        next_state = `PROC_MEM;
+    end
+    if (state === `PROC_MEM) begin
+        next_state = `PROC_WB;
+    end
+    if (state === `PROC_WB) begin
+        next_state = `PROC_FETCH;
+    end
 end
 endmodule;
