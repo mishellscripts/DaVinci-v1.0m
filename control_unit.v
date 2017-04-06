@@ -59,9 +59,9 @@ input ZERO, CLK, RST;
 inout [`DATA_INDEX_LIMIT:0] MEM_DATA;
 
 // Internal registers
-reg [`DATA_INDEX_LIMIT:0] PC_REG = INST_START_ADDR;
+reg [`DATA_INDEX_LIMIT:0] PC_REG = `INST_START_ADDR;
 reg [`DATA_INDEX_LIMIT:0] INST_REG;
-reg [`DATA_INDEX_LIMIT:0] SP_REG = INIT_STACK_POINTER;
+reg [`DATA_INDEX_LIMIT:0] SP_REG = `INIT_STACK_POINTER;
 reg [15:0] stored_imm;
 reg [15:0] stored_signextimm;
 reg [15:0] stored_zeroextimm;
@@ -332,7 +332,7 @@ begin
 	    PC_REG = RF_DATA_R1; // PC = R[rs]
 	end
 
-	// I-Type except beq, bne, sw, lui
+	// I-Type except sw, lui
 	else if (stored_opcode !== 6'h02 && stored_opcode !== 6'h03 && stored_opcode !== 6'h1b 
 		&& stored_opcode !== 6'h1c && stored_opcode !== 6'h2b) begin
 	   

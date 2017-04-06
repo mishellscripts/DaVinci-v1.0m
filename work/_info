@@ -9,176 +9,176 @@ z2
 cModel Technology
 dC:/Modeltech_pe_edu_10.4a/examples
 vALU
-Z0 !s110 1491019610
+Z0 !s110 1491463151
 !i10b 1
 !s100 a7e`BCBUK6ncIcRIlGgiA3
-IknIFPW[CGEnReff^8:PVV2
+ISb1M5O?UEVa7:la=ml2KF1
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02
 w1490650271
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v
+8C:/Users/Michelle/Desktop/test2/alu.v
+FC:/Users/Michelle/Desktop/test2/alu.v
 L0 25
 Z3 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z4 !s108 1491019610.000000
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu.v|
+Z4 !s108 1491463151.000000
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/alu.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/alu.v|
 !s101 -O0
 !i113 1
 Z5 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 n@a@l@u
 valu_tb
-Z6 !s110 1491019611
+R0
 !i10b 1
 !s100 UJ]nFVGBfWIzZn`]bF8nX1
-I7Lc@mP0P`A<zGP<mPJkHV2
+IM>KmV>bQMI:5HR;SQDWo]2
 R1
 R2
 w1490653840
-Z7 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v
-Z8 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v
-Z9 L0 16
-R3
-r1
-!s85 0
-31
-Z10 !s108 1491019611.000000
-Z11 !s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
-Z12 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
-!s101 -O0
-!i113 1
-R5
-vCLK_GENERATOR
-R0
-!i10b 1
-!s100 eC?k=>74NT1To5Io=ghA13
-I=3_>hPJSKBV3aW::A]5[=0
-R1
-R2
-w1490828659
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/clk_gen.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/clk_gen.v
-R9
+8C:/Users/Michelle/Desktop/test2/alu_tb.v
+FC:/Users/Michelle/Desktop/test2/alu_tb.v
+Z6 L0 16
 R3
 r1
 !s85 0
 31
 R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/clk_gen.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/clk_gen.v|
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/alu_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/alu_tb.v|
+!s101 -O0
+!i113 1
+R5
+vCLK_GENERATOR
+Z7 !s110 1491463152
+!i10b 1
+!s100 eC?k=>74NT1To5Io=ghA13
+I=HSDHILYfPnMzO`6B?Z`P3
+R1
+R2
+w1490828659
+8C:/Users/Michelle/Desktop/test2/clk_gen.v
+FC:/Users/Michelle/Desktop/test2/clk_gen.v
+R6
+R3
+r1
+!s85 0
+31
+R4
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/clk_gen.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/clk_gen.v|
 !s101 -O0
 !i113 1
 R5
 n@c@l@k_@g@e@n@e@r@a@t@o@r
 vCONTROL_UNIT
-R0
+R7
 !i10b 1
-!s100 4X734ei[eRLPa@bNee=KJ1
-I:U_ODTo37<^BV=WJeb59L3
+!s100 eL:zhW_F<H_od6[WTX?X?1
+IGj3ELGYz83<573jfZA?E`1
 R1
 R2
-Z13 w1491018991
-Z14 8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v
-Z15 FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v
+Z8 w1491462304
+Z9 8C:/Users/Michelle/Desktop/test2/control_unit.v
+Z10 FC:/Users/Michelle/Desktop/test2/control_unit.v
 L0 3
 R3
 r1
 !s85 0
 31
-R4
-Z16 !s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v|
-Z17 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/control_unit.v|
+Z11 !s108 1491463152.000000
+Z12 !s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/control_unit.v|
+Z13 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/control_unit.v|
 !s101 -O0
 !i113 1
 R5
 n@c@o@n@t@r@o@l_@u@n@i@t
 vDA_VINCI
-R0
+R7
 !i10b 1
 !s100 @Cfmb0Z_T`MjRPoLI@k6C0
-IlHEk9i0ULfgOXf4e01F_81
+IfQzRRTjI42nSEF[ME8LiQ3
 R1
 R2
 w1490675580
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v
-Z18 L0 24
+8C:/Users/Michelle/Desktop/test2/da_vinci.v
+FC:/Users/Michelle/Desktop/test2/da_vinci.v
+Z14 L0 24
 R3
 r1
 !s85 0
 31
-R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci.v|
+R11
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/da_vinci.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/da_vinci.v|
 !s101 -O0
 !i113 1
 R5
 n@d@a_@v@i@n@c@i
 vDA_VINCI_TB
-R0
+Z15 !s110 1491463153
 !i10b 1
-!s100 RA_gRizA^8VSOXK==NhQ40
-IHNkI1@8zfiYXaNST_d5VK0
+!s100 >=AWc4PDiQ38JL=b_:Ae11
+ISi?XHQ0iXVg0MZaCBU0=E2
 R1
 R2
-w1491019216
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v
-R18
+w1491462490
+8C:/Users/Michelle/Desktop/test2/da_vinci_tb.v
+FC:/Users/Michelle/Desktop/test2/da_vinci_tb.v
+R14
 R3
 r1
 !s85 0
 31
-R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/da_vinci_tb.v|
+R11
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/da_vinci_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/da_vinci_tb.v|
 !s101 -O0
 !i113 1
 R5
 n@d@a_@v@i@n@c@i_@t@b
 vMEM_64MB_TB
-R0
+R15
 !i10b 1
 !s100 Q0bd^kgMCaH`JYm[fkQkH3
-IW2zXH1hcFQEE7mEL@PA<@0
+I`4ImGaK6mzI^82E6aI6zR1
 R1
 R2
-Z19 w1422864528
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/mem_64MB_tb.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/mem_64MB_tb.v
-Z20 L0 23
+Z16 w1422864528
+8C:/Users/Michelle/Desktop/test2/mem_64MB_tb.v
+FC:/Users/Michelle/Desktop/test2/mem_64MB_tb.v
+Z17 L0 23
 R3
 r1
 !s85 0
 31
-R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/mem_64MB_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/mem_64MB_tb.v|
+Z18 !s108 1491463153.000000
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/mem_64MB_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/mem_64MB_tb.v|
 !s101 -O0
 !i113 1
 R5
 n@m@e@m_64@m@b_@t@b
 vMEMORY_64MB
-R0
+R15
 !i10b 1
 !s100 fYK4S@7D^mn3<O1@]U71Y0
-Ij<H4;1zchCh1ATBaiM1JC2
+ID25h3EnCdD48CI9MQ@T1m2
 R1
 R2
 w1491019597
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v
+8C:/Users/Michelle/Desktop/test2/memory.v
+FC:/Users/Michelle/Desktop/test2/memory.v
 L0 26
 R3
 r1
 !s85 0
 31
-R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/memory.v|
+R18
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/memory.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/memory.v|
 !s101 -O0
 !i113 1
 R5
@@ -191,81 +191,81 @@ In<U3JmdaWT>F]EjioYFB>2
 R1
 R2
 w1488699869
-R7
-R8
+8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v
+FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v
 L0 27
 R3
 r1
 !s85 0
 31
 !s108 1488699894.000000
-R11
-R12
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/alu_tb.v|
 !s101 -O0
 !i113 1
 R5
 vPROC_CS147_SEC05
-R6
+Z19 !s110 1491463154
 !i10b 1
 !s100 hoddXg151;J@]_cW[Il_Y0
-IaIi5ZXcOmn>LJ4Fm?ZEz@3
+IVL`Y[2lEhJ><]6DHQ9lgU1
 R1
 R2
-R19
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/processor.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/processor.v
-R20
+R16
+8C:/Users/Michelle/Desktop/test2/processor.v
+FC:/Users/Michelle/Desktop/test2/processor.v
+R17
 R3
 r1
 !s85 0
 31
-R10
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/processor.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/processor.v|
+Z20 !s108 1491463154.000000
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/processor.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/processor.v|
 !s101 -O0
 !i113 1
 R5
 n@p@r@o@c_@c@s147_@s@e@c05
 vPROC_SM
-R0
+R7
 !i10b 1
-!s100 ];`zfdY8oi?0MXb<l@OeY1
-Im[n@^3J0BIO>_dO^QgXjX3
+!s100 L;>A@VAHL995UP:lAzcbQ0
+IOkGS=Mn@V7?ZbnN9A8[;z0
 R1
 R2
-R13
-R14
-R15
-L0 442
+R8
+R9
+R10
+L0 414
 R3
 r1
 !s85 0
 31
-R4
-R16
-R17
+R11
+R12
+R13
 !s101 -O0
 !i113 1
 R5
 n@p@r@o@c_@s@m
 vREG_32X32_TB
-R6
+R19
 !i10b 1
 !s100 8Fm1Y0Xkj?4:gJQY9LSWh1
-IzgI2L0m_?fEU03OD8g1C<3
+I>dK>a1NJ<5ZFSDW:7Dekh3
 R1
 R2
 w1490671556
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/reg_32x32_tb.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/reg_32x32_tb.v
-R9
+8C:/Users/Michelle/Desktop/test2/reg_32x32_tb.v
+FC:/Users/Michelle/Desktop/test2/reg_32x32_tb.v
+R6
 R3
 r1
 !s85 0
 31
-R10
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/reg_32x32_tb.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/reg_32x32_tb.v|
+R20
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/reg_32x32_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/reg_32x32_tb.v|
 !s101 -O0
 !i113 1
 R5
@@ -273,21 +273,21 @@ n@r@e@g_32@x32_@t@b
 vREGISTER_FILE_32x32
 R0
 !i10b 1
-!s100 Y1bn``FW6^@kDT1V0kdc23
-IzS0aNf[Nf<Vl?32G@N[C_3
+!s100 F=n@AOiLNeAHJDi`7iULQ1
+I[11DJUYkJI0HQTI5N4iMz1
 R1
 R2
-w1490837252
-8C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/register_file.v
-FC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/register_file.v
+w1491019707
+8C:/Users/Michelle/Desktop/test2/register_file.v
+FC:/Users/Michelle/Desktop/test2/register_file.v
 L0 29
 R3
 r1
 !s85 0
 31
 R4
-!s107 prj_definition.v|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/register_file.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02/register_file.v|
+!s107 prj_definition.v|C:/Users/Michelle/Desktop/test2/register_file.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/test2/register_file.v|
 !s101 -O0
 !i113 1
 R5

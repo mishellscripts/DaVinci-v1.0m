@@ -51,7 +51,6 @@ RST=1'b1;
 //# 20 $stop;
 #5000  //$writememh("RevFib_mem_dump.dat", da_vinci_inst.memory_inst.sram_32x64m, 'h03fffff0, 'h03ffffff);
        $writememh("fibonacci_mem_dump.dat", da_vinci_inst.memory_inst.sram_32x64m, 'h01000000, 'h0100000f);
-       //$writememh("test_mem_dump.dat", da_vinci_inst.memory_inst.sram_32x64m, 'h00000000, 'h00000005);
        $stop;
 
 end
