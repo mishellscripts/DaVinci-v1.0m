@@ -84,6 +84,15 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	RF_TB
 
+} {} {}} C:/Users/Michelle/Desktop/prj3/mult.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mult.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module MULT32
+-- Compiling module MULT32_U
+
+Top level modules:
+	MULT32
+	MULT32_U
+
 } {} {}} C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module RC_ADD_SUB_64
@@ -102,6 +111,9 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	HALF_ADDER
 
+} {} {}} C:/Users/Michelle/Desktop/prj3/prj_definition.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/prj_definition.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+
 } {} {}} C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module MEM_64MB_TB
@@ -110,9 +122,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	MEM_64MB_TB
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/prj_definition.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/prj_definition.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -162,6 +171,15 @@ Top level modules:
 	DECODER_3x8
 	DECODER_2x4
 
+} {} {}} C:/Users/Michelle/Desktop/prj3/mult_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mult_tb.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module MULT_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/mult_tb.v(20): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	MULT_TB
+
 } {} {}} C:/Users/Michelle/Desktop/prj3/half_adder_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/half_adder_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module half_adder_tb
@@ -170,6 +188,31 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	half_adder_tb
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module DA_VINCI_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v(57): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	DA_VINCI_TB
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/alu.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/full_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/full_adder.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module FULL_ADDER
+** Warning: C:/Users/Michelle/Desktop/prj3/full_adder.v(32): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	FULL_ADDER
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/mux.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mux.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -187,40 +230,6 @@ Top level modules:
 	MUX32_4x1
 	MUX32_2x1
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/full_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/full_adder.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module FULL_ADDER
-** Warning: C:/Users/Michelle/Desktop/prj3/full_adder.v(32): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	FULL_ADDER
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/alu.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module ALU
-
-Top level modules:
-	ALU
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module DA_VINCI_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v(57): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	DA_VINCI_TB
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/clk_gen.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/clk_gen.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module CLK_GENERATOR
-** Warning: C:/Users/Michelle/Desktop/prj3/clk_gen.v(33): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	CLK_GENERATOR
-
 } {} {}} C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module rc_add_sub_tb
@@ -230,21 +239,14 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	rc_add_sub_tb
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/register_file.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/clk_gen.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/clk_gen.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module REGISTER_FILE_32x32
-
-Top level modules:
-	REGISTER_FILE_32x32
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module REG_32X32_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v(79): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module CLK_GENERATOR
+** Warning: C:/Users/Michelle/Desktop/prj3/clk_gen.v(33): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	REG_32X32_TB
+	CLK_GENERATOR
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -258,6 +260,22 @@ Top level modules:
 	BARREL_SHIFTER32
 	SHIFT32_R
 	SHIFT32_L
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module REG_32X32_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v(79): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	REG_32X32_TB
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/register_file.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module REGISTER_FILE_32x32
+
+Top level modules:
+	REGISTER_FILE_32x32
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
