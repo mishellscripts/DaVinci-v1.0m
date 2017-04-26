@@ -46,6 +46,7 @@ assign LO = lo_reg;
 
 AND32_2x1 and_inst_1a(and_1a, A, {32{B[0]}});
 AND32_2x1 and_inst_1b(and_1b, A, {32{B[1]}});
+lo_reg[0] = and_1b;
 wire CO_1;
 wire [31:0] Y1;
 RC_ADD_SUB_32 adder1(.Y(Y1), .CO(CO_1), .A(and_1a), .B(and_1b), .SnA({1'b0, SnA[31:1]}));

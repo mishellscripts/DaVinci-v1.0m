@@ -78,12 +78,5 @@ input [31:0] A;
 input [31:0] B;
 
 // TBD
-genvar i;
-generate
-	for(i=0; i<32; i=i+1)
-	begin: or2x1_gen_loop
-		or or2x1_inst(Y[i], A[i], B[i]);
-	end
-endgenerate
 
 endmodule
