@@ -121,8 +121,8 @@ input I0, I1, S;
 
 // TBD
 not not_s(NS, S);
-and and_inst1(Y1, S, I0);
-and and_inst2(Y2, NS, I1);
+and and_inst1(Y1, NS, I0);
+and and_inst2(Y2, S, I1);
 or or_inst(Y, Y1, Y2);
 
 endmodule

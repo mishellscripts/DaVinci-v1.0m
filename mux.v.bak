@@ -109,6 +109,7 @@ generate
 	begin: mux32_gen_loop
 		MUX1_2x1 mux2x1_inst(Y[i], I0[i], I1[i], S);
 	end
+endgenerate
 endmodule
 
 // 1-bit mux

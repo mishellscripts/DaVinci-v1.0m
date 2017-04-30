@@ -28,6 +28,39 @@ input [31:0] A;
 input [31:0] B;
 
 // TBD
+wire [31:0] twos_mcnd;
+wire [31:0] twos_mplr;
+
+TWOSCOMP32 inst_twos_mcnd(.Y(twos_mcnd), .A(A));
+TWOSCOMP32 inst_twos_mplr(.Y(twos_mplr), .A(B));
+
+wire [31:0] MCND;
+wire [31:0] MPLR;
+
+MUX32_2x1 inst_mux_1(.Y(MCND), .I0(A), .I1(twos_mcnd), .S(A[31]));
+MUX32_2x1 inst_mux_2(.Y(MPLR), .I0(B), .I1(twos_mplr), .S(B[31]));
+
+wire [31:0] HI_RES;
+wire [31:0] LO_RES;
+
+MULT32_U inst_uns_mult(.HI(HI_RES), .LO(LO_RES), .A(MCND), .B(MPLR));
+
+//
+
+wire [31:0] inv_hi;
+wire [31:0] twos_lo;
+
+assign HI_RES = (HI_RES === {`DATA_WIDTH{1'bz}})?32'b0:HI_RES;
+
+INV32_1x1 inst_inv_hi(.Y(inv_hi), .A(HI_RES));
+TWOSCOMP32 inst_twos_lo(.Y(twos_lo), .A(LO_RES));
+
+wire result_sign;
+
+xor xor_result_sign(result_sign, A[31], B[31]);
+
+MUX32_2x1 inst_mux_prod1(.Y(HI), .I0(HI_RES), .I1(inv_hi), .S(result_sign));
+MUX32_2x1 inst_mux_prod2(.Y(LO), .I0(LO_RES), .I1(twos_lo), .S(result_sign));
 
 endmodule
 
@@ -42,13 +75,10 @@ input [31:0] B; // MPLR
 // TBD
 reg SnA = 1'b0;
 
-reg [31:0] lo_reg;
-assign LO = lo_reg;
-
 wire [31:0] and_1a;
 wire [31:0] and_1b;
-AND32_2x1 and_inst_1a(and_1a, A, {32{B[0]}});
-AND32_2x1 and_inst_1b(and_1b, A, {32{B[1]}});
+AND32_2x1 and_inst_1a(and_1a, A, {32{B[1]}});
+AND32_2x1 and_inst_1b(and_1b, A, {32{B[0]}});
 wire CO_1;
 wire [31:0] Y1;
 RC_ADD_SUB_32 adder1(.Y(Y1), .CO(CO_1), .A(and_1a), .B({1'b0, and_1b[31:1]}), .SnA(SnA));
@@ -105,7 +135,7 @@ wire [31:0] and_10;
 AND32_2x1 and_inst_10(and_10, A, {32{B[10]}});
 wire CO_10;
 wire [31:0] Y10;
-RC_ADD_SUB_32 adder10(.Y(Y10), .CO(CO_10), .A(and_1a0), .B({CO_9,Y9[31:1]}), .SnA(SnA));
+RC_ADD_SUB_32 adder10(.Y(Y10), .CO(CO_10), .A(and_10), .B({CO_9,Y9[31:1]}), .SnA(SnA));
 
 wire [31:0] and_11;
 AND32_2x1 and_inst_11(and_11, A, {32{B[11]}});
@@ -242,8 +272,9 @@ RC_ADD_SUB_32 adder32(.Y(Y32), .CO(CO_32), .A(and_32), .B({CO_31,Y31[31:1]}), .S
 
 assign LO = {Y31[0], Y30[0], Y29[0], Y28[0], Y27[0], Y26[0], Y25[0], Y24[0], Y23[0], Y22[0], Y21[0], 
 		Y20[0], Y19[0], Y18[0], Y17[0], Y16[0], Y15[0], Y14[0], Y13[0], Y12[0], Y11[0], 
-		Y10[0], Y9[0], Y8[0], Y7[0], Y6[0], Y5[0], Y4[0], Y3[0], Y2[0], Y1[0]};
+		Y10[0], Y9[0], Y8[0], Y7[0], Y6[0], Y5[0], Y4[0], Y3[0], Y2[0], Y1[0], and_1b[0]};
 
+// why always unknown?
 assign HI = Y31;
 
 endmodule

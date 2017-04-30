@@ -40,7 +40,7 @@ RC_ADD_SUB_32 adder1(.Y(Y), .CO(CO), .A(a_inv), .B(32'b1), .SnA(SnA));
 
 endmodule
 
-// 32-bit register -ve edge
+// 32-bit registere -ve edge
 module REG32(Q, D, LOAD, CLK, RESET);
 output [31:0] Q;
 
