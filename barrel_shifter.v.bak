@@ -48,6 +48,96 @@ input [4:0] S;
 
 // TBD
 
+// Ea column will have 32 multiplexer
+// 5 such columns
+
+reg zero = 1'b0;
+
+//wire [31:0] previous;
+wire [31:0] out1;
+
+// Column 1 (shift 1)
+genvar i1;
+generate
+    for(i1=0; i1<32; i1=i1+1)
+    begin: barrelshift1_gen_loop
+        if (i1 == 31) begin
+	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], zero, S[0]);
+	end
+	else begin
+	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], D[i1+1], S[0]);
+	end
+    end
+endgenerate
+
+//assign previous = out1;
+wire [31:0] out2;
+
+// Column 2 (shift 2)
+genvar i2;
+generate
+    for(i2=0; i2<32; i2=i2+1)
+    begin: barrelshift2_gen_loop
+        if (i2 > 30) begin
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], zero, S[1]);
+	end
+	else begin
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], D[i2+2], S[1]);
+	end
+    end
+endgenerate
+
+//assign previous = out2;
+wire [31:0] out3;
+
+// Column 3 (shift 4)
+genvar i3;
+generate
+    for(i3=0; i3<32; i3=i3+1)
+    begin: barrelshift3_gen_loop
+        if (i3 > 28) begin
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], zero, S[2]);
+	end
+	else begin
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], D[i3+4], S[2]);
+	end
+    end
+endgenerate
+
+wire [31:0] out4;
+
+// Column 4 (shift 8)
+genvar i4;
+generate
+    for(i4=0; i4<32; i4=i4+1)
+    begin: barrelshift4_gen_loop
+        if (i4 > 24) begin
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], zero, S[3]);
+	end
+	else begin
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], D[i4+8], S[3]);
+	end
+    end
+endgenerate
+
+wire [31:0] out5;
+
+// Column 5 (shift 16)
+genvar i5;
+generate
+    for(i5=0; i5<32; i5=i5+1)
+    begin: barrelshift5_gen_loop
+        if (i5 > 16) begin
+	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], zero, S[4]);
+	end
+	else begin
+	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], D[i5+16], S[4]);
+	end
+    end
+endgenerate
+
+assign Y = out5;
+
 endmodule
 
 // Left shifter
@@ -77,7 +167,7 @@ generate
 	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], zero, S[0]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], D[i1-1], S[i1]);
+	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], D[i1-1], S[0]);
 	end
     end
 endgenerate
@@ -94,7 +184,7 @@ generate
 	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], zero, S[1]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], D[i2-2], S[i2]);
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], D[i2-2], S[1]);
 	end
     end
 endgenerate
@@ -111,7 +201,7 @@ generate
 	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], zero, S[2]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], D[i3-4], S[i3]);
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], D[i3-4], S[2]);
 	end
     end
 endgenerate
@@ -127,7 +217,7 @@ generate
 	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], zero, S[3]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], D[i4-8], S[i4]);
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], D[i4-8], S[3]);
 	end
     end
 endgenerate
@@ -143,7 +233,7 @@ generate
 	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], zero, S[4]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], D[i5-16], S[i5]);
+	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], D[i5-16], S[4]);
 	end
     end
 endgenerate

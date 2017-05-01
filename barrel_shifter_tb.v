@@ -19,3 +19,22 @@ begin
 end
 
 endmodule;
+
+module RSHIFTER_TB;
+reg [31:0] D;
+reg [4:0] S;
+wire [31:0] Y;
+
+SHIFT32_R inst_rshift_32bit(.Y(Y), .D(D), .S(S));
+
+initial
+begin
+#5 S=1; D=64;
+#5 S=8; D=100;
+#5 S=2; D=40;
+#5 S=20; D=1;
+#5 S=0; D=7;
+#5 S=1; D=100;
+end
+
+endmodule;

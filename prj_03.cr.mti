@@ -73,9 +73,13 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 -- Compiling module LSHIFTER_TB
 ** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(21): (vlog-2283) Extra semicolon in $unit (global) scope.
 
+-- Compiling module RSHIFTER_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(40): (vlog-2283) Extra semicolon in $unit (global) scope.
+
 
 Top level modules:
 	LSHIFTER_TB
+	RSHIFTER_TB
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/memory.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/memory.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -264,6 +268,19 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	rc_add_sub_tb
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module SHIFT32
+-- Compiling module BARREL_SHIFTER32
+-- Compiling module SHIFT32_R
+-- Compiling module SHIFT32_L
+
+Top level modules:
+	SHIFT32
+	BARREL_SHIFTER32
+	SHIFT32_R
+	SHIFT32_L
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/register_file.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
