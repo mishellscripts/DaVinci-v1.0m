@@ -23,6 +23,17 @@ input LnR;
 
 // TBD
 
+//reg [27:0] res;
+//or inst_more_than5(res, S[31:5], 32'b0);
+
+wire more_than_5;
+assign more_than_5 = (S[31:5] == 27'b0)?1'b0:1'b1;
+
+wire [31:0] shift_out;
+BARREL_SHIFTER32 inst_barrel_shifter32(.Y(shift_out), .D(D), .S(S[4:0]), .LnR(LnR));
+
+MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(32'b0), .I1(shift_out), .S(more_than_5));
+
 endmodule
 
 // Shift with control L or R shift
@@ -35,6 +46,16 @@ input [4:0] S;
 input LnR;
 
 // TBD
+
+wire [31:0] outR;
+wire [31:0] outL;
+
+SHIFT32_R inst_rshift(.Y(outR), .D(D), .S(S));
+SHIFT32_L inst_lshift(.Y(outL), .D(D), .S(S));
+
+// Right shift if LnR = 0
+
+assign Y = (LnR == 1'b0)?outR:outL;
 
 endmodule
 
@@ -78,7 +99,7 @@ genvar i2;
 generate
     for(i2=0; i2<32; i2=i2+1)
     begin: barrelshift2_gen_loop
-        if (i2 > 30) begin
+        if (i2 > 29) begin
 	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], zero, S[1]);
 	end
 	else begin
@@ -95,7 +116,7 @@ genvar i3;
 generate
     for(i3=0; i3<32; i3=i3+1)
     begin: barrelshift3_gen_loop
-        if (i3 > 28) begin
+        if (i3 > 27) begin
 	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], zero, S[2]);
 	end
 	else begin
@@ -111,7 +132,7 @@ genvar i4;
 generate
     for(i4=0; i4<32; i4=i4+1)
     begin: barrelshift4_gen_loop
-        if (i4 > 24) begin
+        if (i4 > 23) begin
 	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], zero, S[3]);
 	end
 	else begin
@@ -127,7 +148,7 @@ genvar i5;
 generate
     for(i5=0; i5<32; i5=i5+1)
     begin: barrelshift5_gen_loop
-        if (i5 > 16) begin
+        if (i5 > 15) begin
 	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], zero, S[4]);
 	end
 	else begin

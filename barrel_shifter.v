@@ -23,6 +23,17 @@ input LnR;
 
 // TBD
 
+//reg [27:0] res;
+//or inst_more_than5(res, S[31:5], 32'b0);
+
+wire more_than_5;
+assign more_than_5 = (S[31:5] == 27'b0)?1'b1:1'b0;
+
+wire [31:0] shift_out;
+BARREL_SHIFTER32 inst_barrel_shifter32(.Y(shift_out), .D(D), .S(S[4:0]), .LnR(LnR));
+
+MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(32'b0), .I1(shift_out), .S(more_than_5));
+
 endmodule
 
 // Shift with control L or R shift
@@ -35,6 +46,16 @@ input [4:0] S;
 input LnR;
 
 // TBD
+
+wire [31:0] outR;
+wire [31:0] outL;
+
+SHIFT32_R inst_rshift(.Y(outR), .D(D), .S(S));
+SHIFT32_L inst_lshift(.Y(outL), .D(D), .S(S));
+
+// Right shift if LnR = 0
+
+assign Y = (LnR == 1'b0)?outR:outL;
 
 endmodule
 

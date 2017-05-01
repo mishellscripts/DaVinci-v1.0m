@@ -56,6 +56,13 @@ input [31:0] I15;
 input [3:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, I2, I3, I4, I5, I6, I7, S[2:0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I8, I9, I10, I11, I12, I13, I14, I15, S[2:0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[3]);
+
 
 endmodule
 
@@ -75,6 +82,12 @@ input [31:0] I7;
 input [2:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, I2, I3, S[1:0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I4, I5, I6, I7, S[1:0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[2]);
 
 endmodule
 
@@ -90,6 +103,12 @@ input [31:0] I3;
 input [1:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, S[0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I2, I3, S[0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[1]);
 
 endmodule
 
@@ -121,8 +140,8 @@ input I0, I1, S;
 
 // TBD
 not not_s(NS, S);
-and and_inst1(Y1, S, I0);
-and and_inst2(Y2, NS, I1);
+and and_inst1(Y1, NS, I0);
+and and_inst2(Y2, S, I1);
 or or_inst(Y, Y1, Y2);
 
 endmodule

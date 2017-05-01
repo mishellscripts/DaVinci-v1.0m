@@ -27,7 +27,7 @@ reg [31:0] A;
 reg [31:0] B;
 wire [31:0] Y;
 
-OR32_2x1 or_32_bit_inst(.Y(Y),.A(A),.B(B));
+OR32_2x1 nor_32_bit_inst(.Y(Y),.A(A),.B(B));
 
 initial
 begin

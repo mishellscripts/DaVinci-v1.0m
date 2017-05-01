@@ -77,9 +77,9 @@ input [5:0] OPRN;
 wire CO;
 wire SnA;
 
-not not_oprn0 (not_res, OPRN[0]);
-and and_oprn13 (and_res, OPRN[1], OPRN[3]);
-or or_res(SnA, not_res, and_res);
+not not_oprn0 (notres, OPRN[0]);
+and and_oprn13 (andres, OPRN[1], OPRN[3]);
+or or_res(SnA, not_oprn0, and_oprn13);
 
 // Add and Sub
 wire [31:0] add_out;

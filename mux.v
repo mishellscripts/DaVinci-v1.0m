@@ -28,6 +28,14 @@ input [31:0] I24, I25, I26, I27, I28, I29, I30, I31;
 input [4:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
+			I11, I12, I13, I14, I15, S[3:0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I16, I17, I18, I19, I20, I21, I22, I23, I24,
+			I25, I26, I27, I28, I29, I30, I31, S[3:0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[4]);
 
 endmodule
 
@@ -56,6 +64,13 @@ input [31:0] I15;
 input [3:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, I2, I3, I4, I5, I6, I7, S[2:0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I8, I9, I10, I11, I12, I13, I14, I15, S[2:0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[3]);
+
 
 endmodule
 
@@ -75,6 +90,12 @@ input [31:0] I7;
 input [2:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, I2, I3, S[1:0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I4, I5, I6, I7, S[1:0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[2]);
 
 endmodule
 
@@ -90,6 +111,12 @@ input [31:0] I3;
 input [1:0] S;
 
 // TBD
+wire [31:0] mux_1a_out;
+wire [31:0] mux_1b_out;
+MUX32_2x1 mux32_inst_1a(mux_1a_out, I0, I1, S[0]);
+MUX32_2x1 mux32_inst_1b(mux_1b_out, I2, I3, S[0]);
+
+MUX32_2x1 mux32_inst_2(Y, mux_1a_out, mux_1b_out, S[1]);
 
 endmodule
 
