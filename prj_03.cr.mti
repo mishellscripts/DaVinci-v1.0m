@@ -9,7 +9,16 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 ** Error: C:/Users/Michelle/Desktop/prj3/data_path.v(20): Identifier must be declared with a port mode: CTRL.
 
-} {4.0 5.0 6.0 7.0 8.0 9.0 10.0 11.0} {}} C:/Users/Michelle/Desktop/prj3/mux_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mux_tb.v
+} {4.0 5.0 6.0 7.0 8.0 9.0 10.0 11.0} {}} C:/Users/Michelle/Desktop/prj3/alu_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu_tb.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ALU_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/alu_tb.v(44): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	ALU_TB
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/mux_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mux_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module MUX_TB
 ** Warning: C:/Users/Michelle/Desktop/prj3/mux_tb.v(23): (vlog-2283) Extra semicolon in $unit (global) scope.
@@ -26,13 +35,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	full_adder_tb
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/alu_tb.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu_tb.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module alu_tb
-
-Top level modules:
-	alu_tb
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic_32_bit.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic_32_bit.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -71,16 +73,16 @@ Top level modules:
 } {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module LSHIFTER_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(21): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(24): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 -- Compiling module RSHIFTER_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(40): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(43): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 -- Compiling module BARREL_SHIFTER32_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(68): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(71): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 -- Compiling module SHIFT32_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(96): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v(99): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
@@ -105,15 +107,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	RF_TB
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/half_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/half_adder.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module HALF_ADDER
-** Warning: C:/Users/Michelle/Desktop/prj3/half_adder.v(29): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	HALF_ADDER
-
 } {} {}} C:/Users/Michelle/Desktop/prj3/mult.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mult.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module MULT32
@@ -130,6 +123,15 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	RC_ADD_SUB_64
 	RC_ADD_SUB_32
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/half_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/half_adder.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module HALF_ADDER
+** Warning: C:/Users/Michelle/Desktop/prj3/half_adder.v(29): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	HALF_ADDER
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/prj_definition.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/prj_definition.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -230,8 +232,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MUX32_32x1
 	MUX32_16x1
-	MUX32_8x1
-	MUX32_4x1
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015

@@ -26,13 +26,14 @@ input LnR;
 //reg [27:0] res;
 //or inst_more_than5(res, S[31:5], 32'b0);
 
-wire more_than_5;
-assign more_than_5 = (S[31:5] == 27'b0)?1'b1:1'b0;
+//wire greater_than_zero;
+//or or_inst(greater_than_zero, S[31:5], 27'b0);
+//assign more_than_5 = (S[31:5] == 27'b0)?1'b1:1'b0;
 
 wire [31:0] shift_out;
 BARREL_SHIFTER32 inst_barrel_shifter32(.Y(shift_out), .D(D), .S(S[4:0]), .LnR(LnR));
 
-MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(32'b0), .I1(shift_out), .S(more_than_5));
+MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(32'b0), .I1(shift_out), .S((S[31:5] == 0)));
 
 endmodule
 
@@ -54,8 +55,8 @@ SHIFT32_R inst_rshift(.Y(outR), .D(D), .S(S));
 SHIFT32_L inst_lshift(.Y(outL), .D(D), .S(S));
 
 // Right shift if LnR = 0
-
-assign Y = (LnR == 1'b0)?outR:outL;
+MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(outR), .I1(outL), .S(LnR));
+//assign Y = (LnR == 1'b0)?outR:outL;
 
 endmodule
 
@@ -72,7 +73,6 @@ input [4:0] S;
 // Ea column will have 32 multiplexer
 // 5 such columns
 
-reg zero = 1'b0;
 
 //wire [31:0] previous;
 wire [31:0] out1;
@@ -83,7 +83,7 @@ generate
     for(i1=0; i1<32; i1=i1+1)
     begin: barrelshift1_gen_loop
         if (i1 == 31) begin
-	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], zero, S[0]);
+	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], 1'b0, S[0]);
 	end
 	else begin
 	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], D[i1+1], S[0]);
@@ -100,10 +100,10 @@ generate
     for(i2=0; i2<32; i2=i2+1)
     begin: barrelshift2_gen_loop
         if (i2 > 29) begin
-	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], zero, S[1]);
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], 1'b0, S[1]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], D[i2+2], S[1]);
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], out1[i2+2], S[1]);
 	end
     end
 endgenerate
@@ -117,10 +117,10 @@ generate
     for(i3=0; i3<32; i3=i3+1)
     begin: barrelshift3_gen_loop
         if (i3 > 27) begin
-	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], zero, S[2]);
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], 1'b0, S[2]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], D[i3+4], S[2]);
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], out2[i3+4], S[2]);
 	end
     end
 endgenerate
@@ -133,10 +133,10 @@ generate
     for(i4=0; i4<32; i4=i4+1)
     begin: barrelshift4_gen_loop
         if (i4 > 23) begin
-	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], zero, S[3]);
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], 1'b0, S[3]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], D[i4+8], S[3]);
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], out3[i4+8], S[3]);
 	end
     end
 endgenerate
@@ -149,10 +149,10 @@ generate
     for(i5=0; i5<32; i5=i5+1)
     begin: barrelshift5_gen_loop
         if (i5 > 15) begin
-	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], zero, S[4]);
+	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], 1'b0, S[4]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], D[i5+16], S[4]);
+	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], out4[i5+16], S[4]);
 	end
     end
 endgenerate
@@ -174,8 +174,6 @@ input [4:0] S; //S0 TO S4
 // Ea column will have 32 multiplexer
 // 5 such columns
 
-reg zero = 1'b0;
-
 //wire [31:0] previous;
 wire [31:0] out1;
 
@@ -185,7 +183,7 @@ generate
     for(i1=0; i1<32; i1=i1+1)
     begin: barrelshift1_gen_loop
         if (i1 == 0) begin
-	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], zero, S[0]);
+	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], 1'b0, S[0]);
 	end
 	else begin
 	    MUX1_2x1 mux2x1_inst(out1[i1], D[i1], D[i1-1], S[0]);
@@ -202,10 +200,10 @@ generate
     for(i2=0; i2<32; i2=i2+1)
     begin: barrelshift2_gen_loop
         if (i2 < 2) begin
-	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], zero, S[1]);
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], 1'b0, S[1]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], D[i2-2], S[1]);
+	    MUX1_2x1 mux2x1_inst(out2[i2], out1[i2], out1[i2-2], S[1]);
 	end
     end
 endgenerate
@@ -219,10 +217,10 @@ generate
     for(i3=0; i3<32; i3=i3+1)
     begin: barrelshift3_gen_loop
         if (i3 < 4) begin
-	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], zero, S[2]);
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], 1'b0, S[2]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], D[i3-4], S[2]);
+	    MUX1_2x1 mux2x1_inst(out3[i3], out2[i3], out2[i3-4], S[2]);
 	end
     end
 endgenerate
@@ -235,10 +233,10 @@ generate
     for(i4=0; i4<32; i4=i4+1)
     begin: barrelshift4_gen_loop
         if (i4 < 8) begin
-	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], zero, S[3]);
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], 1'b0, S[3]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], D[i4-8], S[3]);
+	    MUX1_2x1 mux2x1_inst(out4[i4], out3[i4], out3[i4-8], S[3]);
 	end
     end
 endgenerate
@@ -251,10 +249,10 @@ generate
     for(i5=0; i5<32; i5=i5+1)
     begin: barrelshift5_gen_loop
         if (i5 < 16) begin
-	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], zero, S[4]);
+	    MUX1_2x1 mux2x1_inst(Y[i5], out4[i5], 1'b0, S[4]);
 	end
 	else begin
-	    MUX1_2x1 mux2x1_inst(out5[i5], out4[i5], D[i5-16], S[4]);
+	    MUX1_2x1 mux2x1_inst(Y[i5], out4[i5], out4[i5-16], S[4]);
 	end
     end
 endgenerate
