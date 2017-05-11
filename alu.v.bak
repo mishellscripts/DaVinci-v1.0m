@@ -132,6 +132,8 @@ MUX32_16x1 oprn_select (Y, {`DATA_WIDTH{1'bx} }, add_sub_out, add_sub_out, mul_l
 			or_out, nor_out, {31'b0, add_sub_out[31]}, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, 
 			{`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, OPRN[3:0]);
 
-NOR32_2x1 zero_flag(.Y(ZERO), .A(Y), .B({`DATA_WIDTH{1'b1} }));
+NOR32_2x1 zero_flag(.Y(ZERO), .A(Y), .B({`DATA_WIDTH{1'b0} }));
+
+assign ZERO = (ZERO == {`DATA_WIDTH{1'b1} });
 
 endmodule
