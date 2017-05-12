@@ -23,8 +23,10 @@ module DATA_PATH(DATA_OUT, ADDR, ZERO, INSTRUCTION, DATA_IN, CTRL, CLK, RST);
 output [`ADDRESS_INDEX_LIMIT:0] ADDR;
 output ZERO;
 output [`DATA_INDEX_LIMIT:0] DATA_OUT, INSTRUCTION;
+//output [`DATA_INDEX_LIMIT:0] DATA_OUT;
 
 // input list
+//input [`DATA_INDEX_LIMIT:0] INSTRUCTION;
 input [`CTRL_WIDTH_INDEX_LIMIT:0]  CTRL;
 input CLK, RST;
 input [`DATA_INDEX_LIMIT:0] DATA_IN;
@@ -154,16 +156,26 @@ MUX32_2x1 inst_mux_alu2(.Y(is_r_type), .I0(shamt_or_imm), .I1(r2_data), .S(op2_s
 wire [31:0] alu_out;
 ALU inst_ALU(.A(rf_or_sp), .B(is_r_type), .OPRN(oprn), .Y(alu_out), .ZERO(ZERO));
 
-/* ================= DATA MEMORY ACCESS =================== */
+/* ================= DATA MEMORY READ =================== */
 wire [31:0] stack_or_alu;
-MUX32_2x1 inst_mux_dmem1(.Y(stack_or_alu), .I0(alu_out), .I1(next_sp), .S(ma_sel_1));
+MUX32_2x1 inst_mux_dmemr(.Y(stack_or_alu), .I0(alu_out), .I1(next_sp), .S(ma_sel_1));
 
 // Mem data output
 //wire [31:0] r1_or_r2;
-MUX32_2x1 inst_mux_dmem2(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(md_sel_1));
+MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(md_sel_1));
 
 // Mem address output
-MUX32_2x1 inst_mux_dmem2(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(md_sel_1));
+MUX32_2x1 inst_mux_dmem2(.Y(ADDR), .I0(stack_or_alu), .I1(next_pc), .S(ma_sel_2));
+
+/* ================= DATA MEMORY WRITE =================== */
+wire [31:0] mem_or_alu;
+MUX32_2x1 inst_mux_dmemw1(.Y(mem_or_alu), .I0(alu_out), .I1(DATA_IN), .S(wd_sel_1));
+
+wire [31:0] is_write_imm;
+MUX32_2x1 inst_mux_dmemw2(.Y(is_write_imm), .I0(mem_or_alu), .I1({16'b0, imm}), .S(wd_sel_2));
+
+wire [31:0] is_pc_add1;
+MUX32_2x1 inst_mux_dmemw3(.Y(is_pc_add1), .I0(pc_adder_out1), .I1(is_write_imm), .S(wd_sel_3));
 
 endmodule
 
