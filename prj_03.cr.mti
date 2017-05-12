@@ -1,15 +1,4 @@
-C:/Users/Michelle/Desktop/prj3/data_path.v {0 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/data_path.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module DATA_PATH
-** Error: C:/Users/Michelle/Desktop/prj3/data_path.v(28): (vlog-2163) Macro `CTRL_WIDTH_INDEX_LIMIT is undefined.
-
-** Error: (vlog-13069) C:/Users/Michelle/Desktop/prj3/data_path.v(28): near ":": syntax error, unexpected ':'.
-
-** Error: C:/Users/Michelle/Desktop/prj3/data_path.v(20): (vlog-2730) Undefined variable: 'CTRL'.
-
-** Error: C:/Users/Michelle/Desktop/prj3/data_path.v(20): Identifier must be declared with a port mode: CTRL.
-
-} {4.0 5.0 6.0 7.0 8.0 9.0 10.0 11.0} {}} C:/Users/Michelle/Desktop/prj3/alu_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu_tb.v
+C:/Users/Michelle/Desktop/prj3/data_path.v {0 vlog\ -work\ work\ -stats=none\ C:/Users/Michelle/Desktop/prj3/data_path.v\nModel\ Technology\ ModelSim\ PE\ Student\ Edition\ vlog\ 10.4a\ Compiler\ 2015.03\ Apr\ \ 7\ 2015\n--\ Compiling\ module\ DATA_PATH\n**\ Error:\ (vlog-13069)\ C:/Users/Michelle/Desktop/prj3/data_path.v(81):\ near\ \"\{\":\ syntax\ error,\ unexpected\ '\{'.\n\n\n {4.0 5.0} {}} C:/Users/Michelle/Desktop/prj3/alu_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module ALU_TB
 ** Warning: C:/Users/Michelle/Desktop/prj3/alu_tb.v(44): (vlog-2283) Extra semicolon in $unit (global) scope.
@@ -36,6 +25,15 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	full_adder_tb
 
+} {} {}} C:/Users/Michelle/Desktop/prj3/processor.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/processor.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module PROC_CS147_SEC05
+** Warning: C:/Users/Michelle/Desktop/prj3/processor.v(47): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	PROC_CS147_SEC05
+
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic_32_bit.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic_32_bit.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module NOR32_2x1
@@ -61,15 +59,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	CONTROL_UNIT
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/processor.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/processor.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module PROC_CS147_SEC05
-** Warning: C:/Users/Michelle/Desktop/prj3/processor.v(53): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	PROC_CS147_SEC05
-
 } {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module LSHIFTER_TB
@@ -93,10 +82,11 @@ Top level modules:
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/memory.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/memory.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module MEMORY_WRAPPER
 -- Compiling module MEMORY_64MB
 
 Top level modules:
-	MEMORY_64MB
+	MEMORY_WRAPPER
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/register_file_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -133,9 +123,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MULT32
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/prj_definition.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/prj_definition.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
-
 } {} {}} C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module MEM_64MB_TB
@@ -144,6 +131,9 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	MEM_64MB_TB
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/prj_definition.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/prj_definition.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -165,6 +155,15 @@ Top level modules:
 	OR_32BIT_TB
 	NOR_32BIT_TB
 	INV_32BIT_TB
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module TWOSCOMP32_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v(21): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	TWOSCOMP32_TB
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -188,14 +187,14 @@ Top level modules:
 	REG32
 	DECODER_5x32
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/half_adder_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/half_adder_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module TWOSCOMP32_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v(21): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module half_adder_tb
+** Warning: C:/Users/Michelle/Desktop/prj3/half_adder_tb.v(17): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	TWOSCOMP32_TB
+	half_adder_tb
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/mult_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mult_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -206,21 +205,23 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MULT_TB
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/half_adder_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/half_adder_tb.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/full_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/full_adder.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module half_adder_tb
-** Warning: C:/Users/Michelle/Desktop/prj3/half_adder_tb.v(17): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module FULL_ADDER
+** Warning: C:/Users/Michelle/Desktop/prj3/full_adder.v(32): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	half_adder_tb
+	FULL_ADDER
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/alu.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module ALU
+-- Compiling module DA_VINCI_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v(57): (vlog-2283) Extra semicolon in $unit (global) scope.
+
 
 Top level modules:
-	ALU
+	DA_VINCI_TB
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/mux.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mux.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -235,23 +236,30 @@ Top level modules:
 	MUX32_32x1
 	MUX32_16x1
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/alu.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/alu.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module DA_VINCI_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v(57): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/clk_gen.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/clk_gen.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module CLK_GENERATOR
+** Warning: C:/Users/Michelle/Desktop/prj3/clk_gen.v(33): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	DA_VINCI_TB
+	CLK_GENERATOR
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/full_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/full_adder.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module FULL_ADDER
-** Warning: C:/Users/Michelle/Desktop/prj3/full_adder.v(32): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module rc_add_sub_tb
+** Warning: C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v(19): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	FULL_ADDER
+	rc_add_sub_tb
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/logic_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/logic_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -274,23 +282,14 @@ Top level modules:
 	D_FF_TB
 	REG1_TB
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module rc_add_sub_tb
-** Warning: C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v(19): (vlog-2283) Extra semicolon in $unit (global) scope.
+-- Compiling module REG_32X32_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v(79): (vlog-2283) Extra semicolon in $unit (global) scope.
 
 
 Top level modules:
-	rc_add_sub_tb
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/clk_gen.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/clk_gen.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module CLK_GENERATOR
-** Warning: C:/Users/Michelle/Desktop/prj3/clk_gen.v(33): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	CLK_GENERATOR
+	REG_32X32_TB
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -302,14 +301,12 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	SHIFT32
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
+} {} {}} C:/Users/Michelle/Desktop/prj3/register_file.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module REG_32X32_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v(79): (vlog-2283) Extra semicolon in $unit (global) scope.
-
+-- Compiling module REGISTER_FILE_32x32
 
 Top level modules:
-	REG_32X32_TB
+	REGISTER_FILE_32x32
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015

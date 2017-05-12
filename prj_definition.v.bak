@@ -28,8 +28,6 @@
 `define NUM_OF_REG 32
 `define REG_INDEX_LIMIT (`NUM_OF_REG -1)
 `define REG_ADDR_INDEX_LIMIT 4
-`define CTRL_WIDTH 32
-`define CTRL_WIDTH_INDEX_LIMIT (`CTRL_WIDTH - 1)
 
 // definition for processor state
 `define PROC_FETCH    3'h0
@@ -41,4 +39,3 @@
 // define ISA parameters
 `define INST_START_ADDR 32'h00001000
 `define INIT_STACK_POINTER 32'h03ffffff
-

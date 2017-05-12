@@ -101,20 +101,20 @@ REG32_PP sp_inst(.Q(sp), .D(next_sp), .LOAD(sp_load), .CLK(CLK), .RESET(RST));
 
 /* ================ PC selection =================== */
 wire [31:0] pc_adder_out1;
-RC_ADD_SUB_32 inst_pcadd_1(.Y(pc_adder_out1), .CO(CO), .A(next_pc), .B({31'b0, 1'b1}), .SnA(1'b0));
+RC_ADD_SUB_32 inst_add_32(.Y(pc_adder_out1), .CO(CO), .A(next_pc), .B({31'b0, 1'b1}), .SnA(1'b0));
 
 wire [31:0] jump_reg_or_increment;
-MUX32_2x1 inst_mux_jr(.Y(jump_reg_or_increment), .I0(), .I1(pc_adder_1), .S(pc_sel_1));
+MUX32_2x1 inst_mux_32bit(.Y(jump_reg_or_increment), .I0(), .I1(pc_adder_1), .S(pc_sel_1));
 
 // Add with sign extended immediate
 wire [31:0] pc_adder_out2;
-RC_ADD_SUB_32 inst_pcadd_2(.Y(pc_adder_out2), .CO(CO), .A(pc_adder_out1), .B(), .SnA(1'b0));
+RC_ADD_SUB_32 inst_add_32(.Y(pc_adder_out2), .CO(CO), .A(pc_adder_out1), .B(), .SnA(1'b0));
 
 wire [31:0] pc_or_add;
-MUX32_2x1 inst_mux_pcadd(.Y(pc_or_add), .I0(jump_reg_or_increment), .I1(pc_adder_out2), .S(pc_sel_2));
+MUX32_2x1 inst_mux_32bit(.Y(pc_or_add), .I0(jump_reg_or_increment), .I1(pc_adder_out2), .S(pc_sel_2));
 
 wire [31:0] jump_or_res;
-MUX32_2x1 inst_mux_j(.Y(jump_or_res), .I0(), .I1(pc_or_add), .S(pc_sel_3));
+MUX32_2x1 inst_mux_32bit(.Y(jump_or_res), .I0(), .I1(pc_or_add), .S(pc_sel_3));
 
 
 
