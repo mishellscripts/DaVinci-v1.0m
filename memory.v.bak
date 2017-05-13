@@ -23,6 +23,46 @@
 //------------------------------------------------------------------------------------------
 //
 `include "prj_definition.v"
+module MEMORY_WRAPPER(DATA_OUT, DATA_IN, READ, WRITE, ADDR, CLK, RST);
+// parameter file
+// Parameter for the memory initialization file name
+parameter mem_init_file = "mem_content_01.dat";
+// output list
+output [`DATA_INDEX_LIMIT:0] DATA_OUT;
+//input list
+input [`DATA_INDEX_LIMIT:0] DATA_IN;
+input READ, WRITE, CLK, RST;
+input [`ADDRESS_INDEX_LIMIT:0] ADDR;
+
+reg  [`DATA_INDEX_LIMIT:0] DATA_OUT;
+wire [`DATA_INDEX_LIMIT:0] DATA;
+
+assign DATA = ((READ===1'b0)&&(WRITE===1'b1))?DATA_IN:{`DATA_WIDTH{1'bz} };
+
+defparam memory_inst.mem_init_file = mem_init_file;
+MEMORY_64MB memory_inst(.DATA(DATA), .READ(READ), .WRITE(WRITE), 
+                         .ADDR(ADDR), .CLK(CLK),   .RST(RST));
+
+initial 
+begin
+DATA_OUT = 32'h00000000;
+end
+
+always @(negedge RST)
+begin
+if (RST === 1'b0)
+    DATA_OUT = 32'h00000000;
+end
+
+
+always @(DATA) 
+begin
+if ((READ===1'b1)&&(WRITE===1'b0))
+    DATA_OUT=DATA;
+end
+
+endmodule
+
 module MEMORY_64MB(DATA, READ, WRITE, ADDR, CLK, RST);
 // Parameter for the memory initialization file name
 parameter mem_init_file = "mem_content_01.dat";
@@ -50,14 +90,11 @@ $readmemh(mem_init_file, sram_32x64m);
 end
 else
 begin
- if ((READ===1'b1)&&(WRITE===1'b0)) begin // read operation
-	//$write("Mem reading\n");
-	data_ret = sram_32x64m[ADDR]; 
- end
- else if ((READ===1'b0)&&(WRITE===1'b1)) begin // write operation
+ if ((READ===1'b1)&&(WRITE===1'b0)) // read operation
+	data_ret =  sram_32x64m[ADDR];
+ else if ((READ===1'b0)&&(WRITE===1'b1)) // write operation
 	sram_32x64m[ADDR] = DATA;
-	//$write("Mem writing\n");
- end
 end
 end
 endmodule
+

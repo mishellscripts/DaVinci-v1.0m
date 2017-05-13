@@ -169,9 +169,9 @@ MUX32_32x1 inst_mux_32x1_2(mux_32x1_res2, reg0_res, reg1_res, reg2_res, reg3_res
 				reg24_res, reg25_res, reg26_res, reg27_res, reg28_res,
 				reg29_res, reg30_res, reg31_res, ADDR_R2);
 
-MUX32_2x1_1(R1_DATA, {`DATA_WIDTH{1'bz} }, mux_32x1_res1, READ);
+MUX32_2x1 inst_mux_2x1_1(DATA_R1, {`DATA_WIDTH{1'bz} }, mux_32x1_res1, READ);
 
-MUX32_2x1_2(R2_DATA, {`DATA_WIDTH{1'bz} }, mux_32x1_res2, READ);
+MUX32_2x1 inst_mux_2x1_2(DATA_R2, {`DATA_WIDTH{1'bz} }, mux_32x1_res2, READ);
 
 endmodule
 

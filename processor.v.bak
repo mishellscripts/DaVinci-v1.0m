@@ -20,34 +20,28 @@
 //------------------------------------------------------------------------------------------
 //
 `include "prj_definition.v"
-module PROC_CS147_SEC05(DATA, ADDR, READ, WRITE, CLK, RST);
+module PROC_CS147_SEC05(DATA_OUT, ADDR, DATA_IN, READ, WRITE, CLK, RST);
 // output list
 output [`ADDRESS_INDEX_LIMIT:0] ADDR;
+output [`DATA_INDEX_LIMIT:0] DATA_OUT;
 output READ, WRITE;
 // input list
 input  CLK, RST;
-// inout list
-inout [`DATA_INDEX_LIMIT:0] DATA;
+input [`DATA_INDEX_LIMIT:0] DATA_IN;
 
 // net section
-wire [`DATA_INDEX_LIMIT:0] rf_data_w, rf_data_r1, rf_data_r2, alu_op1, alu_op2, alu_result;
-wire [`ADDRESS_INDEX_LIMIT:0] rf_addr_w,  rf_addr_r1, rf_addr_r2;
-wire [`ALU_OPRN_INDEX_LIMIT:0] alu_oprn;
-wire rf_read, rf_write;
 wire zero;
+wire [`CTRL_WIDTH_INDEX_LIMIT:0] ctrl;
+wire [`DATA_INDEX_LIMIT:0] INSTRUCTION;
 
 // instantiation section
 // Control unit
-CONTROL_UNIT cu_inst (.MEM_DATA(DATA),        .RF_DATA_W(rf_data_w),   .RF_ADDR_W(rf_addr_w),   .RF_ADDR_R1(rf_addr_r1), 
-                      .RF_ADDR_R2(rf_addr_r2), .RF_READ(rf_read),       .RF_WRITE(rf_write),     .ALU_OP1(alu_op1), 
-                      .ALU_OP2(alu_op2),      .ALU_OPRN(alu_oprn),     .MEM_ADDR(ADDR),          .MEM_READ(READ), 
-                      .MEM_WRITE(WRITE),      .RF_DATA_R1(rf_data_r1), .RF_DATA_R2(rf_data_r2), .ALU_RESULT(alu_result), 
-                      .ZERO(zero),            .CLK(CLK),               .RST(RST));
-// register file
-REGISTER_FILE_32x32 rf_inst (.DATA_R1(rf_data_r1), .DATA_R2(rf_data_r2), .ADDR_R1(rf_addr_r1), .ADDR_R2(rf_addr_r2), 
-                             .DATA_W(rf_data_w),   .ADDR_W(rf_addr_w),   .READ(rf_read),      .WRITE(rf_write), 
-                             .CLK(CLK),            .RST(RST));
-// alu
-ALU alu_inst (.OUT(alu_result), .ZERO(zero), .OP1(alu_op1), .OP2(alu_op2), .OPRN(alu_oprn));
+CONTROL_UNIT cu_inst (.CTRL(ctrl), .READ(READ), .WRITE(WRITE), 
+                      .ZERO(zero), .INSTRUCTION(INSTRUCTION),
+                      .CLK(CLK),   .RST(RST));
+
+// data path
+DATA_PATH    data_path_inst (.DATA_OUT(DATA_OUT),  .INSTRUCTION(INSTRUCTION), .DATA_IN(DATA_IN), .ADDR(ADDR), .ZERO(zero),
+                             .CTRL(ctrl),  .CLK(CLK),   .RST(RST));
 
 endmodule;

@@ -77,7 +77,7 @@ genvar i;
 generate
 	for(i=0; i<32; i=i+1)
 	begin: reg32_gen_loop
-		REG1 reg1_inst(Q[i], ~(Q[i]), D[i], LOAD, CLK, 1'b1, RESET);
+		REG1 reg1_inst(Q[i], ~Q[i], D[i], LOAD, CLK, 1'b1, RESET);
 	end
 endgenerate
 endmodule
@@ -183,22 +183,22 @@ and inst_and13(D[12], decoder_4x16_out[12], inv_I4);
 and inst_and14(D[13], decoder_4x16_out[13], inv_I4);
 and inst_and15(D[14], decoder_4x16_out[14], inv_I4); 
 and inst_and16(D[15], decoder_4x16_out[15], inv_I4); 
-and inst_and1(D[16], decoder_4x16_out[0], I[4]);
-and inst_and2(D[17], decoder_4x16_out[1], I[4]);
-and inst_and3(D[18], decoder_4x16_out[2], I[4]); 
-and inst_and4(D[19], decoder_4x16_out[3], I[4]); 
-and inst_and5(D[20], decoder_4x16_out[4], I[4]);
-and inst_and6(D[21], decoder_4x16_out[5], I[4]);
-and inst_and7(D[22], decoder_4x16_out[6], I[4]); 
-and inst_and8(D[23], decoder_4x16_out[7], I[4]); 
-and inst_and9(D[24], decoder_4x16_out[8], I[4]);
-and inst_and10(D[25], decoder_4x16_out[9], I[4]);
-and inst_and11(D[26], decoder_4x16_out[10], I[4]); 
-and inst_and12(D[27], decoder_4x16_out[11], I[4]); 
-and inst_and13(D[28], decoder_4x16_out[12], I[4]);
-and inst_and14(D[29], decoder_4x16_out[13], I[4]);
-and inst_and15(D[30], decoder_4x16_out[14], I[4]); 
-and inst_and16(D[31], decoder_4x16_out[15], I[4]); 
+and inst_and17(D[16], decoder_4x16_out[0], I[4]);
+and inst_and18(D[17], decoder_4x16_out[1], I[4]);
+and inst_and19(D[18], decoder_4x16_out[2], I[4]); 
+and inst_and20(D[19], decoder_4x16_out[3], I[4]); 
+and inst_and21(D[20], decoder_4x16_out[4], I[4]);
+and inst_and22(D[21], decoder_4x16_out[5], I[4]);
+and inst_and23(D[22], decoder_4x16_out[6], I[4]); 
+and inst_and24(D[23], decoder_4x16_out[7], I[4]); 
+and inst_and25(D[24], decoder_4x16_out[8], I[4]);
+and inst_and26(D[25], decoder_4x16_out[9], I[4]);
+and inst_and27(D[26], decoder_4x16_out[10], I[4]); 
+and inst_and28(D[27], decoder_4x16_out[11], I[4]); 
+and inst_and29(D[28], decoder_4x16_out[12], I[4]);
+and inst_and30(D[29], decoder_4x16_out[13], I[4]);
+and inst_and31(D[30], decoder_4x16_out[14], I[4]); 
+and inst_and32(D[31], decoder_4x16_out[15], I[4]); 
 
 endmodule
 

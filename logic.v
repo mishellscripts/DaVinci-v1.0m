@@ -77,7 +77,8 @@ genvar i;
 generate
 	for(i=0; i<32; i=i+1)
 	begin: reg32_gen_loop
-		REG1 reg1_inst(Q[i], ~(Q[i]), D[i], LOAD, CLK, 1'b1, RESET);
+		not inst_inv_q(Qbar, Q[i]);
+		REG1 reg1_inst(Q[i], Qbar, D[i], LOAD, CLK, 1'b1, RESET);
 	end
 endgenerate
 endmodule
