@@ -83,26 +83,35 @@ begin
     else if (proc_state === `PROC_EXE) begin
         // R-Type (except jr)
         if (opcode === 6'h00 && stored_funct !== 6'h08) begin 
-	    // Select alu operation, alu_oprn = 
+	    // Select alu operation, alu_oprn = CTRL[21];
 	    case(stored_funct)   
-	        6'h20: alu_oprn = `ALU_OPRN_WIDTH'h01; // add
-	        6'h22: alu_oprn = `ALU_OPRN_WIDTH'h02; // sub
-	        6'h2c: alu_oprn = `ALU_OPRN_WIDTH'h03; // mul
-	        6'h24: alu_oprn = `ALU_OPRN_WIDTH'h06; // and
-	        6'h25: alu_oprn = `ALU_OPRN_WIDTH'h07; // or
-	        6'h27: alu_oprn = `ALU_OPRN_WIDTH'h08; // nor
-	        6'h2a: alu_oprn = `ALU_OPRN_WIDTH'h09; // slt
-	        6'h00: alu_oprn = `ALU_OPRN_WIDTH'h05; // sll
-	        6'h02: alu_oprn = `ALU_OPRN_WIDTH'h04; // srl
+	        6'h20: CTRL[21] = `ALU_OPRN_WIDTH'h01; // add
+	        6'h22: CTRL[21] = `ALU_OPRN_WIDTH'h02; // sub
+	        6'h2c: CTRL[21] = `ALU_OPRN_WIDTH'h03; // mul
+	        6'h24: CTRL[21] = `ALU_OPRN_WIDTH'h06; // and
+	        6'h25: CTRL[21] = `ALU_OPRN_WIDTH'h07; // or
+	        6'h27: CTRL[21] = `ALU_OPRN_WIDTH'h08; // nor
+	        6'h2a: CTRL[21] = `ALU_OPRN_WIDTH'h09; // slt
+	        6'h00: CTRL[21] = `ALU_OPRN_WIDTH'h05; // sll
+	        6'h02: CTRL[21] = `ALU_OPRN_WIDTH'h04; // srl
 	    endcase
 
+	    //op1_sel_1 = CTRL[16]; 
+	    //op2_sel_1 = CTRL[17];
+	    //op2_sel_2 = CTRL[18];
+	    //op2_sel_3 = CTRL[19];
+	    //op2_sel_4 = CTRL[20]; 
+
             // Select first alu operand
-	    alu_op1 = RF_DATA_R1; // R[rs] - always for R-type
+	    CTRL[16] = 1'b0; //R[rs] - always for R-type
 
 	    // Select second alu operand
 	    // If sll or srl instruction, use shamt for op2
-            if (stored_funct === 6'h00 || stored_funct === 6'h02)
-  	        alu_op2 = stored_shamt;
+            if (stored_funct === 6'h00 || stored_funct === 6'h02) begin
+  	        CTRL[17] = 
+		CTRL[18] = 
+		CTRL[19] = 
+		CTRL[20] =    
 	    // Else, use rt for op2
 	    else
 	        alu_op2 = RF_DATA_R2; // R[rt]

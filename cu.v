@@ -96,16 +96,24 @@ begin
 	        6'h02: CTRL[21] = `ALU_OPRN_WIDTH'h04; // srl
 	    endcase
 
+	    //op1_sel_1 = CTRL[16]; 
+	    //op2_sel_1 = CTRL[17];
+	    //op2_sel_2 = CTRL[18];
+	    //op2_sel_3 = CTRL[19];
+	    //op2_sel_4 = CTRL[20]; 
+
             // Select first alu operand
-	    alu_op1 = RF_DATA_R1; // R[rs] - always for R-type
+	    CTRL[16] = 1'b0; //R[rs] - always for R-type
 
 	    // Select second alu operand
 	    // If sll or srl instruction, use shamt for op2
-            if (stored_funct === 6'h00 || stored_funct === 6'h02)
-  	        alu_op2 = stored_shamt;
+            if (stored_funct === 6'h00 || stored_funct === 6'h02) begin
+  	        CTRL[17] = 1'b1;
+		CTRL[19] = 1'b1;
+		CTRL[20] = 1'b0; 
 	    // Else, use rt for op2
-	    else
-	        alu_op2 = RF_DATA_R2; // R[rt]
+	    else begin
+	        CTRL[20] = 1'b1; // R[rt]
         end
 
         // I-Type (except lui)
