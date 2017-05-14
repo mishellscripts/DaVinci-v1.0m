@@ -29,7 +29,17 @@ input [`CTRL_WIDTH_INDEX_LIMIT:0]  CTRL;
 input CLK, RST;
 input [`DATA_INDEX_LIMIT:0] DATA_IN;
 
-assign INSTRUCTION = DATA_IN;
+//assign INSTRUCTION = (DATA_IN >= 0)?DATA_IN:INSTRUCTION;
+
+reg [31:0] instr_reg;
+
+always @(DATA_IN) begin
+$write("updating instruction *** \n");
+	instr_reg <= DATA_IN;
+end
+
+
+assign INSTRUCTION = instr_reg;
 
 // TBD
 reg pc_load, pc_sel_1, pc_sel_2, pc_sel_3, mem_r, mem_w,
@@ -49,6 +59,7 @@ reg [15:0]  immediate;
 reg [25:0]  address;
 
 initial begin
+//instr_reg = DATA_IN;
 /*pc_load = CTRL[0];
 pc_sel_1 = CTRL[1];
 pc_sel_2 = CTRL[2];
@@ -91,10 +102,19 @@ ma_sel_2 = CTRL[31];*/
 
 end
 
+
+always @(alu_out) begin
+$write("ALU RESLT: %h\n", alu_out);
+end
+
+
 wire [31:0] sign_extended_imm;
 wire [31:0] pc;
 wire [31:0] sp;
 wire [31:0] next_pc;
+
+assign next_pc = pc;
+
 wire [31:0] next_sp;
 wire [31:0] pc_adder_out1;
 wire [31:0] jump_reg_or_increment;
@@ -123,20 +143,22 @@ wire [31:0] addr_out;
 assign sign_extended_imm = $signed(immediate);
 
 defparam pc_inst.PATTERN = `INST_START_ADDR;
-REG32_PP pc_inst(.Q(pc), .D(next_pc), .LOAD(pc_load), .CLK(CLK), .RESET(RST));
+REG32_PP pc_inst(.Q(pc), .D(next_pc), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
 //REG32 pc_inst(.Q(pc), .D(next_pc), .LOAD(pc_load), .CLK(CLK), .RESET(RST));
 
 // Test prints
 always @ (posedge CLK)
 begin
-$write("PC: %8h\n", pc);
-$write("CTRL = %h\n", CTRL);
+$write("DATA IN: %h\n", DATA_IN);
+$write("PC: %h\n", pc);
+//$write("NEXTPC: %h\n", next_pc);
+//$write("CTRL = %h\n", CTRL);
 $write("PC address selected?= %h\n", CTRL[31]);
 end
 /////
 
 defparam sp_inst.PATTERN = `INIT_STACK_POINTER;
-REG32_PP sp_inst(.Q(sp), .D(next_sp), .LOAD(sp_load), .CLK(CLK), .RESET(RST));
+REG32_PP sp_inst(.Q(sp), .D(next_sp), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
 
 
 /* ================ PC selection =================== */
@@ -201,7 +223,7 @@ MUX32_2x1 inst_mux_dmemr(.Y(stack_or_alu), .I0(alu_out), .I1(sp), .S(CTRL[26]));
 MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(CTRL[29]));
 
 // Mem address output
-MUX32_2x1 inst_mux_dmem2(.Y(addr_out), .I0(stack_or_alu), .I1(32'h77777777), .S(CTRL[31]));
+MUX32_2x1 inst_mux_dmem2(.Y(addr_out), .I0(stack_or_alu), .I1(pc), .S(CTRL[31]));
 
 assign ADDR = addr_out[25:0];
 assign ZERO = zero_out[0];

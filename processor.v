@@ -41,7 +41,7 @@ CONTROL_UNIT cu_inst (.CTRL(ctrl), .READ(READ), .WRITE(WRITE),
                       .CLK(CLK),   .RST(RST));
 
 // data path
-DATA_PATH    data_path_inst (.DATA_OUT(DATA_OUT),  .INSTRUCTION(INSTRUCTION), .DATA_IN(DATA_IN), .ADDR(ADDR), .ZERO(zero),
+DATA_PATH    data_path_inst (.DATA_OUT(DATA_OUT), .ADDR(ADDR), .ZERO(zero), .INSTRUCTION(INSTRUCTION), .DATA_IN(DATA_IN), 
                              .CTRL(ctrl),  .CLK(CLK),   .RST(RST));
 
 endmodule;

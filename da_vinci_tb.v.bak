@@ -44,9 +44,9 @@ DA_VINCI da_vinci_inst(.MEM_DATA_OUT(DATA_OUT), .MEM_DATA_IN(DATA_IN),
 
 initial
 begin
-//RST=1'b0;
+RST=1'b0;
 #5 RST=1'b1;
-//#5 RST=1'b1;
+#5 RST=1'b0;
 
 // TBD: rest of the test code goes here.
 

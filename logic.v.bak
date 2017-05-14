@@ -22,20 +22,24 @@ input CLK, LOAD;
 input [31:0] D;
 input RESET;
 
+initial begin
+$write("D: %h, CLK: %h, LOAD: %h, RESET: %h", D, CLK, LOAD, RESET);
+end
+
 wire [31:0] qbar;
+
 genvar i;
 generate 
 for(i=0; i<32; i=i+1)
-begin : reg32_pp_gen_loop
+begin : reg32_gen_loop
 if (PATTERN[i] == 0)
-REG1 reg_inst(.Q(Q[i]), .Qbar(qbar[i]), .D(D[i]), .L(LOAD), .C(CLK), .nP(RESET), .nR(1'b1));
-else
 REG1 reg_inst(.Q(Q[i]), .Qbar(qbar[i]), .D(D[i]), .L(LOAD), .C(CLK), .nP(1'b1), .nR(RESET)); 
+else
+REG1 reg_inst(.Q(Q[i]), .Qbar(qbar[i]), .D(D[i]), .L(LOAD), .C(CLK), .nP(RESET), .nR(1'b1));
 end 
 endgenerate
 
 endmodule
-
 // 64-bit two's complement
 module TWOSCOMP64(Y,A);
 //output list

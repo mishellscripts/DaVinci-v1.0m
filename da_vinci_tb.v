@@ -46,7 +46,7 @@ initial
 begin
 RST=1'b0;
 #5 RST=1'b1;
-//#5 RST=1'b1;
+//#5 RST=1'b0;
 
 // TBD: rest of the test code goes here.
 

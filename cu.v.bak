@@ -38,11 +38,11 @@ reg [25:0]  address;
 reg [`CTRL_WIDTH_INDEX_LIMIT:0] C;
 
 assign CTRL = C;
-assign READ = CTRL[4];
-assign WRITE = CTRL[5];
+assign READ = C[4];
+assign WRITE = C[5];
 
 initial begin
-/* =================== Parse data (instruction) ====================== */
+/* =================== Parse data (instruction) ====================== 
 // parse the instruction
 // R-type
 {opcode, rs, rt, rd, shamt, funct} = INSTRUCTION;
@@ -50,38 +50,151 @@ initial begin
 {opcode, rs, rt, immediate } = INSTRUCTION;
 // J-type
 {opcode, address} = INSTRUCTION;
+*/
+//C[0] = 1'b0;
+//C[31] = 1'b1;
+//C[30] = 1'b1;
+//C[4]=1'b1; C[5]=1'b0;
+//$write("INIT - INSTRUCTION: %h\n", INSTRUCTION);
+//$write("INIT - PC LOAD ON?= %h\n", C[0]);
 
-C[0] = 1'b1;
+// mem_r = CTRL[4] mem_w = CTRL[5]
+        C[4]=1'b1; C[5]=1'b0;
+
+	// pc_load = CTRL[0];
+	C[0]= 1'b0;
+	C[31] = 1'b1; // ma_sel_2
+	$write("PC LOAD ON?= %h\n", C[0]);
+	
+	//C[30] = 1'b1; // ir_load
+	
+        // Set register file control to hold
+        // reg_r = CTRL[7] reg_w = CTRL[8]
+	C[7] = 1'b0; C[8] = 1'b0; 
 end
+
+/*
+reg [5:0]   opcode;
+reg [4:0]   rs;
+reg [4:0]   rt;
+reg [4:0]   rd;
+reg [4:0]   shamt;
+reg [5:0]   funct;
+reg [15:0]  immediate;
+reg [25:0]  address;*/
+
+//------------------------ PRINT INSTRUCTION TASK ---------------------------------//
+task print_instruction;
+input [`DATA_INDEX_LIMIT:0] inst;
+reg [5:0]   opcode2;
+reg [4:0]   rs2;
+reg [4:0]   rt2;
+reg [4:0]   rd2;
+reg [4:0]   shamt2;
+reg [5:0]   funct2;
+reg [15:0]  immediate2;
+reg [25:0]  address2;
+begin
+// parse the instruction
+// R-type
+{opcode2, rs2, rt2, rd2, shamt2, funct2} = inst;
+// I-type
+{opcode2, rs2, rt2, immediate2 } = inst;
+// J-type
+{opcode2, address2} = inst;
+
+$write("@ %6dns -> [0X%08h] ", $time, inst);
+
+case(opcode2)
+// R-Type
+6'h00 : begin
+            case(funct2)
+                6'h20: $write("add  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h22: $write("sub  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h2c: $write("mul  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h24: $write("and  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+ 		6'h25: $write("or   r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h27: $write("nor  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h2a: $write("slt  r[%02d], r[%02d], r[%02d];", rs2, rt2, rd2);
+                6'h00: $write("sll  r[%02d], %2d, r[%02d];", rs2, shamt2, rd2);
+                6'h02: $write("srl  r[%02d], 0X%02h, r[%02d];", rs2, shamt2, rd2);
+                6'h08: $write("jr   r[%02d];", rs2);
+                default: begin $write("");
+		end
+            endcase
+        end
+// I-type
+6'h08 : $write("addi  r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h1d : $write("muli  r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h0c : $write("andi  r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h0d : $write("ori   r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h0f : $write("lui   r[%02d], 0X%04h;", rt2, immediate2);
+6'h0a : $write("slti  r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h04 : $write("beq   r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h05 : $write("bne   r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h23 : $write("lw    r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+6'h2b : $write("sw    r[%02d], r[%02d], 0X%04h;", rs2, rt2, immediate2);
+// J-Type
+6'h02 : $write("jmp   0X%07h;", address2);
+6'h03 : $write("jal   0X%07h;", address2);
+6'h1b : $write("push;");
+6'h1c : $write("pop;");
+default: $write("");
+endcase
+
+// Store values
+immediate = immediate2;
+opcode = opcode2; 
+funct = funct2;
+rs = rs2;
+rd = rd2;
+rt = rt2;
+
+$write("\n");
+end
+endtask
+//------------------------------------- END ---------------------------------------//
+
 
 // TBD - take action on each +ve edge of clock
 wire [2:0] proc_state;
 
 PROC_SM state_machine(.STATE(proc_state), .CLK(CLK), .RST(RST));
 
+
+
 always @ (proc_state)
 begin
+    //$write("INSTRUCTION: %h\n", INSTRUCTION);
     // FETCH: Get next instruction from memory with address as content in PC register
     if (proc_state === `PROC_FETCH) begin
-	$write("Instruction Fetch: %8h\n", INSTRUCTION);
+	$write("\n======================\n");
+	$write("Instruction Fetch\n");
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
+
 	// pc_load = CTRL[0];
-
-	C[31] = 1'b1;
-
+	C[0]= 1'b0;
+	C[31] = 1'b1; // ma_sel_2
+	$write("PC LOAD ON?= %h\n", C[0]);
+	
+	//C[30] = 1'b1; // ir_load
+	
         // Set register file control to hold
         // reg_r = CTRL[7] reg_w = CTRL[8]
 	C[7] = 1'b0; C[8] = 1'b0; 
     end
     // DECODE: Parse instruction and get values from register file
     else if (proc_state === `PROC_DECODE) begin
-	// pc_load = CTRL[0];
-	C[0] = 1'b0;
 
-	$write("Instruction Decode: %8h\n", INSTRUCTION);
+	// pc_load = CTRL[0];
+	//C[0] = 1'b0;
+	$write("\n======================\n");
+	//$write("Instruction Decode: %h\n", INSTRUCTION);
+	$write("Instruction Decode\n");
+	 print_instruction(INSTRUCTION);
 	//ir_load = CTRL[30]
-	C[30] = 1'b1;
+	//C[30] = 1'b1;
 
 	// Set register file control to read
         // reg_r = CTRL[7] reg_w = CTRL[8]
@@ -96,7 +209,10 @@ begin
     else if (proc_state === `PROC_EXE) begin
 	// pc_load = CTRL[0];
 	C[0] = 1'b0;
-	$write("Execution\n");
+	$write("\n======================\n");
+	$write("Execution: %h\n", INSTRUCTION);
+	$write("Rs=%d, Rt=%d, Opcode=%d\n", rs, rt, opcode);
+	print_instruction(INSTRUCTION);
         // R-Type (except jr)
         if (opcode === 6'h00 && funct !== 6'h08) begin 
 	    // Select alu operation, alu_oprn = CTRL[21];
@@ -188,8 +304,10 @@ begin
     end
     // Only lw, sw, push, pop
     else if (proc_state === `PROC_MEM) begin
+	$write("alu op=%h\n", C[25:21]);
 	// pc_load = CTRL[0];
 	C[0] = 1'b0;
+	$write("\n======================\n");
 	$write("Mem Phase\n");
         // Default make memory operation 00 or 11
 	//mem_read=1'b0; mem_write=1'b0; 
@@ -232,6 +350,7 @@ begin
 	end 
     end
     else if (proc_state === `PROC_WB) begin
+	$write("\n======================\n");
 	$write("Write Back Phase\n");
         /*if (ALU_RESULT !== 'h03ffffff && stored_opcode === 6'h1b) begin
 	    SP_REG = ALU_RESULT;

@@ -22,6 +22,10 @@ input CLK, LOAD;
 input [31:0] D;
 input RESET;
 
+always @(posedge CLK) begin
+$write("D: %h, CLK: %h, LOAD: %h, RESET: %h\n", D, CLK, LOAD, RESET);
+end
+
 wire [31:0] qbar;
 
 genvar i;
