@@ -36,7 +36,6 @@ end
 endgenerate
 
 endmodule
-
 // 64-bit two's complement
 module TWOSCOMP64(Y,A);
 //output list
@@ -72,13 +71,14 @@ input CLK, LOAD;
 input [31:0] D;
 input RESET;
 
+wire [31:0] Qbar;
+
 // TBD
 genvar i;
 generate
 	for(i=0; i<32; i=i+1)
 	begin: reg32_gen_loop
-		not inst_inv_q(Qbar, Q[i]);
-		REG1 reg1_inst(Q[i], Qbar, D[i], LOAD, CLK, 1'b1, RESET);
+		REG1 reg1_inst(Q[i], Qbar[i], D[i], LOAD, CLK, 1'b1, RESET);
 	end
 endgenerate
 endmodule
@@ -94,7 +94,7 @@ output Q,Qbar;
 
 // TBD
 wire mux2x1_d_res;
-MUX1_2x1 mux2x1_d(mux2x1_d_res, D, Q, L);
+MUX1_2x1 mux2x1_d(mux2x1_d_res, Q, D, L);
 D_FF inst_dff(.Q(Q), .Qbar(Qbar), .D(mux2x1_d_res), .C(C), .nP(nP), .nR(nR));
 
 endmodule
@@ -114,9 +114,9 @@ not inv_c(nC, C);
 wire Y, Ybar;
 D_LATCH inst_d_latch(.Q(Y), .Qbar(Ybar), .D(D), .C(nC), .nP(nP), .nR(nR));
 
-not inv_inv_c(nnC, nC);
+//not inv_inv_c(nnC, nC);
 
-SR_LATCH inst_sr_latch(.Q(Q), .Qbar(Qbar), .S(Y), .R(Ybar), .C(nnC), .nP(nP), .nR(nR));
+SR_LATCH inst_sr_latch(.Q(Q), .Qbar(Qbar), .S(Y), .R(Ybar), .C(C), .nP(nP), .nR(nR));
 
 endmodule
 
@@ -130,11 +130,15 @@ input nP, nR;
 output Q,Qbar;
 
 // TBD
-not not_d(Dbar, D);
+/*not not_d(Dbar, D);
 nand nand_d_1(d_out_1, D, C);
 nand nand_d_2(d_out_2, Dbar, C);
 nand nand_d_3(Q, d_out_1, Qbar, nP);
-nand nand_d_4(Qbar, d_out_2, Q, nR);
+nand nand_d_4(Qbar, d_out_2, Q, nR);*/
+
+wire Dbar;
+not not_d(Dbar, D);
+SR_LATCH inst_dlatch_sr(.Q(Q), .Qbar(Qbar), .S(D), .R(Dbar), .C(C), .nP(nP), .nR(nR));
 
 endmodule
 
@@ -146,6 +150,11 @@ module SR_LATCH(Q,Qbar, S, R, C, nP, nR);
 input S, R, C;
 input nP, nR;
 output Q,Qbar;
+
+wire sr_out_1, sr_out_2;
+/*P, R;
+not inv_nP(P, nP);
+not inv_nR(R, nR);*/
 
 // TBD
 nand nand_sr_1(sr_out_1, S, C);

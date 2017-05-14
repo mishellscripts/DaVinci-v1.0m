@@ -90,10 +90,16 @@ $readmemh(mem_init_file, sram_32x64m);
 end
 else
 begin
- if ((READ===1'b1)&&(WRITE===1'b0)) // read operation
+ if ((READ===1'b1)&&(WRITE===1'b0)) begin// read operation
 	data_ret =  sram_32x64m[ADDR];
- else if ((READ===1'b0)&&(WRITE===1'b1)) // write operation
+	$write("Memory read data at address %5h: %8h\n", ADDR, data_ret);
+ end 
+ else if ((READ===1'b0)&&(WRITE===1'b1)) begin // write operation
 	sram_32x64m[ADDR] = DATA;
+	$write("Memory write\n");
+ end 
+ else
+	$write("Memory hold\n"); 
 end
 end
 endmodule

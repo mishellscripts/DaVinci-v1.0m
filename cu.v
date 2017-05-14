@@ -38,6 +38,8 @@ reg [25:0]  address;
 reg [`CTRL_WIDTH_INDEX_LIMIT:0] C;
 
 assign CTRL = C;
+assign READ = C[4];
+assign WRITE = C[5];
 
 initial begin
 /* =================== Parse data (instruction) ====================== */
@@ -48,21 +50,25 @@ initial begin
 {opcode, rs, rt, immediate } = INSTRUCTION;
 // J-type
 {opcode, address} = INSTRUCTION;
+
+C[0] = 1'b1;
 end
 
 // TBD - take action on each +ve edge of clock
 wire [2:0] proc_state;
 
-PROC_SM state_machine(.STATE(proc_state), .CLK(CLK),.RST(RST));
+PROC_SM state_machine(.STATE(proc_state), .CLK(CLK), .RST(RST));
 
 always @ (proc_state)
 begin
     // FETCH: Get next instruction from memory with address as content in PC register
     if (proc_state === `PROC_FETCH) begin
+	$write("Instruction Fetch: %8h\n", INSTRUCTION);
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
 	// pc_load = CTRL[0];
-	C[0] = 1'b1;
+
+	C[31] = 1'b1;
 
         // Set register file control to hold
         // reg_r = CTRL[7] reg_w = CTRL[8]
@@ -70,8 +76,12 @@ begin
     end
     // DECODE: Parse instruction and get values from register file
     else if (proc_state === `PROC_DECODE) begin
-	//ir_load = CTRL[26]
-	C[26] = 1'b1;
+	// pc_load = CTRL[0];
+	C[0] = 1'b0;
+
+	$write("Instruction Decode: %8h\n", INSTRUCTION);
+	//ir_load = CTRL[30]
+	C[30] = 1'b1;
 
 	// Set register file control to read
         // reg_r = CTRL[7] reg_w = CTRL[8]
@@ -84,19 +94,22 @@ begin
     end
     // EXE: Set ALU operand and operation code (except lui, jmp, jal; no operand/operation)
     else if (proc_state === `PROC_EXE) begin
+	// pc_load = CTRL[0];
+	C[0] = 1'b0;
+	$write("Execution\n");
         // R-Type (except jr)
         if (opcode === 6'h00 && funct !== 6'h08) begin 
 	    // Select alu operation, alu_oprn = CTRL[21];
 	    case(funct)   
-	        6'h20: C[21] = `ALU_OPRN_WIDTH'h01; // add
-	        6'h22: C[21] = `ALU_OPRN_WIDTH'h02; // sub
-	        6'h2c: C[21] = `ALU_OPRN_WIDTH'h03; // mul
-	        6'h24: C[21] = `ALU_OPRN_WIDTH'h06; // and
-	        6'h25: C[21] = `ALU_OPRN_WIDTH'h07; // or
-	        6'h27: C[21] = `ALU_OPRN_WIDTH'h08; // nor
-	        6'h2a: C[21] = `ALU_OPRN_WIDTH'h09; // slt
-	        6'h00: C[21] = `ALU_OPRN_WIDTH'h05; // sll
-	        6'h02: C[21] = `ALU_OPRN_WIDTH'h04; // srl
+	        6'h20: C[25:21] = `ALU_OPRN_WIDTH'h01; // add
+	        6'h22: C[25:21] = `ALU_OPRN_WIDTH'h02; // sub
+	        6'h2c: C[25:21] = `ALU_OPRN_WIDTH'h03; // mul
+	        6'h24: C[25:21] = `ALU_OPRN_WIDTH'h06; // and
+	        6'h25: C[25:21] = `ALU_OPRN_WIDTH'h07; // or
+	        6'h27: C[25:21] = `ALU_OPRN_WIDTH'h08; // nor
+	        6'h2a: C[25:21] = `ALU_OPRN_WIDTH'h09; // slt
+	        6'h00: C[25:21] = `ALU_OPRN_WIDTH'h05; // sll
+	        6'h02: C[25:21] = `ALU_OPRN_WIDTH'h04; // srl
 	    endcase
 
 	    //op1_sel_1 = CTRL[16]; 
@@ -146,14 +159,14 @@ begin
 
 	    // Select alu operation
 	    case(opcode)   
-	        6'h08: C[21] = `ALU_OPRN_WIDTH'h01; // add
-	        6'h2b: C[21] = `ALU_OPRN_WIDTH'h01; // sw
-	        6'h1d: C[21] = `ALU_OPRN_WIDTH'h03; // muli
-	        6'h0c: C[21] = `ALU_OPRN_WIDTH'h06; // andi
-	        6'h0d: C[21] = `ALU_OPRN_WIDTH'h07; // ori
-	        6'h0a: C[21] = `ALU_OPRN_WIDTH'h09; // slti
-	        6'h04: C[21] = `ALU_OPRN_WIDTH'h02; // beq
-	        6'h05: C[21] = `ALU_OPRN_WIDTH'h02; // bne
+	        6'h08: C[25:21] = `ALU_OPRN_WIDTH'h01; // add
+	        6'h2b: C[25:21] = `ALU_OPRN_WIDTH'h01; // sw
+	        6'h1d: C[25:21] = `ALU_OPRN_WIDTH'h03; // muli
+	        6'h0c: C[25:21] = `ALU_OPRN_WIDTH'h06; // andi
+	        6'h0d: C[25:21] = `ALU_OPRN_WIDTH'h07; // ori
+	        6'h0a: C[25:21] = `ALU_OPRN_WIDTH'h09; // slti
+	        6'h04: C[25:21] = `ALU_OPRN_WIDTH'h02; // beq
+	        6'h05: C[25:21] = `ALU_OPRN_WIDTH'h02; // bne
 	    endcase
         end
         // Stack operations
@@ -170,37 +183,39 @@ begin
 	    C[19] = 1'b1;
 	    C[20] = 1'b0;
 	    C[16] = 1'b1;
-            C[21] = `ALU_OPRN_WIDTH'h01; //add to sp
+            C[25:21] = `ALU_OPRN_WIDTH'h01; //add to sp
         end
     end
     // Only lw, sw, push, pop
     else if (proc_state === `PROC_MEM) begin
+	// pc_load = CTRL[0];
+	C[0] = 1'b0;
+	$write("Mem Phase\n");
         // Default make memory operation 00 or 11
 	//mem_read=1'b0; mem_write=1'b0; 
 
 	// Lw instruction
      	if (opcode === 6'h23) begin 
-	    // dmem_r = CTRL[23] dmem_w = CTRL[24]
-            C[23]=1'b1; C[24]=1'b0; 
+	    // dmem_r = CTRL[27] dmem_w = CTRL[28]
+            C[27]=1'b1; C[28]=1'b0; 
 	    //mem_addr = ALU_RESULT;
-	    C[22] = 1'b0;
+	    C[26] = 1'b0;
 	end	
 	// Sw instruction
 	else if (opcode === 6'h2b) begin
-	    // dmem_r = CTRL[23] dmem_w = CTRL[24]
-            C[23]=1'b0; C[24]=1'b1; 
+            C[27]=1'b0; C[28]=1'b1; 
 	    //mem_data = r2data, mem_addr = ALU_RESULT; 
-	    C[22] = 1'b0;
-	    C[25] = 1'b0;
+	    C[26] = 1'b0;
+	    C[29] = 1'b0;
 	    //mem_datax = RF_DATA_R2;
 	end 
 	// Push instruction
 	else if (opcode === 6'h1b) begin
-	    C[23]=1'b0; C[24]=1'b1; 
+	    C[27]=1'b0; C[28]=1'b1; 
 	    //mem_addr = SP_REG;
-	    C[22] = 1'b1;
+	    C[26] = 1'b1;
 	    //mem_datax = RF_DATA_R1; // M[SP_REG] = R[0]
-	    C[25] = 1'b1;
+	    C[29] = 1'b1;
 
             // Decrement stack pointer	    
 	    //alu_op1 = SP_REG;
@@ -209,14 +224,15 @@ begin
 	    C[19] = 1'b1;
 	    C[20] = 1'b0;
 	    C[16] = 1'b1;
-	    C[21] = `ALU_OPRN_WIDTH'h02; //sub op
+	    C[25:21] = `ALU_OPRN_WIDTH'h02; //sub op
 	end 
 	// Pop instruction
 	else if (opcode === 6'h1c) begin
-	    C[23]=1'b1; C[24]=1'b0; C[22] = 1'b1; 
+	    C[27]=1'b1; C[28]=1'b0; C[26] = 1'b1; 
 	end 
     end
     else if (proc_state === `PROC_WB) begin
+	$write("Write Back Phase\n");
         /*if (ALU_RESULT !== 'h03ffffff && stored_opcode === 6'h1b) begin
 	    SP_REG = ALU_RESULT;
 	end*/
@@ -254,7 +270,7 @@ begin
 	else if (opcode === 6'h00 && funct === 6'h08) begin
             C[7]=1'b1; C[8]=1'b0; // rf_addr_r1 already is rs, turn on to get data from rf
 	    //PC_REG = RF_DATA_R1; // PC = R[rs]
-	    C[1]=1'b0; C[2]=1'b0; C[3]=1'b1;
+	    C[1]=1'b0;
 	end
 
 	// I-Type except sw, lui
@@ -284,14 +300,14 @@ begin
 		// If zero flag is on, R[rs] == R[rt]
 		if (ZERO) begin
 		    //PC_REG = PC_REG + stored_signextimm;
-		    C[2]=1'b1; C[3]=1'b1;
+		    C[2]=1'b1;
 		end
 	    end
 	    // If bne instruction (opp of beq)
 	    else if (opcode === 6'h05) begin
 		// If zero flag is on, R[rs] == R[rt]
 		if (~ZERO) begin
-		    C[2]=1'b1; C[3]=1'b1;
+		    C[3]=1'b1;
 		end
 	    end
 	    else begin
