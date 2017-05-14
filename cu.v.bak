@@ -59,18 +59,18 @@ initial begin
 //$write("INIT - PC LOAD ON?= %h\n", C[0]);
 
 // mem_r = CTRL[4] mem_w = CTRL[5]
-        C[4]=1'b1; C[5]=1'b0;
+        //C[4]=1'b1; C[5]=1'b0;
 
 	// pc_load = CTRL[0];
-	C[0]= 1'b0;
-	C[31] = 1'b1; // ma_sel_2
-	$write("PC LOAD ON?= %h\n", C[0]);
+//	C[0]= 1'b0;
+//	C[31] = 1'b1; // ma_sel_2
+//	$write("PC LOAD ON?= %h\n", C[0]);
 	
 	//C[30] = 1'b1; // ir_load
 	
         // Set register file control to hold
         // reg_r = CTRL[7] reg_w = CTRL[8]
-	C[7] = 1'b0; C[8] = 1'b0; 
+//	C[7] = 1'b0; C[8] = 1'b0; 
 end
 
 /*
@@ -161,6 +161,12 @@ wire [2:0] proc_state;
 
 PROC_SM state_machine(.STATE(proc_state), .CLK(CLK), .RST(RST));
 
+reg [31:0] INST_REG;
+
+always @(INSTRUCTION) begin
+$write("updating instruction ***\n");
+	INST_REG <= INSTRUCTION;
+end
 
 
 always @ (proc_state)
@@ -169,7 +175,7 @@ begin
     // FETCH: Get next instruction from memory with address as content in PC register
     if (proc_state === `PROC_FETCH) begin
 	$write("\n======================\n");
-	$write("Instruction Fetch\n");
+	$write("Instruction Fetch: %h\n", INST_REG);
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
 
@@ -178,21 +184,21 @@ begin
 	C[31] = 1'b1; // ma_sel_2
 	$write("PC LOAD ON?= %h\n", C[0]);
 	
-	//C[30] = 1'b1; // ir_load
+	C[30] = 1'b1; // ir_load
 	
         // Set register file control to hold
         // reg_r = CTRL[7] reg_w = CTRL[8]
-	C[7] = 1'b0; C[8] = 1'b0; 
+	//C[7] = 1'b0; C[8] = 1'b0; 
     end
     // DECODE: Parse instruction and get values from register file
     else if (proc_state === `PROC_DECODE) begin
-
+	C[31] = 1'b1; // ma_sel_2
 	// pc_load = CTRL[0];
 	//C[0] = 1'b0;
 	$write("\n======================\n");
-	//$write("Instruction Decode: %h\n", INSTRUCTION);
+	//$write("Instruction Decode: %h\n", INST_REG);
 	$write("Instruction Decode\n");
-	 print_instruction(INSTRUCTION);
+	//print_instruction(INSTRUCTION);
 	//ir_load = CTRL[30]
 	//C[30] = 1'b1;
 
@@ -210,9 +216,9 @@ begin
 	// pc_load = CTRL[0];
 	C[0] = 1'b0;
 	$write("\n======================\n");
-	$write("Execution: %h\n", INSTRUCTION);
-	$write("Rs=%d, Rt=%d, Opcode=%d\n", rs, rt, opcode);
+	$write("Execution: %h\n", INST_REG);
 	print_instruction(INSTRUCTION);
+	$write("Rs=%d, Rt=%d, Opcode=%d\n", rs, rt, opcode);
         // R-Type (except jr)
         if (opcode === 6'h00 && funct !== 6'h08) begin 
 	    // Select alu operation, alu_oprn = CTRL[21];
@@ -367,6 +373,8 @@ begin
 	C[2] = 1'b0;
 	C[3] = 1'b1;
         
+	$write("PC pattern before: %h %h %h %h\n", C[0], C[1], C[2], C[3]);
+
 	// Reset memory write signal to no-op (00 or 11)
 	//mem_read=1'b0; mem_write=1'b0; 
   	
@@ -463,6 +471,9 @@ begin
 	    //rf_data_w = MEM_DATA;
 	    C[12]=1'b1; C[13]=1'b0; C[14]=1'b1;
 	end 
+
+	$write("PC pattern after: %h %h %h %h\n", C[0], C[1], C[2], C[3]);
+
     end
 end
 

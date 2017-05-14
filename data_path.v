@@ -33,13 +33,12 @@ input [`DATA_INDEX_LIMIT:0] DATA_IN;
 
 reg [31:0] instr_reg;
 
+/*
 always @(DATA_IN) begin
 $write("updating instruction ***\n");
 	instr_reg <= DATA_IN;
-end
+end*/
 
-
-assign INSTRUCTION = instr_reg;
 
 // TBD
 reg pc_load, pc_sel_1, pc_sel_2, pc_sel_3, mem_r, mem_w,
@@ -88,7 +87,9 @@ dmem_w = CTRL[28];
 md_sel_1 = CTRL[29]; 
 ir_load = CTRL[30];
 ma_sel_2 = CTRL[31];*/
+end
 
+always @(DATA_IN) begin
 /* =================== Parse data (instruction) ====================== */
 // parse the instruction
 // R-type
@@ -98,15 +99,12 @@ ma_sel_2 = CTRL[31];*/
 // J-type
 {opcode, address} = DATA_IN;
 
+instr_reg <= DATA_IN;
 //$write("In data path, instr = %8h\n", DATA_IN);
-
 end
 
 
-always @(alu_out) begin
-$write("ALU RESLT: %h\n", alu_out);
-end
-
+assign INSTRUCTION = instr_reg;
 
 wire [31:0] sign_extended_imm;
 wire [31:0] pc;
@@ -140,10 +138,41 @@ wire [31:0] zero_out;
 wire [31:0] stack_or_alu;
 wire [31:0] addr_out;
 
+always @(alu_out) begin
+$write("ALU RESULT: %h\n", alu_out);
+end
+
+/*
+always @(rs_or_zero) begin
+$write("REG FILE RS: %h\n", rs_or_zero);
+end
+
+always @(rt) begin
+$write("REG FILE RT: %h\n", rt);
+end*/
+
+// Oprns
+always @(rf_or_sp) begin
+$write("ALU OP1: %h\n", rf_or_sp);
+end
+
+always @(is_r_type) begin
+$write("ALU OP2: %h\n", is_r_type);
+end
+
+always @(pc_adder_out1) begin
+$write("PC INC BY 1\n");
+end
+
+always @(jump_or_res) begin
+$write("FINAL PC: %h\n", jump_or_res);
+end
+
+
 assign sign_extended_imm = $signed(immediate);
 
 defparam pc_inst.PATTERN = `INST_START_ADDR;
-REG32_PP pc_inst(.Q(pc), .D(next_pc), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
+REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
 //REG32 pc_inst(.Q(pc), .D(next_pc), .LOAD(pc_load), .CLK(CLK), .RESET(RST));
 
 // Test prints
@@ -165,14 +194,14 @@ REG32_PP sp_inst(.Q(sp), .D(next_sp), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
 
 RC_ADD_SUB_32 inst_pcadd_1(.Y(pc_adder_out1), .CO(CO), .A(pc), .B({31'b0, 1'b1}), .SnA(1'b0));
 
-MUX32_2x1 inst_mux_jr(.Y(jump_reg_or_increment), .I0(r1_data), .I1(pc_adder_out1), .S(pc_sel_1));
+MUX32_2x1 inst_mux_jr(.Y(jump_reg_or_increment), .I0(r1_data), .I1(pc_adder_out1), .S(CTRL[1]));
 
 // Add with sign extended immediate
 RC_ADD_SUB_32 inst_pcadd_2(.Y(pc_adder_out2), .CO(CO), .A(pc_adder_out1), .B(sign_extended_imm), .SnA(1'b0));
 
-MUX32_2x1 inst_mux_pcadd(.Y(pc_or_add), .I0(jump_reg_or_increment), .I1(pc_adder_out2), .S(pc_sel_2));
+MUX32_2x1 inst_mux_pcadd(.Y(pc_or_add), .I0(jump_reg_or_increment), .I1(pc_adder_out2), .S(CTRL[2]));
 
-MUX32_2x1 inst_mux_j(.Y(jump_or_res), .I0({6'b0, address}), .I1(pc_or_add), .S(pc_sel_3));
+MUX32_2x1 inst_mux_j(.Y(jump_or_res), .I0({6'b0, address}), .I1(pc_or_add), .S(CTRL[3]));
 
 /* ============== WRITE selection ================ */
 // Write address
@@ -196,6 +225,8 @@ MUX32_2x1 inst_mux_32bit(.Y(rs_or_zero), .I0(32'b0), .I1({27'b0, rs}), .S(CTRL[6
 
 REGISTER_FILE_32x32 inst_reg_32x32(.DATA_R1(r1_data), .DATA_R2(r2_data), .ADDR_R1(rs_or_zero[4:0]), .ADDR_R2(rt), 
                             	   .DATA_W(is_pc_add1), .ADDR_W(is_stack_op[4:0]), .READ(CTRL[7]), .WRITE(CTRL[8]), .CLK(CLK), .RST(RST));
+
+
 
 
 /* ================= OPERAND select for ALU =================== */

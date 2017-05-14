@@ -30,9 +30,9 @@ input [4:0] S;
 // TBD
 wire [31:0] mux_1a_out4;
 wire [31:0] mux_1b_out4;
-MUX32_2x1 mux32_inst_1a(mux_1a_out4, I0, I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
+MUX32_16x1 mux32_inst_1a(mux_1a_out4, I0, I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
 			I11, I12, I13, I14, I15, S[3:0]);
-MUX32_2x1 mux32_inst_1b(mux_1b_out4, I16, I17, I18, I19, I20, I21, I22, I23, I24,
+MUX32_16x1 mux32_inst_1b(mux_1b_out4, I16, I17, I18, I19, I20, I21, I22, I23, I24,
 			I25, I26, I27, I28, I29, I30, I31, S[3:0]);
 
 MUX32_2x1 mux32_inst_2(Y, mux_1a_out4, mux_1b_out4, S[4]);

@@ -30,12 +30,12 @@ input [4:0] S;
 // TBD
 wire [31:0] mux_1a_out4;
 wire [31:0] mux_1b_out4;
-MUX32_16x1 mux32_inst_1a(mux_1a_out4, I0, I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
+MUX32_16x1 mux32_inst_4a(mux_1a_out4, I0, I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
 			I11, I12, I13, I14, I15, S[3:0]);
-MUX32_16x1 mux32_inst_1b(mux_1b_out4, I16, I17, I18, I19, I20, I21, I22, I23, I24,
+MUX32_16x1 mux32_inst_4b(mux_1b_out4, I16, I17, I18, I19, I20, I21, I22, I23, I24,
 			I25, I26, I27, I28, I29, I30, I31, S[3:0]);
 
-MUX32_2x1 mux32_inst_2(Y, mux_1a_out4, mux_1b_out4, S[4]);
+MUX32_2x1 mux32_inst_4(Y, mux_1a_out4, mux_1b_out4, S[4]);
 
 endmodule
 
@@ -66,10 +66,10 @@ input [3:0] S;
 // TBD
 wire [31:0] mux_1a_out3;
 wire [31:0] mux_1b_out3;
-MUX32_8x1 mux32_inst_1a(mux_1a_out3, I0, I1, I2, I3, I4, I5, I6, I7, S[2:0]);
-MUX32_8x1 mux32_inst_1b(mux_1b_out3, I8, I9, I10, I11, I12, I13, I14, I15, S[2:0]);
+MUX32_8x1 mux32_inst_3a(mux_1a_out3, I0, I1, I2, I3, I4, I5, I6, I7, S[2:0]);
+MUX32_8x1 mux32_inst_3b(mux_1b_out3, I8, I9, I10, I11, I12, I13, I14, I15, S[2:0]);
 
-MUX32_2x1 mux32_inst_2(Y, mux_1a_out3, mux_1b_out3, S[3]);
+MUX32_2x1 mux32_inst_3(Y, mux_1a_out3, mux_1b_out3, S[3]);
 
 
 endmodule
@@ -92,8 +92,8 @@ input [2:0] S;
 // TBD
 wire [31:0] mux_1a_out2;
 wire [31:0] mux_1b_out2;
-MUX32_4x1 mux32_inst_1a(mux_1a_out2, I0, I1, I2, I3, S[1:0]);
-MUX32_4x1 mux32_inst_1b(mux_1b_out2, I4, I5, I6, I7, S[1:0]);
+MUX32_4x1 mux32_inst_2a(mux_1a_out2, I0, I1, I2, I3, S[1:0]);
+MUX32_4x1 mux32_inst_2b(mux_1b_out2, I4, I5, I6, I7, S[1:0]);
 
 MUX32_2x1 mux32_inst_2(Y, mux_1a_out2, mux_1b_out2, S[2]);
 
@@ -116,7 +116,7 @@ wire [31:0] mux_1b_out1;
 MUX32_2x1 mux32_inst_1a(mux_1a_out1, I0, I1, S[0]);
 MUX32_2x1 mux32_inst_1b(mux_1b_out1, I2, I3, S[0]);
 
-MUX32_2x1 mux32_inst_2(Y, mux_1a_out1, mux_1b_out1, S[1]);
+MUX32_2x1 mux32_inst_1(Y, mux_1a_out1, mux_1b_out1, S[1]);
 
 endmodule
 

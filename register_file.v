@@ -173,5 +173,13 @@ MUX32_2x1 inst_mux_2x1_1(DATA_R1, {`DATA_WIDTH{1'bz} }, mux_32x1_res1, READ);
 
 MUX32_2x1 inst_mux_2x1_2(DATA_R2, {`DATA_WIDTH{1'bz} }, mux_32x1_res2, READ);
 
+always @(mux_32x1_res1) begin
+$write("R1 data: %h\n", mux_32x1_res1);
+end
+
+always @(mux_32x1_res2) begin
+$write("R2 data: %h\n", mux_32x1_res2);
+end
+
 endmodule
 

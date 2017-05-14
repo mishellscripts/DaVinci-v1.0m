@@ -22,9 +22,11 @@ input CLK, LOAD;
 input [31:0] D;
 input RESET;
 
-initial begin
-$write("D: %h, CLK: %h, LOAD: %h, RESET: %h", D, CLK, LOAD, RESET);
+/*
+always @(posedge CLK) begin
+$write("D: %h, CLK: %h, LOAD: %h, RESET: %h\n", D, CLK, LOAD, RESET);
 end
+*/
 
 wire [31:0] qbar;
 
@@ -229,22 +231,22 @@ wire [7:0] decoder_3x8_out;
 DECODER_3x8 inst_decoder_3x8(.D(decoder_3x8_out), .I(I[2:0]));
 not inst_inv_i3(inv_I3, I[3]);
 
-and inst_and1(D[0], decoder_3x8_out[0], inv_I3);
-and inst_and2(D[1], decoder_3x8_out[1], inv_I3);
-and inst_and3(D[2], decoder_3x8_out[2], inv_I3); 
-and inst_and4(D[3], decoder_3x8_out[3], inv_I3); 
-and inst_and5(D[4], decoder_3x8_out[4], inv_I3);
-and inst_and6(D[5], decoder_3x8_out[5], inv_I3);
-and inst_and7(D[6], decoder_3x8_out[6], inv_I3); 
-and inst_and8(D[7], decoder_3x8_out[7], inv_I3); 
-and inst_and9(D[8], decoder_3x8_out[0], I[3]);
-and inst_and10(D[9], decoder_3x8_out[1], I[3]);
-and inst_and11(D[10], decoder_3x8_out[2], I[3]); 
-and inst_and12(D[11], decoder_3x8_out[3], I[3]); 
-and inst_and13(D[12], decoder_3x8_out[4], I[3]);
-and inst_and14(D[13], decoder_3x8_out[5], I[2]);
-and inst_and15(D[14], decoder_3x8_out[6], I[2]); 
-and inst_and16(D[15], decoder_3x8_out[7], I[2]); 
+and inst3_and1(D[0], decoder_3x8_out[0], inv_I3);
+and inst3_and2(D[1], decoder_3x8_out[1], inv_I3);
+and inst3_and3(D[2], decoder_3x8_out[2], inv_I3); 
+and inst3_and4(D[3], decoder_3x8_out[3], inv_I3); 
+and inst3_and5(D[4], decoder_3x8_out[4], inv_I3);
+and inst3_and6(D[5], decoder_3x8_out[5], inv_I3);
+and inst3_and7(D[6], decoder_3x8_out[6], inv_I3); 
+and inst3_and8(D[7], decoder_3x8_out[7], inv_I3); 
+and inst3_and9(D[8], decoder_3x8_out[0], I[3]);
+and inst3_and10(D[9], decoder_3x8_out[1], I[3]);
+and inst3_and11(D[10], decoder_3x8_out[2], I[3]); 
+and inst3_and12(D[11], decoder_3x8_out[3], I[3]); 
+and inst3_and13(D[12], decoder_3x8_out[4], I[3]);
+and inst3_and14(D[13], decoder_3x8_out[5], I[3]);
+and inst3_and15(D[14], decoder_3x8_out[6], I[3]); 
+and inst3_and16(D[15], decoder_3x8_out[7], I[3]); 
 
 
 endmodule
@@ -262,14 +264,14 @@ wire [3:0] decoder_2x4_out;
 DECODER_2x4 inst_decoder_2x4(.D(decoder_2x4_out), .I(I[1:0]));
 not inst_inv_i2(inv_I2, I[2]);
 
-and inst_and1(D[0], decoder_2x4_out[0], inv_I2);
-and inst_and2(D[1], decoder_2x4_out[1], inv_I2);
-and inst_and3(D[2], decoder_2x4_out[2], inv_I2); 
-and inst_and4(D[3], decoder_2x4_out[3], inv_I2); 
-and inst_and5(D[4], decoder_2x4_out[0], I[2]);
-and inst_and6(D[5], decoder_2x4_out[1], I[2]);
-and inst_and7(D[6], decoder_2x4_out[2], I[2]); 
-and inst_and8(D[7], decoder_2x4_out[3], I[2]); 
+and inst2_and1(D[0], decoder_2x4_out[0], inv_I2);
+and inst2_and2(D[1], decoder_2x4_out[1], inv_I2);
+and inst2_and3(D[2], decoder_2x4_out[2], inv_I2); 
+and inst2_and4(D[3], decoder_2x4_out[3], inv_I2); 
+and inst2_and5(D[4], decoder_2x4_out[0], I[2]);
+and inst2_and6(D[5], decoder_2x4_out[1], I[2]);
+and inst2_and7(D[6], decoder_2x4_out[2], I[2]); 
+and inst2_and8(D[7], decoder_2x4_out[3], I[2]); 
 
 endmodule
 
@@ -283,9 +285,9 @@ input [1:0] I;
 // TBD
 not inst_inv_i0(inv_I0, I[0]);
 not inst_inv_i1(inv_I1, I[1]);
-and inst_and1(D[0], inv_I0, inv_I1);
-and inst_and2(D[1], inv_I0, I[1]);
-and inst_and3(D[2], I[0], inv_I1); 
+and inst_and1(D[0], inv_I1, inv_I0);
+and inst_and2(D[1], inv_I1, I[0]);
+and inst_and3(D[2], I[1], inv_I0); 
 and inst_and4(D[3], I[0], I[1]); 
 
 endmodule
