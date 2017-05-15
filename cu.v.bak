@@ -185,6 +185,8 @@ begin
 
 	// CTRL[30]; // r1 load
 	C[30] = 1'b1;
+	C[27] = 1'b1; // r2 load
+	C[15] = 1'b0; // SP LOAD
 
 	// ma_sel_2
 	C[31] = 1'b1; 
@@ -209,6 +211,8 @@ begin
 
 	// CTRL[30]; // r1 load
 	C[30] = 1'b1;
+	C[27] = 1'b1;
+	C[15] = 1'b0; // SP LOAD
 
 	$write("\n======================\n");
 	//$write("Instruction Decode: %h\n", INST_REG);
@@ -235,6 +239,8 @@ begin
 
 	// CTRL[30]; // r1 load
 	C[30] = 1'b1;
+	C[27] = 1'b1;
+	C[15] = 1'b0; // SP LOAD
 
 	$write("\n======================\n");
 	$write("Execution: %h\n", INST_REG);
@@ -337,6 +343,11 @@ begin
 	$write("alu op=%h\n", C[25:21]);
 	// pc_load = CTRL[0];
 	C[0] = 1'b0;
+	C[15] = 1'b0; // SP LOAD
+
+	C[30] = 1'b0;
+	C[27] = 1'b0;
+
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
 
@@ -351,7 +362,7 @@ begin
 	    // dmem_r = CTRL[27] dmem_w = CTRL[28]
             C[4]=1'b1; C[5]=1'b0; 
 	    //mem_addr = ALU_RESULT;
-	    C[26] = 1'b0;
+	    C[26] = 1'b0; C[31]=1'b0;
 	end	
 	// Sw instruction
 	else if (opcode === 6'h2b) begin
@@ -366,18 +377,10 @@ begin
 	else if (opcode === 6'h1b) begin
 	    C[4]=1'b0; C[5]=1'b1; 
 	    //mem_addr = SP_REG;
-	    C[26] = 1'b1;
+	    C[26] = 1'b1; C[31]=1'b0;
 	    //mem_datax = RF_DATA_R1; // M[SP_REG] = R[0]
 	    C[29] = 1'b1;
 
-            // Decrement stack pointer	    
-	    //alu_op1 = SP_REG;
-	    //alu_op2 = 1;
-            C[17] = 1'b0;
-	    C[19] = 1'b1;
-	    C[20] = 1'b0;
-	    C[16] = 1'b1;
-	    C[25:21] = `ALU_OPRN_WIDTH'h02; //sub op
 	end 
 	// Pop instruction
 	else if (opcode === 6'h1c) begin
@@ -388,8 +391,8 @@ begin
 	$write("\n======================\n");
 	$write("Write Back Phase\n");
 
-	// CTRL[30]; // r1 load
-	C[30] = 1'b0;
+	C[15] = 1'b0; // SP LOAD
+	//C[15] = 1'b1; // SP LOAD
 
         /*if (ALU_RESULT !== 'h03ffffff && stored_opcode === 6'h1b) begin
 	    SP_REG = ALU_RESULT;
@@ -506,14 +509,26 @@ begin
 	    C[3]=1'b0;
 	end 
 	// Pop instruction
-	if (opcode === 6'h1c) begin
+	else if (opcode === 6'h1c) begin
 	    C[7]=1'b0; C[8]=1'b1;  
 	    //rf_addr_w = 0;
 	    C[10]=1'b0; C[11]=1'b0;
 	    //rf_data_w = MEM_DATA;
 	    C[12]=1'b1; C[13]=1'b0; C[14]=1'b1;
 	end 
+	else if (opcode === 6'h1b) begin
+	    //$write("SP LOAD\n");
+	    C[15] = 1'b1; // SP LOAD
+            // Decrement stack pointer	    
+	    //alu_op1 = SP_REG;
+	    //alu_op2 = 1;
+            C[17] = 1'b0;
+	    C[19] = 1'b1;
+	    C[20] = 1'b0;
+	    C[16] = 1'b1;
+	    C[25:21] = `ALU_OPRN_WIDTH'h02; //sub op
 
+	end
 	//$write("PC pattern after: %h %h %h %h\n", C[0], C[1], C[2], C[3]);
 
     end

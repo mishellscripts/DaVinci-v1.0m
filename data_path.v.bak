@@ -181,6 +181,7 @@ always @ (posedge CLK)
 begin
 $write("DATA IN: %h\n", DATA_IN);
 $write("PC: %h\n", pc);
+$write("SP: %h\n", sp);
 //$write("NEXTPC: %h\n", next_pc);
 //$write("CTRL = %h\n", CTRL);
 //$write("PC address selected?= %h\n", CTRL[31]);
@@ -188,7 +189,7 @@ end
 /////
 
 defparam sp_inst.PATTERN = `INIT_STACK_POINTER;
-REG32_PP sp_inst(.Q(sp), .D(next_sp), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
+REG32_PP sp_inst(.Q(sp), .D(alu_out), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
 
 
 /* ================ PC selection =================== */
@@ -227,6 +228,9 @@ MUX32_2x1 inst_mux_32bit(.Y(rs_or_zero), .I0({27'b0, rs}), .I1(32'b0), .S(CTRL[6
 wire [31:0] r1_data_store;
 REG32 r1_data_store_inst(.Q(r1_data_store), .D(r1_data), .LOAD(CTRL[30]), .CLK(CLK), .RESET(RST));
 
+wire [31:0] r2_data_store;
+REG32 r2_data_store_inst(.Q(r2_data_store), .D(r2_data), .LOAD(CTRL[27]), .CLK(CLK), .RESET(RST));
+
 REGISTER_FILE_32x32 inst_reg_32x32(.DATA_R1(r1_data), .DATA_R2(r2_data), .ADDR_R1(rs_or_zero[4:0]), .ADDR_R2(rt), 
                             	   .DATA_W(is_pc_add1), .ADDR_W(is_stack_op[4:0]), .READ(CTRL[7]), .WRITE(CTRL[8]), .CLK(CLK), .RST(RST));
 
@@ -256,7 +260,7 @@ $write("RF or SP = %h : %h\n", CTRL[16], rf_or_sp);
 end
 
 
-MUX32_2x1 inst_mux_alu2(.Y(is_r_type), .I0(shamt_or_imm), .I1(r2_data), .S(CTRL[20]));
+MUX32_2x1 inst_mux_alu2(.Y(is_r_type), .I0(shamt_or_imm), .I1(r2_data_store), .S(CTRL[20]));
 
 
 // Alu instantiation
@@ -268,7 +272,7 @@ MUX32_2x1 inst_mux_dmemr(.Y(stack_or_alu), .I0(alu_out), .I1(sp), .S(CTRL[26]));
 
 // Mem data output
 //wire [31:0] r1_or_r2;
-MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(CTRL[29]));
+MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data_store), .I1(r1_data_store), .S(CTRL[29]));
 
 // Mem address output
 MUX32_2x1 inst_mux_dmem2(.Y(addr_out), .I0(stack_or_alu), .I1(pc), .S(CTRL[31]));

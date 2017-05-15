@@ -18,6 +18,8 @@ begin
 #5 A=5; B=7; OPRN=1;
 // Sub
 #5 A=5; B=7; OPRN=2;
+// Sub
+#5 A=100; B=7; OPRN=2;
 // Mul
 #5 A=5; B=7; OPRN=3;
 // Shift R

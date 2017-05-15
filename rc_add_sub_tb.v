@@ -14,6 +14,9 @@ initial
 begin
 SnA=0; A=23; B=28;
 #10 SnA=1; A=100; B=1;
+#10 SnA=1; A=32'h03fffffff; B=1;
+#10 SnA=1; A=32'hffffffff; B=1;
+#10 SnA=1; A=100; B=1;
 end
 
 endmodule;

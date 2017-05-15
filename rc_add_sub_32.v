@@ -43,10 +43,10 @@ input [`DATA_INDEX_LIMIT:0] B;
 input SnA;
 
 // TBD
-reg init_CI = 1'b0;
+//reg init_CI = 1'b0;
 wire CO_0b;
 xor add_sub_0(as0, B[0], SnA);
-FULL_ADDER full_adder_0(.Y(Y[0]), .CO(CO_0b), .A(A[0]), .B(as0), .CI(init_CI));
+FULL_ADDER full_adder_0(.Y(Y[0]), .CO(CO_0b), .A(A[0]), .B(as0), .CI(SnA));
 
 wire CO_1b;
 xor add_sub_1(as1, B[1], SnA);

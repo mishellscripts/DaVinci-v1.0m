@@ -17,7 +17,7 @@ begin
 // Add
 #5 A=5; B=7; OPRN=1;
 // Sub
-#5 A=5; B=7; OPRN=2;
+#5 A=32'h03fffffff; B=1; OPRN=2;
 // Sub
 #5 A=100; B=7; OPRN=2;
 // Mul
