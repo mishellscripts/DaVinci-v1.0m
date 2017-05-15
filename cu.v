@@ -4,9 +4,10 @@
 //         READ  : Memory read signal
 //         WRITE : Memory Write signal
 //
-// Input:  ZERO : Zero status from ALU
-//         CLK  : Clock signal
-//         RST  : Reset Signal
+// Input:  ZERO        : Zero status from ALU
+//         INSTRUCTION : Instruction from data path
+//         CLK         : Clock signal
+//         RST         : Reset Signal
 //
 // Notes: - Control unit synchronize operations of a processor
 //          Assign each bit of control signal to control one part of data path
@@ -41,48 +42,6 @@ assign CTRL = C;
 assign READ = C[4];
 assign WRITE = C[5];
 
-initial begin
-/* =================== Parse data (instruction) ====================== 
-// parse the instruction
-// R-type
-{opcode, rs, rt, rd, shamt, funct} = INSTRUCTION;
-// I-type
-{opcode, rs, rt, immediate } = INSTRUCTION;
-// J-type
-{opcode, address} = INSTRUCTION;
-*/
-//C[0] = 1'b0;
-//C[31] = 1'b1;
-//C[30] = 1'b1;
-//C[4]=1'b1; C[5]=1'b0;
-//$write("INIT - INSTRUCTION: %h\n", INSTRUCTION);
-//$write("INIT - PC LOAD ON?= %h\n", C[0]);
-
-// mem_r = CTRL[4] mem_w = CTRL[5]
-        //C[4]=1'b1; C[5]=1'b0;
-
-	// pc_load = CTRL[0];
-//	C[0]= 1'b0;
-//	C[31] = 1'b1; // ma_sel_2
-//	$write("PC LOAD ON?= %h\n", C[0]);
-	
-	//C[30] = 1'b1; // ir_load
-	
-        // Set register file control to hold
-        // reg_r = CTRL[7] reg_w = CTRL[8]
-//	C[7] = 1'b0; C[8] = 1'b0; 
-end
-
-/*
-reg [5:0]   opcode;
-reg [4:0]   rs;
-reg [4:0]   rt;
-reg [4:0]   rd;
-reg [4:0]   shamt;
-reg [5:0]   funct;
-reg [15:0]  immediate;
-reg [25:0]  address;*/
-
 //------------------------ PRINT INSTRUCTION TASK ---------------------------------//
 task print_instruction;
 input [`DATA_INDEX_LIMIT:0] inst;
@@ -116,7 +75,7 @@ case(opcode2)
  		6'h25: $write("or   r[%02d], r[%02d], r[%02d];", rd2, rs2, rt2);
                 6'h27: $write("nor  r[%02d], r[%02d], r[%02d];", rd2, rs2, rt2);
                 6'h2a: $write("slt  r[%02d], r[%02d], r[%02d];", rd2, rs2, rt2);
-                6'h00: $write("sll  r[%02d], %2d, r[%02d];", rd2, rs2, shamt2);
+                6'h01: $write("sll  r[%02d], r[%02d], %2d;", rd2, rs2, shamt2);
                 6'h02: $write("srl  r[%02d], 0X%02h, r[%02d];", rd2, rs2, shamt2);
                 6'h08: $write("jr   r[%02d];", rs2);
                 default: begin $write("");
@@ -168,8 +127,6 @@ always @(INSTRUCTION) begin
 	INST_REG <= INSTRUCTION;
 end
 
-reg [31:0] ALU_OUT;
-
 always @ (proc_state)
 begin
     //$write("INSTRUCTION: %h\n", INSTRUCTION);
@@ -179,20 +136,16 @@ begin
 	$write("Instruction Fetch: %h\n", INST_REG);
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
-
-	// pc_load = CTRL[0];
+	// pc_load = CTRL[0]
 	C[0]= 1'b0;
-
-	// CTRL[30]; // r1 load
-	C[30] = 1'b1;
-	C[27] = 1'b1; // r2 load
-	C[15] = 1'b0; // SP LOAD
-
+	// r1 load
+	C[30] = 1'b1;	
+	// r2 load
+	C[27] = 1'b1;
+	// sp load
+	C[15] = 1'b0;
 	// ma_sel_2
 	C[31] = 1'b1; 
-	$write("PC LOAD ON?= %h\n", C[0]);
-	
-	//C[30] = 1'b1; // ir_load
 	
         // Set register file control to hold
         // reg_r = CTRL[7] reg_w = CTRL[8]
@@ -203,21 +156,19 @@ begin
     else if (proc_state === `PROC_DECODE) begin
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
-
-	C[31] = 1'b1; // ma_sel_2
-	
+	// ma_sel_2
+	C[31] = 1'b1; 
 	//pc_load = CTRL[0];
 	C[0] = 1'b0;
-
 	// CTRL[30]; // r1 load
 	C[30] = 1'b1;
+	// r2 load
 	C[27] = 1'b1;
-	C[15] = 1'b0; // SP LOAD
+ 	// SP LOAD
+	C[15] = 1'b0;
 
 	$write("\n======================\n");
-	//$write("Instruction Decode: %h\n", INST_REG);
 	$write("Instruction Decode\n");
-	//print_instruction(INSTRUCTION);
 
 	// Set register file control to read
         // reg_r = CTRL[7] reg_w = CTRL[8]
@@ -239,13 +190,16 @@ begin
 
 	// CTRL[30]; // r1 load
 	C[30] = 1'b1;
+	// r2 load
 	C[27] = 1'b1;
-	C[15] = 1'b0; // SP LOAD
+	// SP LOAD
+	C[15] = 1'b0; 
 
 	$write("\n======================\n");
 	$write("Execution: %h\n", INST_REG);
 	print_instruction(INSTRUCTION);
 	$write("Rs=%d, Rt=%d, Opcode=%d\n", rs, rt, opcode);
+
         // R-Type (except jr)
         if (opcode === 6'h00 && funct !== 6'h08) begin 
 	    // Select alu operation, alu_oprn = CTRL[21];
@@ -257,7 +211,7 @@ begin
 	        6'h25: C[25:21] = `ALU_OPRN_WIDTH'h07; // or
 	        6'h27: C[25:21] = `ALU_OPRN_WIDTH'h08; // nor
 	        6'h2a: C[25:21] = `ALU_OPRN_WIDTH'h09; // slt
-	        6'h00: C[25:21] = `ALU_OPRN_WIDTH'h05; // sll
+	        6'h01: C[25:21] = `ALU_OPRN_WIDTH'h05; // sll
 	        6'h02: C[25:21] = `ALU_OPRN_WIDTH'h04; // srl
 	    endcase
 
@@ -272,7 +226,7 @@ begin
 
 	    // Select second alu operand
 	    // If sll or srl instruction, use shamt for op2
-            if (funct === 6'h00 || funct === 6'h02) begin
+            if (funct === 6'h01 || funct === 6'h02) begin
   	        C[17] = 1'b1;
 		C[19] = 1'b1;
 		C[20] = 1'b0;
@@ -285,8 +239,6 @@ begin
         // I-Type (except lui)
         else if (opcode !== 6'h02 && opcode !== 6'h03 && opcode !== 6'h1b 
 		&& opcode !== 6'h1c && opcode !== 6'h0f) begin
-
-		$write("I Type\n");
 
 	    // Select first alu operand
 	    C[16] = 1'b0; // R[rs] for all I-type except lui
@@ -303,7 +255,6 @@ begin
 	        C[20] = 1'b1;
 	    // For the rest, use SignExtImm
 	    else begin
-		$write("Normal I Type\n");
 	        C[18] = 1'b1;
 		C[19] = 1'b0;
 		C[20] = 1'b0;
@@ -336,6 +287,7 @@ begin
 	    C[20] = 1'b0;
 	    C[16] = 1'b1;
             C[25:21] = `ALU_OPRN_WIDTH'h01; //add to sp
+	    C[15] = 1'b1; // SP LOAD
         end
     end
     // Only lw, sw, push, pop
@@ -353,7 +305,6 @@ begin
 
 	$write("\n======================\n");
 	$write("Mem Phase\n");
-	$write("C[16]=%h\n", C[16]);
         // Default make memory operation 00 or 11
 	//mem_read=1'b0; mem_write=1'b0; 
 
@@ -384,7 +335,7 @@ begin
 	end 
 	// Pop instruction
 	else if (opcode === 6'h1c) begin
-	    C[4]=1'b1; C[5]=1'b0; C[26] = 1'b1; 
+	    C[4]=1'b1; C[5]=1'b0; C[26] = 1'b1; C[31]=1'b0;
 	end 
     end
     else if (proc_state === `PROC_WB) begin
@@ -392,36 +343,20 @@ begin
 	$write("Write Back Phase\n");
 
 	C[15] = 1'b0; // SP LOAD
-	//C[15] = 1'b1; // SP LOAD
-
-        /*if (ALU_RESULT !== 'h03ffffff && stored_opcode === 6'h1b) begin
-	    SP_REG = ALU_RESULT;
-	end*/
-
-	// Write back to RF or PC_REG(beq, bne, jmp, jal)
-        // Increase PC_REG BY 1 
-	/*pc_load = CTRL[0];
-	pc_sel_1 = CTRL[1];
-	pc_sel_2 = CTRL[2];
-	pc_sel_3 = CTRL[3];*/
-	//C[16] = 1'b0;
 
 	// mem_r = CTRL[4] mem_w = CTRL[5]
         C[4]=1'b1; C[5]=1'b0;
+	//r1sel1
 	C[6]=1'b0;
-	   
-		//C[7] = 1'b1; C[8] = 1'b0; 
-		C[16] = 1'b0;
+	// op1sel1
+	C[16] = 1'b0;
 
+	// Write back to RF or PC_REG(beq, bne, jmp, jal)
+        // Increase PC_REG BY 1 
 	C[0] = 1'b1;
 	C[1] = 1'b1;
 	C[2] = 1'b0;
 	C[3] = 1'b1;
-        
-	//$write("PC pattern before: %h %h %h %h\n", C[0], C[1], C[2], C[3]);
-
-	// Reset memory write signal to no-op (00 or 11)
-	//mem_read=1'b0; mem_write=1'b0; 
   	
 	/* wa_sel_1 = CTRL[9];
 	wa_sel_2 = CTRL[10];
@@ -458,7 +393,6 @@ begin
 		C[9]=1'b1; C[11]=1'b1;
 		//rf_data_w = MEM_DATA; // R[rt] = memory data
 		C[12]=1'b1; C[13]=1'b0; C[14]=1'b1;
-	        //$write("R[%3h] set to %5h\n", rf_addr_w, MEM_DATA);
 	    end
 	    // If lui instruction, extend imm
 	    else if (opcode === 6'h0f) begin
@@ -479,7 +413,7 @@ begin
 	    else if (opcode === 6'h05) begin
 		// If zero flag is on, R[rs] == R[rt]
 		if (~ZERO) begin
-		    C[3]=1'b1;
+		    C[2]=1'b1;
 		end
 	    end
 	    else begin
@@ -529,7 +463,6 @@ begin
 	    C[25:21] = `ALU_OPRN_WIDTH'h02; //sub op
 	    C[15] = 1'b1; // SP LOAD
 	end
-	//$write("PC pattern after: %h %h %h %h\n", C[0], C[1], C[2], C[3]);
 
     end
 end

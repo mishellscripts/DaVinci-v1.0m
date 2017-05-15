@@ -180,7 +180,7 @@ REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST)
 always @ (posedge CLK)
 begin
 $write("DATA IN: %h\n", DATA_IN);
-//$write("PC: %h\n", pc);
+$write("PC: %h\n", pc);
 $write("SP: %h\n", sp);
 //$write("NEXTPC: %h\n", next_pc);
 //$write("CTRL = %h\n", CTRL);

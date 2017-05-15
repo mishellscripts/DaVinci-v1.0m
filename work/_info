@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/Users/Michelle/Desktop/SJSU/Year 3/Spring 2017/CS147/prj_02
 vALU
-Z0 !s110 1494831469
+Z0 !s110 1494841833
 !i10b 1
 !s100 9MlO0zd23lkHSYiT`X@bl1
 Ik9S:[6m9mQ`GD58:zb2T;2
@@ -23,35 +23,13 @@ Z3 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z4 !s108 1494831469.000000
+Z4 !s108 1494841832.000000
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/alu.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/alu.v|
 !s101 -O0
 !i113 1
 Z5 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 n@a@l@u
-vALU_TB
-R0
-!i10b 1
-!s100 2D@l4Qfa@Bji25]hfGVjL3
-IKlE]J2zLc<eO0SP<U9h[K2
-R1
-R2
-w1494830643
-Z6 8C:/Users/Michelle/Desktop/prj3/alu_tb.v
-Z7 FC:/Users/Michelle/Desktop/prj3/alu_tb.v
-L0 4
-R3
-r1
-!s85 0
-31
-R4
-Z8 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/alu_tb.v|
-Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/alu_tb.v|
-!s101 -O0
-!i113 1
-R5
-n@a@l@u_@t@b
 valu_tb
 !s110 1493680843
 !i10b 1
@@ -60,59 +38,81 @@ IBniO5>OGVPE3oQgPmfH3d0
 R1
 R2
 w1490653840
-R6
-R7
-Z10 L0 16
+Z6 8C:/Users/Michelle/Desktop/prj3/alu_tb.v
+Z7 FC:/Users/Michelle/Desktop/prj3/alu_tb.v
+Z8 L0 16
 R3
 r1
 !s85 0
 31
 !s108 1493680843.000000
-R8
-R9
+Z9 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/alu_tb.v|
+Z10 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/alu_tb.v|
 !s101 -O0
 !i113 1
 R5
-vAND32_2x1
-Z11 !s110 1494831471
+vALU_TB
+R0
 !i10b 1
-!s100 [JfoPVHGIi?T:L?81Vo221
-IZ9<68MlYEBBgFz1O:WfVe0
+!s100 2D@l4Qfa@Bji25]hfGVjL3
+IKlE]J2zLc<eO0SP<U9h[K2
 R1
 R2
-Z12 w1493190441
-Z13 8C:/Users/Michelle/Desktop/prj3/logic_32_bit.v
-Z14 FC:/Users/Michelle/Desktop/prj3/logic_32_bit.v
-L0 37
-R3
-r1
-!s85 0
-31
-Z15 !s108 1494831470.000000
-Z16 !s107 C:/Users/Michelle/Desktop/prj3/logic_32_bit.v|
-Z17 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_32_bit.v|
-!s101 -O0
-!i113 1
-R5
-n@a@n@d32_2x1
-vAND_32BIT_TB
-Z18 !s110 1494831472
-!i10b 1
-!s100 n96Kz7]fV@oc^ILBMBD?D2
-IHJee?JH75[cJzX3jJOoEQ1
-R1
-R2
-Z19 w1493680839
-Z20 8C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
-Z21 FC:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
+w1494830643
+R6
+R7
 L0 4
 R3
 r1
 !s85 0
 31
-Z22 !s108 1494831472.000000
-Z23 !s107 C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v|
-Z24 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v|
+Z11 !s108 1494841833.000000
+R9
+R10
+!s101 -O0
+!i113 1
+R5
+n@a@l@u_@t@b
+vAND32_2x1
+Z12 !s110 1494841834
+!i10b 1
+!s100 [JfoPVHGIi?T:L?81Vo221
+IZ9<68MlYEBBgFz1O:WfVe0
+R1
+R2
+Z13 w1493190441
+Z14 8C:/Users/Michelle/Desktop/prj3/logic_32_bit.v
+Z15 FC:/Users/Michelle/Desktop/prj3/logic_32_bit.v
+L0 37
+R3
+r1
+!s85 0
+31
+Z16 !s108 1494841834.000000
+Z17 !s107 C:/Users/Michelle/Desktop/prj3/logic_32_bit.v|
+Z18 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_32_bit.v|
+!s101 -O0
+!i113 1
+R5
+n@a@n@d32_2x1
+vAND_32BIT_TB
+Z19 !s110 1494841835
+!i10b 1
+!s100 n96Kz7]fV@oc^ILBMBD?D2
+IHJee?JH75[cJzX3jJOoEQ1
+R1
+R2
+Z20 w1493680839
+Z21 8C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
+Z22 FC:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v
+L0 4
+R3
+r1
+!s85 0
+31
+Z23 !s108 1494841835.000000
+Z24 !s107 C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v|
+Z25 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_32_bit_tb.v|
 !s101 -O0
 !i113 1
 R5
@@ -124,45 +124,45 @@ R0
 Ifhb<:RA;Qn=S9T@5:jzHH0
 R1
 R2
-Z25 w1494544930
-Z26 8C:/Users/Michelle/Desktop/prj3/barrel_shifter.v
-Z27 FC:/Users/Michelle/Desktop/prj3/barrel_shifter.v
+Z26 w1494544930
+Z27 8C:/Users/Michelle/Desktop/prj3/barrel_shifter.v
+Z28 FC:/Users/Michelle/Desktop/prj3/barrel_shifter.v
 L0 41
 R3
 r1
 !s85 0
 31
-R4
-Z28 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/barrel_shifter.v|
-Z29 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/barrel_shifter.v|
+R11
+Z29 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/barrel_shifter.v|
+Z30 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/barrel_shifter.v|
 !s101 -O0
 !i113 1
 R5
 n@b@a@r@r@e@l_@s@h@i@f@t@e@r32
 vBARREL_SHIFTER32_TB
-R18
+Z31 !s110 1494841836
 !i10b 1
 !s100 VHmz3an3Zi@1[Q8AGhnjf0
 I]YmY2Z5K5>idddJjHGUQA1
 R1
 R2
-Z30 w1494544744
-Z31 8C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
-Z32 FC:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
+Z32 w1494544744
+Z33 8C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
+Z34 FC:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
 L0 45
 R3
 r1
 !s85 0
 31
-R22
-Z33 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v|
-Z34 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v|
+R23
+Z35 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v|
+Z36 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v|
 !s101 -O0
 !i113 1
 R5
 n@b@a@r@r@e@l_@s@h@i@f@t@e@r32_@t@b
 vCLK_GENERATOR
-Z35 !s110 1494831470
+R0
 !i10b 1
 !s100 eC?k=>74NT1To5Io=ghA13
 Ij]b^oANRE<:4c_9E_F1?Z0
@@ -171,12 +171,12 @@ R2
 w1490828659
 8C:/Users/Michelle/Desktop/prj3/clk_gen.v
 FC:/Users/Michelle/Desktop/prj3/clk_gen.v
-R10
+R8
 R3
 r1
 !s85 0
 31
-R15
+R11
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/clk_gen.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/clk_gen.v|
 !s101 -O0
@@ -184,117 +184,117 @@ R15
 R5
 n@c@l@k_@g@e@n@e@r@a@t@o@r
 vCONTROL_UNIT
-R18
+R31
 !i10b 1
-!s100 lbk@b9jI>5W_=ml_F^cC[1
-Ie4L:d@g6iF02Y?InYRN8g3
+!s100 @SZi?jVnVoZjjgmn7kYDL0
+I4^5lE_UV>eLzAS@6@FD2^3
 R1
 R2
-Z36 w1494830605
-Z37 8C:/Users/Michelle/Desktop/prj3/cu.v
-Z38 FC:/Users/Michelle/Desktop/prj3/cu.v
-Z39 L0 21
+Z37 w1494840883
+Z38 8C:/Users/Michelle/Desktop/prj3/cu.v
+Z39 FC:/Users/Michelle/Desktop/prj3/cu.v
+Z40 L0 22
 R3
 r1
 !s85 0
 31
-R22
-Z40 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/cu.v|
-Z41 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/cu.v|
+Z41 !s108 1494841836.000000
+Z42 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/cu.v|
+Z43 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/cu.v|
 !s101 -O0
 !i113 1
 R5
 n@c@o@n@t@r@o@l_@u@n@i@t
 vD_FF
-R35
+R12
 !i10b 1
 !s100 K;jMXYPCS;QlFlh35=Nfz1
 I9Ncc6GPb]DAXKgm>VWejA2
 R1
 R2
-Z42 w1494800028
-Z43 8C:/Users/Michelle/Desktop/prj3/logic.v
-Z44 FC:/Users/Michelle/Desktop/prj3/logic.v
+Z44 w1494800028
+Z45 8C:/Users/Michelle/Desktop/prj3/logic.v
+Z46 FC:/Users/Michelle/Desktop/prj3/logic.v
 L0 112
 R3
 r1
 !s85 0
 31
-R15
-Z45 !s107 C:/Users/Michelle/Desktop/prj3/logic.v|
-Z46 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic.v|
+R11
+Z47 !s107 C:/Users/Michelle/Desktop/prj3/logic.v|
+Z48 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic.v|
 !s101 -O0
 !i113 1
 R5
 n@d_@f@f
 vD_FF_TB
-R18
+R31
 !i10b 1
 !s100 Y8HilIHE^:M5jL279D>g?2
 IDJi24FDcAKCES6c=7i@h81
 R1
 R2
-Z47 w1494735125
-Z48 8C:/Users/Michelle/Desktop/prj3/logic_tb.v
-Z49 FC:/Users/Michelle/Desktop/prj3/logic_tb.v
+Z49 w1494735125
+Z50 8C:/Users/Michelle/Desktop/prj3/logic_tb.v
+Z51 FC:/Users/Michelle/Desktop/prj3/logic_tb.v
 L0 102
 R3
 r1
 !s85 0
 31
-R22
-Z50 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/logic_tb.v|
-Z51 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_tb.v|
+R41
+Z52 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/logic_tb.v|
+Z53 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/logic_tb.v|
 !s101 -O0
 !i113 1
 R5
 n@d_@f@f_@t@b
 vD_LATCH
-R35
+R12
 !i10b 1
 !s100 eTWY_C:d59eX8MDd3XdlH1
 IUjkI^ONeN?AO79J6SkokZ1
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 133
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@d_@l@a@t@c@h
 vD_LATCH_TB
-R18
+R31
 !i10b 1
 !s100 A_XJ]ZKmRAigX]G^J`:G_0
 IB<IeQ<@`_f402n::l][G>3
 R1
 R2
-R47
-R48
 R49
+R50
+R51
 L0 87
 R3
 r1
 !s85 0
 31
-R22
-R50
-R51
+R41
+R52
+R53
 !s101 -O0
 !i113 1
 R5
 n@d_@l@a@t@c@h_@t@b
 vDA_VINCI
-R35
+R0
 !i10b 1
 !s100 daaTE@@o84`W9_S4X0zN70
 I`KEPEWD3hZJ9365MJLRZJ3
@@ -303,12 +303,12 @@ R2
 w1494664954
 8C:/Users/Michelle/Desktop/prj3/da_vinci.v
 FC:/Users/Michelle/Desktop/prj3/da_vinci.v
-Z52 L0 24
+Z54 L0 24
 R3
 r1
 !s85 0
 31
-R15
+R11
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/da_vinci.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/da_vinci.v|
 !s101 -O0
@@ -316,21 +316,21 @@ R15
 R5
 n@d@a_@v@i@n@c@i
 vDA_VINCI_TB
-R35
+R0
 !i10b 1
 !s100 EnmYIRS?OoKFbXz_SHU:83
 I0VN1_QN3dnIOd9zV4oF@n0
 R1
 R2
-w1494831466
+w1494841807
 8C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
 FC:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
-R52
+R54
 R3
 r1
 !s85 0
 31
-R15
+R11
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v|
 !s101 -O0
@@ -338,13 +338,13 @@ R15
 R5
 n@d@a_@v@i@n@c@i_@t@b
 vDATA_PATH
-R35
+R0
 !i10b 1
-!s100 1A5H;C6ZTTKN:`Df>aagg1
-I_9AL^Yo2c_8TO=OoB`gAK2
+!s100 fBRbXZ3>b]28Gj:FLnHiP0
+IV^GnV98C3ZDJb0o=7IkN`1
 R1
 R2
-w1494826674
+w1494836026
 8C:/Users/Michelle/Desktop/prj3/data_path.v
 FC:/Users/Michelle/Desktop/prj3/data_path.v
 L0 20
@@ -352,7 +352,7 @@ R3
 r1
 !s85 0
 31
-R15
+R11
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/data_path.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/data_path.v|
 !s101 -O0
@@ -360,95 +360,95 @@ R15
 R5
 n@d@a@t@a_@p@a@t@h
 vDECODER_2x4
-R35
+R12
 !i10b 1
 !s100 I8?^Gg9o7WZaI_JEaVT;_1
 IGXRDP]:jkAWIAb[<2F40B2
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 279
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@d@e@c@o@d@e@r_2x4
 vDECODER_3x8
-R35
+R12
 !i10b 1
 !s100 [42^aN8ROmHBXC:La;3AY2
 Igz;P4J@4g@hO;L<l8h:Aa2
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 255
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@d@e@c@o@d@e@r_3x8
 vDECODER_4x16
-R35
+R12
 !i10b 1
 !s100 LmzTazIQ5ZILC[:UlZ3^P0
 IjLW:j:EPdVjJaRLSa?H=80
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 222
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@d@e@c@o@d@e@r_4x16
 vDECODER_5x32
-R35
+R12
 !i10b 1
 !s100 :>`FCV6QoiISQcg7LzIV:2
 IPP[<Rl_b:C4J_o0Ba?KbS2
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 174
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@d@e@c@o@d@e@r_5x32
 vFULL_ADDER
-R35
+R0
 !i10b 1
 !s100 5EPj@lLT1Qk@^j98lZ;4O2
 IMZ0JClkcI]<g3k1zUg`CA1
@@ -457,12 +457,12 @@ R2
 w1492905349
 8C:/Users/Michelle/Desktop/prj3/full_adder.v
 FC:/Users/Michelle/Desktop/prj3/full_adder.v
-Z53 L0 22
+R40
 R3
 r1
 !s85 0
 31
-R15
+R11
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/full_adder.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/full_adder.v|
 !s101 -O0
@@ -470,7 +470,7 @@ R15
 R5
 n@f@u@l@l_@a@d@d@e@r
 vfull_adder_tb
-R11
+R19
 !i10b 1
 !s100 0>H2;NZEoao4fEZOJ;;Xj3
 IKP<UAig_MgPYCdnfMN>Ha0
@@ -484,12 +484,34 @@ R3
 r1
 !s85 0
 31
-Z54 !s108 1494831471.000000
+R23
 !s107 C:/Users/Michelle/Desktop/prj3/full_adder_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/full_adder_tb.v|
 !s101 -O0
 !i113 1
 R5
+vHALF_ADDER
+R0
+!i10b 1
+!s100 lGWE_7NRi_?nA_@A?1RLN1
+IQ=YK;:J2=ei>UTQnV91c01
+R1
+R2
+w1492905198
+Z55 8C:/Users/Michelle/Desktop/prj3/half_adder.v
+Z56 FC:/Users/Michelle/Desktop/prj3/half_adder.v
+Z57 L0 21
+R3
+r1
+!s85 0
+31
+R11
+Z58 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/half_adder.v|
+Z59 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/half_adder.v|
+!s101 -O0
+!i113 1
+R5
+n@h@a@l@f_@a@d@d@e@r
 vhalf_adder
 !s110 1492904611
 !i10b 1
@@ -498,43 +520,21 @@ IoC;Jm4oJI_WL;k5K;d5Xk2
 R1
 R2
 w1492903347
-Z55 8C:/Users/Michelle/Desktop/prj3/half_adder.v
-Z56 FC:/Users/Michelle/Desktop/prj3/half_adder.v
-R39
+R55
+R56
+R57
 R3
 r1
 !s85 0
 31
 !s108 1492904611.000000
-Z57 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/half_adder.v|
-Z58 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/half_adder.v|
-!s101 -O0
-!i113 1
-R5
-vHALF_ADDER
-R35
-!i10b 1
-!s100 lGWE_7NRi_?nA_@A?1RLN1
-IQ=YK;:J2=ei>UTQnV91c01
-R1
-R2
-w1492905198
-R55
-R56
-R39
-R3
-r1
-!s85 0
-31
-R15
-R57
 R58
+R59
 !s101 -O0
 !i113 1
 R5
-n@h@a@l@f_@a@d@d@e@r
 vhalf_adder_tb
-R11
+R19
 !i10b 1
 !s100 YJnNeh3m0XT:z4In[Qc]d3
 IPP3>38U2FUhBl3AR_Chb52
@@ -548,52 +548,52 @@ R3
 r1
 !s85 0
 31
-R54
+R23
 !s107 C:/Users/Michelle/Desktop/prj3/half_adder_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/half_adder_tb.v|
 !s101 -O0
 !i113 1
 R5
 vINV32_1x1
-R11
+R12
 !i10b 1
 !s100 =7:cYQ5S7?P>F13XOU3`32
 Ii^U@;neRQN96>FMl@AAYo3
 R1
 R2
-R12
 R13
 R14
+R15
 L0 55
 R3
 r1
 !s85 0
 31
-R15
 R16
 R17
+R18
 !s101 -O0
 !i113 1
 R5
 n@i@n@v32_1x1
 vINV_32BIT_TB
-R18
+R19
 !i10b 1
 !s100 ;25]M]WbiXA=3[=XZOi=L3
 IU;Qk:@f7iH7?Y1Fkn6_203
 R1
 R2
-R19
 R20
 R21
-Z59 L0 64
+R22
+Z60 L0 64
 R3
 r1
 !s85 0
 31
-R22
 R23
 R24
+R25
 !s101 -O0
 !i113 1
 R5
@@ -606,44 +606,44 @@ Iha:z5;YBZ;V9j`dMPHefQ2
 R1
 R2
 w1493190345
-R20
 R21
+R22
 L0 3
 R3
 r1
 !s85 0
 31
 !s108 1493190348.000000
-R23
 R24
+R25
 !s101 -O0
 !i113 1
 R5
 n@l@o@g@i@c_32@b@i@t_@t@b
 vLSHIFTER_TB
-R18
+R31
 !i10b 1
 !s100 R_5dfamO=8ReWgUi;m[h61
 IJ<N^FNVi^N>JK0dfk9I9c1
 R1
 R2
-R30
-R31
 R32
+R33
+R34
 L0 4
 R3
 r1
 !s85 0
 31
-R22
-R33
-R34
+R23
+R35
+R36
 !s101 -O0
 !i113 1
 R5
 n@l@s@h@i@f@t@e@r_@t@b
 vMEM_64MB_TB
-R11
+R12
 !i10b 1
 !s100 Q0bd^kgMCaH`JYm[fkQkH3
 IXdSW2:?h_D3i7A>i?JNRZ3
@@ -652,12 +652,12 @@ R2
 w1422864528
 8C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v
 FC:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v
-Z60 L0 23
+Z61 L0 23
 R3
 r1
 !s85 0
 31
-R54
+R16
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mem_64MB_tb.v|
 !s101 -O0
@@ -665,95 +665,95 @@ R54
 R5
 n@m@e@m_64@m@b_@t@b
 vMEMORY_64MB
-R11
+R12
 !i10b 1
 !s100 5mn<SU3gZ1SGPhKERINm:1
 I0`c]a?_]z][lKG<3Fdahi0
 R1
 R2
-Z61 w1494829636
-Z62 8C:/Users/Michelle/Desktop/prj3/memory.v
-Z63 FC:/Users/Michelle/Desktop/prj3/memory.v
+Z62 w1494829636
+Z63 8C:/Users/Michelle/Desktop/prj3/memory.v
+Z64 FC:/Users/Michelle/Desktop/prj3/memory.v
 L0 66
 R3
 r1
 !s85 0
 31
-R54
-Z64 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/memory.v|
-Z65 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/memory.v|
+R16
+Z65 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/memory.v|
+Z66 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/memory.v|
 !s101 -O0
 !i113 1
 R5
 n@m@e@m@o@r@y_64@m@b
 vMEMORY_WRAPPER
-R11
+R12
 !i10b 1
 !s100 JbW=66C9AYZiFCAKCdPGk2
 IN2cDGl7E:Qef_:be55iW]0
 R1
 R2
-R61
 R62
 R63
-Z66 L0 26
+R64
+Z67 L0 26
 R3
 r1
 !s85 0
 31
-R54
-R64
+R16
 R65
+R66
 !s101 -O0
 !i113 1
 R5
 n@m@e@m@o@r@y_@w@r@a@p@p@e@r
 vMULT32
-R11
+R12
 !i10b 1
 !s100 <WKG5jcgR5]k5oePEz[PL3
 I`i>oM9J4WDJ4T4iE<^k<^1
 R1
 R2
-Z67 w1493512501
-Z68 8C:/Users/Michelle/Desktop/prj3/mult.v
-Z69 FC:/Users/Michelle/Desktop/prj3/mult.v
-R53
+Z68 w1493512501
+Z69 8C:/Users/Michelle/Desktop/prj3/mult.v
+Z70 FC:/Users/Michelle/Desktop/prj3/mult.v
+R40
 R3
 r1
 !s85 0
 31
-R54
-Z70 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/mult.v|
-Z71 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mult.v|
+R16
+Z71 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/mult.v|
+Z72 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mult.v|
 !s101 -O0
 !i113 1
 R5
 n@m@u@l@t32
 vMULT32_U
-R11
+R12
 !i10b 1
 !s100 ]3<Pl;;?7HDC`:MGL3BEn0
 IQhcf``AXC8Sc3SPlNM3D<1
 R1
 R2
-R67
 R68
 R69
+R70
 L0 67
 R3
 r1
 !s85 0
 31
-R54
-R70
+R16
 R71
+R72
 !s101 -O0
 !i113 1
 R5
 n@m@u@l@t32_@u
 vMULT_TB
-R18
+R19
 !i10b 1
 !s100 <mU7;D3oYmR8^8^L[61LX1
 I>S<[1VzDfb4C[5En3i8lz3
@@ -767,7 +767,7 @@ R3
 r1
 !s85 0
 31
-R22
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/mult_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mult_tb.v|
 !s101 -O0
@@ -775,139 +775,139 @@ R22
 R5
 n@m@u@l@t_@t@b
 vMUX1_2x1
-R11
+R12
 !i10b 1
 !s100 55EdW<SLN7B53hcYeSR9F2
 If6lnbemG3dV;CE6?fimSG3
 R1
 R2
-Z72 w1494799530
-Z73 8C:/Users/Michelle/Desktop/prj3/mux.v
-Z74 FC:/Users/Michelle/Desktop/prj3/mux.v
+Z73 w1494799530
+Z74 8C:/Users/Michelle/Desktop/prj3/mux.v
+Z75 FC:/Users/Michelle/Desktop/prj3/mux.v
 L0 143
 R3
 r1
 !s85 0
 31
-R54
-Z75 !s107 C:/Users/Michelle/Desktop/prj3/mux.v|
-Z76 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mux.v|
+R16
+Z76 !s107 C:/Users/Michelle/Desktop/prj3/mux.v|
+Z77 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mux.v|
 !s101 -O0
 !i113 1
 R5
 n@m@u@x1_2x1
 vMUX32_16x1
-R11
+R12
 !i10b 1
 !s100 ClV60W5>J>mdeXZIEOZ1M1
 I4=]]OH6YlWJFAc^`bQDDG2
 R1
 R2
-R72
 R73
 R74
+R75
 L0 43
 R3
 r1
 !s85 0
 31
-R54
-R75
+R16
 R76
+R77
 !s101 -O0
 !i113 1
 R5
 n@m@u@x32_16x1
 vMUX32_2x1
-R11
+R12
 !i10b 1
 !s100 nmDl=LgMoHfTzf[4SjbzG3
 IH8njEneLNiY_NNBd]L>lU1
 R1
 R2
-R72
 R73
 R74
+R75
 L0 124
 R3
 r1
 !s85 0
 31
-R54
-R75
+R16
 R76
+R77
 !s101 -O0
 !i113 1
 R5
 n@m@u@x32_2x1
 vMUX32_32x1
-R11
+R12
 !i10b 1
 !s100 :dIGi[hf9gMHmE8EjBCL03
 Id?6aJ6;ID@JDeL66F1H970
 R1
 R2
-R72
 R73
 R74
-Z77 L0 17
+R75
+Z78 L0 17
 R3
 r1
 !s85 0
 31
-R54
-R75
+R16
 R76
+R77
 !s101 -O0
 !i113 1
 R5
 n@m@u@x32_32x1
 vMUX32_4x1
-R11
+R12
 !i10b 1
 !s100 GVcLZi`aV8YP[3?ToN0PT3
 Ihl541ne>9@UDoE;6YzE@V0
 R1
 R2
-R72
 R73
 R74
+R75
 L0 103
 R3
 r1
 !s85 0
 31
-R54
-R75
+R16
 R76
+R77
 !s101 -O0
 !i113 1
 R5
 n@m@u@x32_4x1
 vMUX32_8x1
-R11
+R12
 !i10b 1
 !s100 RnSWmE_<7n>l3=T13?N6h2
 I45[eB2dkAFP70KDg_1f872
 R1
 R2
-R72
 R73
 R74
+R75
 L0 78
 R3
 r1
 !s85 0
 31
-R54
-R75
+R16
 R76
+R77
 !s101 -O0
 !i113 1
 R5
 n@m@u@x32_8x1
 vMUX_TB
-R18
+R19
 !i10b 1
 !s100 Koo_I9GfJb@3oc4C?`D753
 I`HG<dD@OUbO=Vf`ma5odD1
@@ -921,7 +921,7 @@ R3
 r1
 !s85 0
 31
-R54
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/mux_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/mux_tb.v|
 !s101 -O0
@@ -929,95 +929,95 @@ R54
 R5
 n@m@u@x_@t@b
 vNOR32_2x1
-R35
+R12
 !i10b 1
 !s100 d=cICIJV2J_GL_`6>VPL:3
 IK5=6^<hk@EO0BK_[>`1dQ3
 R1
 R2
-R12
 R13
 R14
+R15
 L0 18
 R3
 r1
 !s85 0
 31
-R15
 R16
 R17
+R18
 !s101 -O0
 !i113 1
 R5
 n@n@o@r32_2x1
 vNOR_32BIT_TB
-R18
+R19
 !i10b 1
 !s100 YLhen6=:i?ee:7OKBF;hi3
 IhXCd0imZWd@^Ch]dh@1?g1
 R1
 R2
-R19
 R20
 R21
+R22
 L0 44
 R3
 r1
 !s85 0
 31
-R22
 R23
 R24
+R25
 !s101 -O0
 !i113 1
 R5
 n@n@o@r_32@b@i@t_@t@b
 vOR32_2x1
-R11
+R12
 !i10b 1
 !s100 bL82<b2T1McV3m2m[QSYg1
 I78<`TZDk`Udf6C]T5ZFdV3
 R1
 R2
-R12
 R13
 R14
-Z78 L0 73
+R15
+Z79 L0 73
 R3
 r1
 !s85 0
 31
-R15
 R16
 R17
+R18
 !s101 -O0
 !i113 1
 R5
 n@o@r32_2x1
 vOR_32BIT_TB
-R18
+R19
 !i10b 1
 !s100 Gm@6XiRB_8X1m_6A@QzeV2
 IgMfldFcBl]k=kzi;l33<i1
 R1
 R2
-R19
 R20
 R21
+R22
 L0 25
 R3
 r1
 !s85 0
 31
-R22
 R23
 R24
+R25
 !s101 -O0
 !i113 1
 R5
 n@o@r_32@b@i@t_@t@b
 vPROC_CS147_SEC05
-R11
+R12
 !i10b 1
 !s100 [Yn0_PZQdPmzn@_H5ZeRd3
 I1j<V]n]8:j;GCa>51@<Z=2
@@ -1026,12 +1026,12 @@ R2
 w1494758737
 8C:/Users/Michelle/Desktop/prj3/processor.v
 FC:/Users/Michelle/Desktop/prj3/processor.v
-R60
+R61
 R3
 r1
 !s85 0
 31
-R54
+R16
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/processor.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/processor.v|
 !s101 -O0
@@ -1039,73 +1039,73 @@ R54
 R5
 n@p@r@o@c_@c@s147_@s@e@c05
 vPROC_SM
-R18
+R31
 !i10b 1
-!s100 ?Mn=Ien1NllC3D`QA>@Hz0
-IaE>0R^n3d^gB9AQSe`Kh31
+!s100 BiL^Fdj8m:=cZIDE2ZILU3
+IZje<<Q6f:S?AX<@`bB6]:0
 R1
 R2
-R36
 R37
 R38
-L0 558
+R39
+L0 491
 R3
 r1
 !s85 0
 31
-R22
-R40
 R41
+R42
+R43
 !s101 -O0
 !i113 1
 R5
 n@p@r@o@c_@s@m
 vRC_ADD_SUB_32
-R11
+R19
 !i10b 1
 !s100 0`0Yg01k]P>aGnl]iZGll1
 I3F:9X6QSdK8d6SGghVLIS3
 R1
 R2
-Z79 w1494831136
-Z80 8C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v
-Z81 FC:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v
+Z80 w1494831136
+Z81 8C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v
+Z82 FC:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v
 L0 36
 R3
 r1
 !s85 0
 31
-R54
-Z82 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v|
-Z83 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v|
+R23
+Z83 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v|
+Z84 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/rc_add_sub_32.v|
 !s101 -O0
 !i113 1
 R5
 n@r@c_@a@d@d_@s@u@b_32
 vRC_ADD_SUB_64
-R11
+R19
 !i10b 1
 !s100 D;`Tm=O3AK]394ZK=Hl2K1
 IQ6jfcP39iY:k<M^<ITj3;0
 R1
 R2
-R79
 R80
 R81
-R60
+R82
+R61
 R3
 r1
 !s85 0
 31
-R54
-R82
+R23
 R83
+R84
 !s101 -O0
 !i113 1
 R5
 n@r@c_@a@d@d_@s@u@b_64
 vrc_add_sub_tb
-R11
+R19
 !i10b 1
 !s100 T_g9Ug2nU_F0iPnSSYjD40
 IBM?hdjAh6:@G2`EfB:XOn3
@@ -1119,146 +1119,146 @@ R3
 r1
 !s85 0
 31
-R54
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/rc_add_sub_tb.v|
 !s101 -O0
 !i113 1
 R5
 vREG1
-R35
+R0
 !i10b 1
 !s100 Zza8j8EkSgY7R=Fc@c5KS3
 I7V@OhZHYAjP8D8b:WglE;3
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 96
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@r@e@g1
 vREG1_TB
-R18
+R31
 !i10b 1
 !s100 iIK:`FaUHY:SheYQ[0mN03
 I7956B<JC]@jjX??Y?LI]z0
 R1
 R2
-R47
-R48
 R49
+R50
+R51
 L0 144
 R3
 r1
 !s85 0
 31
-R22
-R50
-R51
+R41
+R52
+R53
 !s101 -O0
 !i113 1
 R5
 n@r@e@g1_@t@b
 vREG32
-R35
+R0
 !i10b 1
 !s100 X7z7Q_X:CZ?RaeAOA<2B:1
 I6OdR5T:SeCL7gi]c2JU6J3
 R1
 R2
-R42
-R43
 R44
-R78
+R45
+R46
+R79
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@r@e@g32
 vREG32_PP
-R35
+R0
 !i10b 1
 !s100 U@j9KCFcS8[9aM8g?g0jL3
 I>2I:0af8aFZl]EN=oH`j_3
 R1
 R2
-R42
-R43
 R44
-R77
+R45
+R46
+R78
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@r@e@g32_@p@p
 vREG32_PP_TB
-R18
+R31
 !i10b 1
 !s100 6_hnQDOaD<[g^]WHU=2^P0
 IRle6RV_<_2]7gcXKZQa]z1
 R1
 R2
-R47
-R48
 R49
+R50
+R51
 L0 214
 R3
 r1
 !s85 0
 31
-R22
-R50
-R51
+R41
+R52
+R53
 !s101 -O0
 !i113 1
 R5
 n@r@e@g32_@p@p_@t@b
 vREG32_TB
-R18
+R31
 !i10b 1
 !s100 cJ:<L;l;;<R`]j5cO@j<h1
 I7e59=khi?PKO^E[>ii8a_1
 R1
 R2
-R47
-R48
 R49
+R50
+R51
 L0 184
 R3
 r1
 !s85 0
 31
-R22
-R50
-R51
+R41
+R52
+R53
 !s101 -O0
 !i113 1
 R5
 n@r@e@g32_@t@b
 vREG_32X32_TB
-R11
+R19
 !i10b 1
 !s100 8Fm1Y0Xkj?4:gJQY9LSWh1
 ILgNTJUQR?`on]L6Ji?e<?0
@@ -1267,12 +1267,12 @@ R2
 w1490671556
 8C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
 FC:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
-R10
+R8
 R3
 r1
 !s85 0
 31
-R54
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v|
 !s101 -O0
@@ -1280,7 +1280,7 @@ R54
 R5
 n@r@e@g_32@x32_@t@b
 vREGISTER_FILE_32x32
-R11
+R19
 !i10b 1
 !s100 [SH@8ad;jfH4:`mhf@ja>3
 ID[JBFmRcVEfKn;bXbUJB63
@@ -1294,7 +1294,7 @@ R3
 r1
 !s85 0
 31
-R54
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/register_file.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/register_file.v|
 !s101 -O0
@@ -1302,7 +1302,7 @@ R54
 R5
 n@r@e@g@i@s@t@e@r_@f@i@l@e_32x32
 vRF_TB
-R0
+!s110 1494841832
 !i10b 1
 !s100 8fQD^]L@ej[SmzUUMYo]Y2
 IMm?;cd^4dd_EaCF7]R;0I2
@@ -1311,7 +1311,7 @@ R2
 w1494806047
 8C:/Users/Michelle/Desktop/prj3/register_file_tb.v
 FC:/Users/Michelle/Desktop/prj3/register_file_tb.v
-R60
+R61
 R3
 r1
 !s85 0
@@ -1324,23 +1324,23 @@ R4
 R5
 n@r@f_@t@b
 vRSHIFTER_TB
-R18
+R31
 !i10b 1
 !s100 L0;2X7M6P@I@5Y@D=OR6A3
 I^TM1mWCIh[P4T_WQDRJzF1
 R1
 R2
-R30
-R31
 R32
-R66
+R33
+R34
+R67
 R3
 r1
 !s85 0
 31
-R22
-R33
-R34
+R23
+R35
+R36
 !s101 -O0
 !i113 1
 R5
@@ -1352,39 +1352,39 @@ R0
 IRNZ6RWS82dQ:Fc4RzFTIE3
 R1
 R2
-R25
 R26
 R27
-R10
+R28
+R8
 R3
 r1
 !s85 0
 31
-R4
-R28
+R11
 R29
+R30
 !s101 -O0
 !i113 1
 R5
 n@s@h@i@f@t32
 vSHIFT32_L
-R35
+R0
 !i10b 1
 !s100 L70kAbX_>HHICHbEO4A9]1
 Ij1B>gzLa2W:?z0mi_e`Nj3
 R1
 R2
-R25
 R26
 R27
+R28
 L0 165
 R3
 r1
 !s85 0
 31
-R4
-R28
+R11
 R29
+R30
 !s101 -O0
 !i113 1
 R5
@@ -1396,39 +1396,39 @@ R0
 IQc3RoTffJjSYFmX9oM7<11
 R1
 R2
-R25
 R26
 R27
-R59
+R28
+R60
 R3
 r1
 !s85 0
 31
-R4
-R28
+R11
 R29
+R30
 !s101 -O0
 !i113 1
 R5
 n@s@h@i@f@t32_@r
 vSHIFT32_TB
-R18
+R31
 !i10b 1
 !s100 d;D4ZOb:cKKDa31DBW4Eo3
 In]jZ0odSUojoW>A3VZfbZ0
 R1
 R2
-R30
-R31
 R32
-R78
+R33
+R34
+R79
 R3
 r1
 !s85 0
 31
-R22
-R33
-R34
+R23
+R35
+R36
 !s101 -O0
 !i113 1
 R5
@@ -1441,88 +1441,88 @@ IlI@]<>MN0Z64^<gImWJ8A3
 R1
 R2
 w1493629035
-R31
-R32
+R33
+R34
 L0 4
 R3
 r1
 !s85 0
 31
 !s108 1493629044.000000
-R33
-R34
+R35
+R36
 !s101 -O0
 !i113 1
 R5
 n@s@h@i@f@t@e@r_@t@b
 vSR_LATCH
-R35
+R12
 !i10b 1
 !s100 `UX]EhFn414Z@ka5f[n^z1
 IHDTA`>;:WaC3^fF6kY30A0
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 155
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@s@r_@l@a@t@c@h
 vSR_LATCH_TB
-R18
+R31
 !i10b 1
 !s100 GRGMX:jnCmazK661IfPOj0
 I`ANfKbBAE;VKczbdeNf3l0
 R1
 R2
-R47
-R48
 R49
+R50
+R51
 L0 4
 R3
 r1
 !s85 0
 31
-R22
-R50
-R51
+R41
+R52
+R53
 !s101 -O0
 !i113 1
 R5
 n@s@r_@l@a@t@c@h_@t@b
 vTWOSCOMP32
-R35
+R0
 !i10b 1
 !s100 R@N]<F=lYmUFc:A1QlG<20
 IWcSUfO0bHclnP=H`1U41E0
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 57
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
 n@t@w@o@s@c@o@m@p32
 vTWOSCOMP32_TB
-R18
+R19
 !i10b 1
 !s100 <:EZ2MAUnfb?>Q@RIN;7>3
 I=VSQ1K^PN;l>NUo@Bm]Y:0
@@ -1536,7 +1536,7 @@ R3
 r1
 !s85 0
 31
-R22
+R23
 !s107 prj_definition.v|C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Michelle/Desktop/prj3/TWOSCOMP32_TB.v|
 !s101 -O0
@@ -1544,23 +1544,23 @@ R22
 R5
 n@t@w@o@s@c@o@m@p32_@t@b
 vTWOSCOMP64
-R35
+R0
 !i10b 1
 !s100 n]G]E0@KZz83:1jTbzR]R1
 I1K@OY[VGe<a2K9`Gf5n`91
 R1
 R2
-R42
-R43
 R44
+R45
+R46
 L0 46
 R3
 r1
 !s85 0
 31
-R15
-R45
-R46
+R11
+R47
+R48
 !s101 -O0
 !i113 1
 R5
