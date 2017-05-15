@@ -67,6 +67,15 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MEMORY_WRAPPER
 
+} {} {}} C:/Users/Michelle/Desktop/prj3/register_file_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file_tb.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module RF_TB
+** Warning: C:/Users/Michelle/Desktop/prj3/register_file_tb.v(97): (vlog-2283) Extra semicolon in $unit (global) scope.
+
+
+Top level modules:
+	RF_TB
+
 } {} {}} C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/barrel_shifter_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module LSHIFTER_TB
@@ -87,15 +96,6 @@ Top level modules:
 	RSHIFTER_TB
 	BARREL_SHIFTER32_TB
 	SHIFT32_TB
-
-} {} {}} C:/Users/Michelle/Desktop/prj3/register_file_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file_tb.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module RF_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/register_file_tb.v(91): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	RF_TB
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/mult.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/mult.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -225,15 +225,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	MUX32_32x1
 
-} {} {}} C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module DA_VINCI_TB
-** Warning: C:/Users/Michelle/Desktop/prj3/da_vinci_tb.v(60): (vlog-2283) Extra semicolon in $unit (global) scope.
-
-
-Top level modules:
-	DA_VINCI_TB
-
 } {} {}} C:/Users/Michelle/Desktop/prj3/full_adder.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/full_adder.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module FULL_ADDER
@@ -298,6 +289,13 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	rc_add_sub_tb
+
+} {} {}} C:/Users/Michelle/Desktop/prj3/register_file.v {1 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/register_file.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module REGISTER_FILE_32x32
+
+Top level modules:
+	REGISTER_FILE_32x32
 
 } {} {}} C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v {2 {vlog -work work -stats=none C:/Users/Michelle/Desktop/prj3/reg_32x32_tb.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015

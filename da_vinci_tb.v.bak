@@ -46,14 +46,14 @@ initial
 begin
 RST=1'b0;
 #5 RST=1'b1;
-#5 RST=1'b0;
+//#5 RST=1'b0;
 
 // TBD: rest of the test code goes here.
 
 //# 20 $stop;
 #200  //$writememh("RevFib_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h03fffff0, 'h03ffffff);
        //$writememh("fibonacci_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h01000000, 'h0100000f);
-       $writememh("test_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h01000000, 'h01000001);
+       $writememh("test_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h00000000, 'h00000001);
 	$stop;
 
 end

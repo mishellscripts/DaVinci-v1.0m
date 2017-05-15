@@ -48,38 +48,44 @@ REGISTER_FILE_32x32 ref_32x32_inst(.DATA_R1(DATA_R1), .DATA_R2(DATA_R2), .ADDR_R
 
 initial
 begin
-RST=1'b1;
+$write("Resetting\n");
+RST=1'b0;
 READ=1'b0;
 WRITE=1'b0;
 DATA_REG = {`DATA_WIDTH{1'b0} };
-ADDR_R1 = {`DATA_WIDTH{1'b0} };
-ADDR_R2 = {`DATA_WIDTH{1'b0} };
+ADDR_R1 = {`REG_ADDR_INDEX_LIMIT{1'b0} };
+ADDR_R2 = {`REG_ADDR_INDEX_LIMIT{1'b0} };
 no_of_test = 0;
 no_of_pass = 0;
 
 // Start the operation
-#10    RST=1'b0;
 #10    RST=1'b1;
+//#10    RST=1'b0;
+
+$write("========================\n");
+
 // Write cycle
 for(i=0;i<32; i = i + 1)
 begin
-#10     DATA_REG=i; READ=1'b0; WRITE=1'b1; ADDR_W = i;
+#10     DATA_REG=i*2; READ=1'b0; WRITE=1'b1; ADDR_W = i;
 end
 
-#5 READ=1'b0; WRITE=1'b0;
+$write("========================\n");
+
+//#5 READ=1'b0; WRITE=1'b0;
 // test of write data
 for(i=0;i<32; i = i + 1)
 begin
-#5      READ=1'b1; WRITE=1'b0; ADDR_R1 = i; ADDR_R2 = i;
-#5      no_of_test = no_of_test + 1;
-        if (DATA_R1 !== i)
-	    $write("[TEST @ %0dns] Read %1b, Write %1b, expecting %8h, got %8h [FAILED]\n", $time, READ, WRITE, i, DATA_R1);
+#10      READ=1'b1; WRITE=1'b0; ADDR_R1 = i; ADDR_R2 = i;
+#10      no_of_test = no_of_test + 1;
+        if (DATA_R1 !== i*2)
+	    $write("[TEST @ %0dns] Read %1b, Write %1b, expecting %32b, got %32b [FAILED]\n", $time, READ, WRITE, i*2, DATA_R1);
         else 
 	    no_of_pass  = no_of_pass + 1;
 end
 
 
-#5    READ=1'b0; WRITE=1'b0; // No op
+//#5    READ=1'b0; WRITE=1'b0; // No op
 
 #10 $write("\n");
     $write("\tTotal number of tests %d\n", no_of_test);

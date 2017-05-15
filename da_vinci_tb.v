@@ -35,9 +35,9 @@ reg RST;
 CLK_GENERATOR clk_gen_inst(.CLK(CLK));
 
 // DA_VINCI v1.0 instance
-//defparam da_vinci_inst.mem_init_file = "fibonacci.dat";
+defparam da_vinci_inst.mem_init_file = "fibonacci.dat";
 //defparam da_vinci_inst.mem_init_file = "RevFib.dat";
-defparam da_vinci_inst.mem_init_file = "test.dat";
+//defparam da_vinci_inst.mem_init_file = "test.dat";
 DA_VINCI da_vinci_inst(.MEM_DATA_OUT(DATA_OUT), .MEM_DATA_IN(DATA_IN), 
                        .ADDR(ADDR), .READ(READ), 
                        .WRITE(WRITE), .CLK(CLK), .RST(RST));
@@ -52,8 +52,8 @@ RST=1'b0;
 
 //# 20 $stop;
 #200  //$writememh("RevFib_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h03fffff0, 'h03ffffff);
-       //$writememh("fibonacci_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h01000000, 'h0100000f);
-       $writememh("test_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h01000000, 'h01000001);
+       $writememh("fibonacci_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h01000000, 'h0100000f);
+       //$writememh("test_mem_dump.dat", da_vinci_inst.memory_inst.memory_inst.sram_32x64m, 'h00000000, 'h00000001);
 	$stop;
 
 end

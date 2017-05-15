@@ -24,5 +24,5 @@ ma_sel_1 = CTRL[26];
 dmem_r = CTRL[27];
 dmem_w = CTRL[28]; 
 md_sel_1 = CTRL[29]; 
-ir_load = CTRL[30];
+ir_load = CTRL[30]; // r1 load
 ma_sel_2 = CTRL[31];

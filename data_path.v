@@ -138,7 +138,7 @@ wire [31:0] zero_out;
 wire [31:0] stack_or_alu;
 wire [31:0] addr_out;
 
-always @(alu_out) begin
+always @(posedge CLK) begin
 $write("ALU RESULT: %h\n", alu_out);
 end
 
@@ -152,21 +152,22 @@ $write("REG FILE RT: %h\n", rt);
 end*/
 
 // Oprns
-always @(rf_or_sp) begin
+always @(posedge CLK) begin
 $write("ALU OP1: %h\n", rf_or_sp);
 end
 
-always @(is_r_type) begin
+always @(posedge CLK) begin
 $write("ALU OP2: %h\n", is_r_type);
 end
 
+/*
 always @(pc_adder_out1) begin
 $write("PC INC BY 1\n");
 end
 
 always @(jump_or_res) begin
 $write("FINAL PC: %h\n", jump_or_res);
-end
+end*/
 
 
 assign sign_extended_imm = $signed(immediate);
@@ -182,7 +183,7 @@ $write("DATA IN: %h\n", DATA_IN);
 $write("PC: %h\n", pc);
 //$write("NEXTPC: %h\n", next_pc);
 //$write("CTRL = %h\n", CTRL);
-$write("PC address selected?= %h\n", CTRL[31]);
+//$write("PC address selected?= %h\n", CTRL[31]);
 end
 /////
 
@@ -221,12 +222,17 @@ MUX32_2x1 inst_mux_dmemw3(.Y(is_pc_add1), .I0(pc_adder_out1), .I1(is_lui), .S(CT
 
 /* ================== init REG FILE ==================== */
 
-MUX32_2x1 inst_mux_32bit(.Y(rs_or_zero), .I0(32'b0), .I1({27'b0, rs}), .S(CTRL[6]));
+MUX32_2x1 inst_mux_32bit(.Y(rs_or_zero), .I0({27'b0, rs}), .I1(32'b0), .S(CTRL[6]));
+
+wire [31:0] r1_data_store;
+REG32 r1_data_store_inst(.Q(r1_data_store), .D(r1_data), .LOAD(CTRL[30]), .CLK(CLK), .RESET(RST));
 
 REGISTER_FILE_32x32 inst_reg_32x32(.DATA_R1(r1_data), .DATA_R2(r2_data), .ADDR_R1(rs_or_zero[4:0]), .ADDR_R2(rt), 
                             	   .DATA_W(is_pc_add1), .ADDR_W(is_stack_op[4:0]), .READ(CTRL[7]), .WRITE(CTRL[8]), .CLK(CLK), .RST(RST));
 
-
+always @(rs_or_zero) begin
+$write("r1 addr = %h\n", rs_or_zero[4:0]);
+end
 
 
 /* ================= OPERAND select for ALU =================== */
@@ -238,12 +244,23 @@ MUX32_2x1 inst_mux_op2(.Y(zero_or_sign_ext), .I0({16'b0, immediate}), .I1(sign_e
 MUX32_2x1 inst_mux_op3(.Y(shamt_or_imm), .I0(zero_or_sign_ext), .I1(shamt_or_1), .S(CTRL[19]));
 
 // Alu select
-MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data), .I1(sp), .S(CTRL[16]));
+//MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data), .I1(sp), .S(CTRL[16]));
+MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data_store), .I1(sp), .S(CTRL[16]));
+//MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data), .I1(32'h12345678), .S(CTRL[16]));
+
+
+
+
+always @(posedge CLK) begin
+$write("RF or SP = %h : %h\n", CTRL[16], rf_or_sp);
+end
+
 
 MUX32_2x1 inst_mux_alu2(.Y(is_r_type), .I0(shamt_or_imm), .I1(r2_data), .S(CTRL[20]));
 
+
 // Alu instantiation
-ALU inst_ALU(.A(rf_or_sp), .B(is_r_type), .OPRN({1'bx, alu_oprn}), .Y(alu_out), .ZERO(zero_out));
+ALU inst_ALU(.A(rf_or_sp), .B(is_r_type), .OPRN({1'bx, CTRL[25:21]}), .Y(alu_out), .ZERO(zero_out));
 
 /* ================= DATA MEMORY READ =================== */
 
@@ -251,7 +268,7 @@ MUX32_2x1 inst_mux_dmemr(.Y(stack_or_alu), .I0(alu_out), .I1(sp), .S(CTRL[26]));
 
 // Mem data output
 //wire [31:0] r1_or_r2;
-MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data), .S(CTRL[29]));
+MUX32_2x1 inst_mux_dmem1(.Y(DATA_OUT), .I0(r2_data), .I1(r1_data_store), .S(CTRL[29]));
 
 // Mem address output
 MUX32_2x1 inst_mux_dmem2(.Y(addr_out), .I0(stack_or_alu), .I1(pc), .S(CTRL[31]));

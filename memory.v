@@ -96,7 +96,7 @@ begin
  end 
  else if ((READ===1'b0)&&(WRITE===1'b1)) begin // write operation
 	sram_32x64m[ADDR] = DATA;
-	$write("Memory write\n");
+	$write("Memory write at address %5h: %8h\n", ADDR, DATA);
  end 
  else
 	$write("Memory hold\n"); 
