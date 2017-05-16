@@ -150,9 +150,9 @@ endmodule
 // Left shifter
 module SHIFT32_L(Y,D,S);
 // output list
-output [31:0] Y; 
+output [`DATA_INDEX_LIMIT:0] Y; 
 // input list
-input [31:0] D; // B = D
+input [`DATA_INDEX_LIMIT:0] D; // B = D
 input [4:0] S; //S0 TO S4
 
 // TBD

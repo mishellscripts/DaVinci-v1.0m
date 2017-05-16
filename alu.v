@@ -24,11 +24,11 @@
 `include "prj_definition.v"
 module ALU(A, B, OPRN, Y, ZERO);
 // output list
-output [31:0] Y;
-output [31:0] ZERO;
+output [`DATA_INDEX_LIMIT:0] Y;
+output [`DATA_INDEX_LIMIT:0] ZERO;
 // input list
-input [31:0] A;
-input [31:0] B;
+input [`DATA_INDEX_LIMIT:0] A;
+input [`DATA_INDEX_LIMIT:0] B;
 input [5:0] OPRN;
 
 wire CO;
@@ -40,32 +40,32 @@ and and_oprn13 (and_res, OPRN[0], OPRN[3]);
 or or_res(SnA, not_res, and_res);
 
 // Add and Sub
-wire [31:0] add_sub_out;
+wire [`DATA_INDEX_LIMIT:0] add_sub_out;
 RC_ADD_SUB_32 inst_add_32(.Y(add_sub_out), .CO(CO), .A(A), .B(B), .SnA(SnA));
 
 // Mul
-wire [31:0] mul_hi_out;
-wire [31:0] mul_lo_out;
+wire [`DATA_INDEX_LIMIT:0] mul_hi_out;
+wire [`DATA_INDEX_LIMIT:0] mul_lo_out;
 MULT32 inst_mult_32(.HI(mul_hi_out), .LO(mul_lo_out), .A(A), .B(B));
 
 // Shifter
-wire [31:0] shift_out;
+wire [`DATA_INDEX_LIMIT:0] shift_out;
 SHIFT32 inst_shiftLR_32bit(.Y(shift_out), .D(A), .S(B), .LnR(OPRN[0]));
 
 // And
-wire [31:0] and_out;
+wire [`DATA_INDEX_LIMIT:0] and_out;
 AND32_2x1 and_32_bit_inst(.Y(and_out),.A(A),.B(B));
 
 // Or
-wire [31:0] or_out;
+wire [`DATA_INDEX_LIMIT:0] or_out;
 OR32_2x1 or_32_bit_inst(.Y(or_out),.A(A),.B(B));
 
 // Nor
-wire [31:0] nor_out;
+wire [`DATA_INDEX_LIMIT:0] nor_out;
 NOR32_2x1 nor_32_bit_inst(.Y(nor_out),.A(A),.B(B));
 
 // Slt
-wire [31:0] slt_out;
+wire [`DATA_INDEX_LIMIT:0] slt_out;
 assign slt_out = (add_sub_out < 0)?1:0;
 
 
@@ -73,7 +73,7 @@ MUX32_16x1 oprn_select (Y, {`DATA_WIDTH{1'bx} }, add_sub_out, add_sub_out, mul_l
 			or_out, nor_out, {31'b0, add_sub_out[31]}, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, 
 			{`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, {`DATA_WIDTH{1'bx} }, OPRN[3:0]);
 
-wire [31:0] zero_flag_result;
+wire [`DATA_INDEX_LIMIT:0] zero_flag_result;
 
 NOR32_2x1 zero_flag(.Y(zero_flag_result), .A(Y), .B({`DATA_WIDTH{1'b0} }));
 

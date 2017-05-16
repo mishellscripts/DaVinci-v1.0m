@@ -156,7 +156,6 @@ input [31:0] D; // B = D
 input [4:0] S; //S0 TO S4
 
 // TBD
-
 // Ea column will have 32 multiplexer
 // 5 such columns
 

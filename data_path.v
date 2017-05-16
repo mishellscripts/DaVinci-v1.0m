@@ -143,8 +143,7 @@ end
 
 assign sign_extended_imm = $signed(immediate);
 
-defparam pc_inst.PATTERN = `INST_START_ADDR;
-REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
+
 
 always @ (posedge CLK)
 begin
@@ -156,6 +155,8 @@ end
 defparam sp_inst.PATTERN = `INIT_STACK_POINTER;
 REG32_PP sp_inst(.Q(sp), .D(alu_out), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
 
+defparam pc_inst.PATTERN = `INST_START_ADDR;
+REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
 
 /* ================ PC selection =================== */
 
