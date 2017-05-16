@@ -136,12 +136,6 @@ input nP, nR;
 output Q,Qbar;
 
 // TBD
-/*not not_d(Dbar, D);
-nand nand_d_1(d_out_1, D, C);
-nand nand_d_2(d_out_2, Dbar, C);
-nand nand_d_3(Q, d_out_1, Qbar, nP);
-nand nand_d_4(Qbar, d_out_2, Q, nR);*/
-
 wire Dbar;
 not not_d(Dbar, D);
 SR_LATCH inst_dlatch_sr(.Q(Q), .Qbar(Qbar), .S(D), .R(Dbar), .C(C), .nP(nP), .nR(nR));
@@ -158,9 +152,6 @@ input nP, nR;
 output Q,Qbar;
 
 wire sr_out_1, sr_out_2;
-/*P, R;
-not inv_nP(P, nP);
-not inv_nR(R, nR);*/
 
 // TBD
 nand nand_sr_1(sr_out_1, S, C);
@@ -183,38 +174,38 @@ wire [15:0] decoder_4x16_out;
 DECODER_4x16 inst_decoder_4x16(.D(decoder_4x16_out), .I(I[3:0]));
 not inst_inv_i4(inv_I4, I[4]);
 
-and inst_and1(D[0], decoder_4x16_out[0], inv_I4);
-and inst_and2(D[1], decoder_4x16_out[1], inv_I4);
-and inst_and3(D[2], decoder_4x16_out[2], inv_I4); 
-and inst_and4(D[3], decoder_4x16_out[3], inv_I4); 
-and inst_and5(D[4], decoder_4x16_out[4], inv_I4);
-and inst_and6(D[5], decoder_4x16_out[5], inv_I4);
-and inst_and7(D[6], decoder_4x16_out[6], inv_I4); 
-and inst_and8(D[7], decoder_4x16_out[7], inv_I4); 
-and inst_and9(D[8], decoder_4x16_out[8], inv_I4);
-and inst_and10(D[9], decoder_4x16_out[9], inv_I4);
-and inst_and11(D[10], decoder_4x16_out[10], inv_I4); 
-and inst_and12(D[11], decoder_4x16_out[11], inv_I4); 
-and inst_and13(D[12], decoder_4x16_out[12], inv_I4);
-and inst_and14(D[13], decoder_4x16_out[13], inv_I4);
-and inst_and15(D[14], decoder_4x16_out[14], inv_I4); 
-and inst_and16(D[15], decoder_4x16_out[15], inv_I4); 
-and inst_and17(D[16], decoder_4x16_out[0], I[4]);
-and inst_and18(D[17], decoder_4x16_out[1], I[4]);
-and inst_and19(D[18], decoder_4x16_out[2], I[4]); 
-and inst_and20(D[19], decoder_4x16_out[3], I[4]); 
-and inst_and21(D[20], decoder_4x16_out[4], I[4]);
-and inst_and22(D[21], decoder_4x16_out[5], I[4]);
-and inst_and23(D[22], decoder_4x16_out[6], I[4]); 
-and inst_and24(D[23], decoder_4x16_out[7], I[4]); 
-and inst_and25(D[24], decoder_4x16_out[8], I[4]);
-and inst_and26(D[25], decoder_4x16_out[9], I[4]);
-and inst_and27(D[26], decoder_4x16_out[10], I[4]); 
-and inst_and28(D[27], decoder_4x16_out[11], I[4]); 
-and inst_and29(D[28], decoder_4x16_out[12], I[4]);
-and inst_and30(D[29], decoder_4x16_out[13], I[4]);
-and inst_and31(D[30], decoder_4x16_out[14], I[4]); 
-and inst_and32(D[31], decoder_4x16_out[15], I[4]); 
+and inst4_and1(D[0], decoder_4x16_out[0], inv_I4);
+and inst4_and2(D[1], decoder_4x16_out[1], inv_I4);
+and inst4_and3(D[2], decoder_4x16_out[2], inv_I4); 
+and inst4_and4(D[3], decoder_4x16_out[3], inv_I4); 
+and inst4_and5(D[4], decoder_4x16_out[4], inv_I4);
+and inst4_and6(D[5], decoder_4x16_out[5], inv_I4);
+and inst4_and7(D[6], decoder_4x16_out[6], inv_I4); 
+and inst4_and8(D[7], decoder_4x16_out[7], inv_I4); 
+and inst4_and9(D[8], decoder_4x16_out[8], inv_I4);
+and inst4_and10(D[9], decoder_4x16_out[9], inv_I4);
+and inst4_and11(D[10], decoder_4x16_out[10], inv_I4); 
+and inst4_and12(D[11], decoder_4x16_out[11], inv_I4); 
+and inst4_and13(D[12], decoder_4x16_out[12], inv_I4);
+and inst4_and14(D[13], decoder_4x16_out[13], inv_I4);
+and inst4_and15(D[14], decoder_4x16_out[14], inv_I4); 
+and inst4_and16(D[15], decoder_4x16_out[15], inv_I4); 
+and inst4_and17(D[16], decoder_4x16_out[0], I[4]);
+and inst4_and18(D[17], decoder_4x16_out[1], I[4]);
+and inst4_and19(D[18], decoder_4x16_out[2], I[4]); 
+and inst4_and20(D[19], decoder_4x16_out[3], I[4]); 
+and inst4_and21(D[20], decoder_4x16_out[4], I[4]);
+and inst4_and22(D[21], decoder_4x16_out[5], I[4]);
+and inst4_and23(D[22], decoder_4x16_out[6], I[4]); 
+and inst4_and24(D[23], decoder_4x16_out[7], I[4]); 
+and inst4_and25(D[24], decoder_4x16_out[8], I[4]);
+and inst4_and26(D[25], decoder_4x16_out[9], I[4]);
+and inst4_and27(D[26], decoder_4x16_out[10], I[4]); 
+and inst4_and28(D[27], decoder_4x16_out[11], I[4]); 
+and inst4_and29(D[28], decoder_4x16_out[12], I[4]);
+and inst4_and30(D[29], decoder_4x16_out[13], I[4]);
+and inst4_and31(D[30], decoder_4x16_out[14], I[4]); 
+and inst4_and32(D[31], decoder_4x16_out[15], I[4]); 
 
 endmodule
 

@@ -15,22 +15,14 @@
 // 32-bit shift amount shifter
 module SHIFT32(Y,D,S, LnR);
 // output list
-output [31:0] Y;
+output [`DATA_INDEX_LIMIT:0] Y;
 // input list
-input [31:0] D;
-input [31:0] S;
+input [`DATA_INDEX_LIMIT:0] D;
+input [`DATA_INDEX_LIMIT:0] S;
 input LnR;
 
 // TBD
-
-//reg [27:0] res;
-//or inst_more_than5(res, S[31:5], 32'b0);
-
-//wire greater_than_zero;
-//or or_inst(greater_than_zero, S[31:5], 27'b0);
-//assign more_than_5 = (S[31:5] == 27'b0)?1'b1:1'b0;
-
-wire [31:0] shift_out;
+wire [`DATA_INDEX_LIMIT:0] shift_out;
 BARREL_SHIFTER32 inst_barrel_shifter32(.Y(shift_out), .D(D), .S(S[4:0]), .LnR(LnR));
 
 MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(32'b0), .I1(shift_out), .S((S[31:5] == 0)));
@@ -40,42 +32,38 @@ endmodule
 // Shift with control L or R shift
 module BARREL_SHIFTER32(Y,D,S, LnR);
 // output list
-output [31:0] Y;
+output [`DATA_INDEX_LIMIT:0] Y;
 // input list
-input [31:0] D;
+input [`DATA_INDEX_LIMIT:0] D;
 input [4:0] S;
 input LnR;
 
 // TBD
 
-wire [31:0] outR;
-wire [31:0] outL;
+wire [`DATA_INDEX_LIMIT:0] outR;
+wire [`DATA_INDEX_LIMIT:0] outL;
 
 SHIFT32_R inst_rshift(.Y(outR), .D(D), .S(S));
 SHIFT32_L inst_lshift(.Y(outL), .D(D), .S(S));
 
 // Right shift if LnR = 0
 MUX32_2x1 inst_mux_32bit(.Y(Y),.I0(outR), .I1(outL), .S(LnR));
-//assign Y = (LnR == 1'b0)?outR:outL;
 
 endmodule
 
 // Right shifter
 module SHIFT32_R(Y,D,S);
 // output list
-output [31:0] Y;
+output [`DATA_INDEX_LIMIT:0] Y;
 // input list
-input [31:0] D;
+input [`DATA_INDEX_LIMIT:0] D;
 input [4:0] S;
 
 // TBD
-
 // Ea column will have 32 multiplexer
 // 5 such columns
 
-
-//wire [31:0] previous;
-wire [31:0] out1;
+wire [`DATA_INDEX_LIMIT:0] out1;
 
 // Column 1 (shift 1)
 genvar i1;
@@ -91,8 +79,7 @@ generate
     end
 endgenerate
 
-//assign previous = out1;
-wire [31:0] out2;
+wire [`DATA_INDEX_LIMIT:0] out2;
 
 // Column 2 (shift 2)
 genvar i2;
@@ -108,8 +95,7 @@ generate
     end
 endgenerate
 
-//assign previous = out2;
-wire [31:0] out3;
+wire [`DATA_INDEX_LIMIT:0] out3;
 
 // Column 3 (shift 4)
 genvar i3;
@@ -125,7 +111,7 @@ generate
     end
 endgenerate
 
-wire [31:0] out4;
+wire [`DATA_INDEX_LIMIT:0] out4;
 
 // Column 4 (shift 8)
 genvar i4;
@@ -141,7 +127,7 @@ generate
     end
 endgenerate
 
-wire [31:0] out5;
+wire [`DATA_INDEX_LIMIT:0] out5;
 
 // Column 5 (shift 16)
 genvar i5;
@@ -170,12 +156,10 @@ input [31:0] D; // B = D
 input [4:0] S; //S0 TO S4
 
 // TBD
-
 // Ea column will have 32 multiplexer
 // 5 such columns
 
-//wire [31:0] previous;
-wire [31:0] out1;
+wire [`DATA_INDEX_LIMIT:0] out1;
 
 // Column 1 (shift 1)
 genvar i1;
@@ -191,8 +175,7 @@ generate
     end
 endgenerate
 
-//assign previous = out1;
-wire [31:0] out2;
+wire [`DATA_INDEX_LIMIT:0] out2;
 
 // Column 2 (shift 2)
 genvar i2;
@@ -208,8 +191,7 @@ generate
     end
 endgenerate
 
-//assign previous = out2;
-wire [31:0] out3;
+wire [`DATA_INDEX_LIMIT:0] out3;
 
 // Column 3 (shift 4)
 genvar i3;
@@ -225,7 +207,7 @@ generate
     end
 endgenerate
 
-wire [31:0] out4;
+wire [`DATA_INDEX_LIMIT:0] out4;
 
 // Column 4 (shift 8)
 genvar i4;
@@ -241,7 +223,7 @@ generate
     end
 endgenerate
 
-wire [31:0] out5;
+wire [`DATA_INDEX_LIMIT:0] out5;
 
 // Column 5 (shift 16)
 genvar i5;

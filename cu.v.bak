@@ -413,7 +413,7 @@ begin
 	    else if (opcode === 6'h05) begin
 		// If zero flag is on, R[rs] == R[rt]
 		if (~ZERO) begin
-		    C[3]=1'b1;
+		    C[2]=1'b1;
 		end
 	    end
 	    else begin

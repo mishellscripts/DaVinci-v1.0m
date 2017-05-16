@@ -29,16 +29,7 @@ input [`CTRL_WIDTH_INDEX_LIMIT:0]  CTRL;
 input CLK, RST;
 input [`DATA_INDEX_LIMIT:0] DATA_IN;
 
-//assign INSTRUCTION = (DATA_IN >= 0)?DATA_IN:INSTRUCTION;
-
 reg [31:0] instr_reg;
-
-/*
-always @(DATA_IN) begin
-$write("updating instruction ***\n");
-	instr_reg <= DATA_IN;
-end*/
-
 
 // TBD
 reg pc_load, pc_sel_1, pc_sel_2, pc_sel_3, mem_r, mem_w,
@@ -57,9 +48,8 @@ reg [5:0]   funct;
 reg [15:0]  immediate;
 reg [25:0]  address;
 
-initial begin
-//instr_reg = DATA_IN;
-/*pc_load = CTRL[0];
+/*initial begin
+pc_load = CTRL[0];
 pc_sel_1 = CTRL[1];
 pc_sel_2 = CTRL[2];
 pc_sel_3 = CTRL[3];
@@ -86,8 +76,8 @@ dmem_r = CTRL[27];
 dmem_w = CTRL[28]; 
 md_sel_1 = CTRL[29]; 
 ir_load = CTRL[30];
-ma_sel_2 = CTRL[31];*/
-end
+ma_sel_2 = CTRL[31];
+end*/
 
 always @(DATA_IN) begin
 /* =================== Parse data (instruction) ====================== */
@@ -180,7 +170,7 @@ REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST)
 always @ (posedge CLK)
 begin
 $write("DATA IN: %h\n", DATA_IN);
-//$write("PC: %h\n", pc);
+$write("PC: %h\n", pc);
 $write("SP: %h\n", sp);
 //$write("NEXTPC: %h\n", next_pc);
 //$write("CTRL = %h\n", CTRL);

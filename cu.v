@@ -129,7 +129,6 @@ end
 
 always @ (proc_state)
 begin
-    //$write("INSTRUCTION: %h\n", INSTRUCTION);
     // FETCH: Get next instruction from memory with address as content in PC register
     if (proc_state === `PROC_FETCH) begin
 	$write("\n======================\n");

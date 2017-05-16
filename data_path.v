@@ -29,16 +29,7 @@ input [`CTRL_WIDTH_INDEX_LIMIT:0]  CTRL;
 input CLK, RST;
 input [`DATA_INDEX_LIMIT:0] DATA_IN;
 
-//assign INSTRUCTION = (DATA_IN >= 0)?DATA_IN:INSTRUCTION;
-
 reg [31:0] instr_reg;
-
-/*
-always @(DATA_IN) begin
-$write("updating instruction ***\n");
-	instr_reg <= DATA_IN;
-end*/
-
 
 // TBD
 reg pc_load, pc_sel_1, pc_sel_2, pc_sel_3, mem_r, mem_w,
@@ -57,9 +48,8 @@ reg [5:0]   funct;
 reg [15:0]  immediate;
 reg [25:0]  address;
 
-initial begin
-//instr_reg = DATA_IN;
-/*pc_load = CTRL[0];
+/*initial begin
+pc_load = CTRL[0];
 pc_sel_1 = CTRL[1];
 pc_sel_2 = CTRL[2];
 pc_sel_3 = CTRL[3];
@@ -86,8 +76,8 @@ dmem_r = CTRL[27];
 dmem_w = CTRL[28]; 
 md_sel_1 = CTRL[29]; 
 ir_load = CTRL[30];
-ma_sel_2 = CTRL[31];*/
-end
+ma_sel_2 = CTRL[31];
+end*/
 
 always @(DATA_IN) begin
 /* =================== Parse data (instruction) ====================== */
@@ -142,15 +132,6 @@ always @(posedge CLK) begin
 $write("ALU RESULT: %h\n", alu_out);
 end
 
-/*
-always @(rs_or_zero) begin
-$write("REG FILE RS: %h\n", rs_or_zero);
-end
-
-always @(rt) begin
-$write("REG FILE RT: %h\n", rt);
-end*/
-
 // Oprns
 always @(posedge CLK) begin
 $write("ALU OP1: %h\n", rf_or_sp);
@@ -160,33 +141,17 @@ always @(posedge CLK) begin
 $write("ALU OP2: %h\n", is_r_type);
 end
 
-/*
-always @(pc_adder_out1) begin
-$write("PC INC BY 1\n");
-end
-
-always @(jump_or_res) begin
-$write("FINAL PC: %h\n", jump_or_res);
-end*/
-
-
 assign sign_extended_imm = $signed(immediate);
 
 defparam pc_inst.PATTERN = `INST_START_ADDR;
 REG32_PP pc_inst(.Q(pc), .D(jump_or_res), .LOAD(CTRL[0]), .CLK(CLK), .RESET(RST));
-//REG32 pc_inst(.Q(pc), .D(next_pc), .LOAD(pc_load), .CLK(CLK), .RESET(RST));
 
-// Test prints
 always @ (posedge CLK)
 begin
 $write("DATA IN: %h\n", DATA_IN);
 $write("PC: %h\n", pc);
 $write("SP: %h\n", sp);
-//$write("NEXTPC: %h\n", next_pc);
-//$write("CTRL = %h\n", CTRL);
-//$write("PC address selected?= %h\n", CTRL[31]);
 end
-/////
 
 defparam sp_inst.PATTERN = `INIT_STACK_POINTER;
 REG32_PP sp_inst(.Q(sp), .D(alu_out), .LOAD(CTRL[15]), .CLK(CLK), .RESET(RST));
@@ -250,9 +215,6 @@ MUX32_2x1 inst_mux_op3(.Y(shamt_or_imm), .I0(zero_or_sign_ext), .I1(shamt_or_1),
 // Alu select
 //MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data), .I1(sp), .S(CTRL[16]));
 MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data_store), .I1(sp), .S(CTRL[16]));
-//MUX32_2x1 inst_mux_alu1(.Y(rf_or_sp), .I0(r1_data), .I1(32'h12345678), .S(CTRL[16]));
-
-
 
 
 always @(posedge CLK) begin

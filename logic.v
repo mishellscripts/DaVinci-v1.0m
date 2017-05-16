@@ -12,14 +12,14 @@
 //------------------------------------------------------------------------------------------
 //  1.0     Sep 02, 2014	Kaushik Patra	kpatra@sjsu.edu		Initial creation
 //------------------------------------------------------------------------------------------
-//
+`include "prj_definition.v"
 
 module REG32_PP(Q, D, LOAD, CLK, RESET);
 parameter PATTERN = 32'h00000000;
-output [31:0] Q;
+output [`DATA_INDEX_LIMIT:0] Q;
 
 input CLK, LOAD;
-input [31:0] D;
+input [`DATA_INDEX_LIMIT:0] D;
 input RESET;
 
 /*
@@ -28,7 +28,7 @@ $write("D: %h, CLK: %h, LOAD: %h, RESET: %h\n", D, CLK, LOAD, RESET);
 end
 */
 
-wire [31:0] qbar;
+wire [`DATA_INDEX_LIMIT:0] qbar;
 
 genvar i;
 generate 
@@ -56,12 +56,12 @@ endmodule
 // 32-bit two's complement
 module TWOSCOMP32(Y,A);
 //output list
-output [31:0] Y;
+output [`DATA_INDEX_LIMIT:0] Y;
 //input list
-input [31:0] A;
+input [`DATA_INDEX_LIMIT:0] A;
 
 // TBD
-wire [31:0] a_inv;
+wire [`DATA_INDEX_LIMIT:0] a_inv;
 INV32_1x1 inv_32_inst(a_inv, A);
 wire CO;
 reg SnA = 1'b0;
@@ -71,13 +71,13 @@ endmodule
 
 // 32-bit register +ve edge, Reset on RESET=0
 module REG32(Q, D, LOAD, CLK, RESET);
-output [31:0] Q;
+output [`DATA_INDEX_LIMIT:0] Q;
 
 input CLK, LOAD;
-input [31:0] D;
+input [`DATA_INDEX_LIMIT:0] D;
 input RESET;
 
-wire [31:0] Qbar;
+wire [`DATA_INDEX_LIMIT:0] Qbar;
 
 // TBD
 genvar i;
@@ -136,12 +136,6 @@ input nP, nR;
 output Q,Qbar;
 
 // TBD
-/*not not_d(Dbar, D);
-nand nand_d_1(d_out_1, D, C);
-nand nand_d_2(d_out_2, Dbar, C);
-nand nand_d_3(Q, d_out_1, Qbar, nP);
-nand nand_d_4(Qbar, d_out_2, Q, nR);*/
-
 wire Dbar;
 not not_d(Dbar, D);
 SR_LATCH inst_dlatch_sr(.Q(Q), .Qbar(Qbar), .S(D), .R(Dbar), .C(C), .nP(nP), .nR(nR));
@@ -158,9 +152,6 @@ input nP, nR;
 output Q,Qbar;
 
 wire sr_out_1, sr_out_2;
-/*P, R;
-not inv_nP(P, nP);
-not inv_nR(R, nR);*/
 
 // TBD
 nand nand_sr_1(sr_out_1, S, C);
@@ -173,7 +164,7 @@ endmodule
 // 5x32 Line decoder
 module DECODER_5x32(D,I);
 // output
-output [31:0] D;
+output [`DATA_INDEX_LIMIT:0] D;
 // input
 input [4:0] I;
 

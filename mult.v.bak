@@ -45,12 +45,10 @@ wire [31:0] LO_RES;
 
 MULT32_U inst_uns_mult(.HI(HI_RES), .LO(LO_RES), .A(MCND), .B(MPLR));
 
-//
-
 wire [31:0] inv_hi;
 wire [31:0] twos_lo;
 
-assign HI_RES = (HI_RES === {`DATA_WIDTH{1'bz}})?32'b0:HI_RES;
+assign HI_RES = (HI_RES === {`DATA_WIDTH{1'bz}})?{32'b0}:HI_RES;
 
 INV32_1x1 inst_inv_hi(.Y(inv_hi), .A(HI_RES));
 TWOSCOMP32 inst_twos_lo(.Y(twos_lo), .A(LO_RES));
@@ -263,18 +261,11 @@ wire CO_31;
 wire [31:0] Y31;
 RC_ADD_SUB_32 adder31(.Y(Y31), .CO(CO_31), .A(and_31), .B({CO_30,Y30[31:1]}), .SnA(SnA));
 
-/*
-AND32_2x1 and_inst_32(and_32, A, {32{B[2]}});
-wire CO_32;
-wire [31:0] Y32;
-RC_ADD_SUB_32 adder32(.Y(Y32), .CO(CO_32), .A(and_32), .B({CO_31,Y31[31:1]}), .SnA(SnA));*/
-
 
 assign LO = {Y31[0], Y30[0], Y29[0], Y28[0], Y27[0], Y26[0], Y25[0], Y24[0], Y23[0], Y22[0], Y21[0], 
 		Y20[0], Y19[0], Y18[0], Y17[0], Y16[0], Y15[0], Y14[0], Y13[0], Y12[0], Y11[0], 
 		Y10[0], Y9[0], Y8[0], Y7[0], Y6[0], Y5[0], Y4[0], Y3[0], Y2[0], Y1[0], and_1b[0]};
 
-// why always unknown?
 assign HI = Y31;
 
 endmodule
